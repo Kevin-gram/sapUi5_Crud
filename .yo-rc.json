@@ -1,0 +1,18 @@
+{
+  "generator-ui5-app": {
+    "namespace": "crud",
+    "framework": "SAPUI5",
+    "frameworkVersion": "1.130.2",
+    "author": "kevin-gram",
+    "initrepo": false,
+    "appId": "crud",
+    "appURI": "crud",
+    "cdnDomain": "ui5.sap.com",
+    "defaultTheme": "sap_horizon",
+    "qunitCoverageFile": "qunit-coverage-istanbul.js",
+    "gte1_98_0": true,
+    "gte1_104_0": true,
+    "lt1_124_0": false,
+    "setupCompleted": true
+  }
+}
