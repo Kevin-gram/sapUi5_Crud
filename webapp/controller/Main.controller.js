@@ -68,9 +68,7 @@ sap.ui.define([
 
         formatDateForOData(date) {
             if (!date) return null;
-            // If it's already a Date object, use it; otherwise create a new Date
             const d = date instanceof Date ? date : new Date(date);
-            // Format: YYYY-MM-DD
             return d.getFullYear() + '-' + 
                    String(d.getMonth() + 1).padStart(2, '0') + '-' + 
                    String(d.getDate()).padStart(2, '0');
@@ -169,6 +167,23 @@ sap.ui.define([
             })
             .catch(error => {
                 MessageBox.error("Error updating product: " + error.message);
+            });
+        },
+
+        onDeletePress(oEvent) {
+            const button = oEvent.getSource();
+            const listItem = button.getParent();
+            const context = listItem.getBindingContext();
+            const productId = context.getObject().ID;
+
+            this.getView().getModel().remove(`/Products(${productId})`, {
+                success: () => {
+                    MessageBox.success("Product deleted successfully!");
+                    this.getView().getModel().refresh(true);
+                },
+                error: (error) => {
+                    MessageBox.error("Error deleting product: " + error.message);
+                }
             });
         }
     });
