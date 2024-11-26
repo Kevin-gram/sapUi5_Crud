@@ -54,7 +54,7 @@
                 </columns>
                 <items>
                     <!-- Simplified ColumnListItem for debugging purposes -->
-                    <ColumnListItem>
+                    <ColumnListItem type="Active" press="onShowData">
                         <!-- Text for debugging purposes -->
                         <Text text="{ID}"/>
                         <Text text="{Name}"/>
@@ -74,11 +74,11 @@
 
             <Panel id="productPanel" headerText="Product Detail">
                 <VBox>
-                    <Text id="productId" text="{ID}"></Text>
-                    <Text id="productName" text="{Name}"></Text>
-                    <Text id="productPrice" text="{Price}"></Text>
-                    <Text id="productRating" text="{Rating}"></Text>
-                    <Text id="productReleaseDate" text="{path: 'ReleaseDate', formatter: '.formatter.formatDate'}"></Text>
+                    <Text id="productId" text=""></Text>
+                    <Text id="productName" text=""></Text>
+                    <Text id="productPrice" text=""></Text>
+                    <Text id="productRating" text=""></Text>
+                    <Text id="productReleaseDate" text=""></Text>
                 </VBox>
             </Panel>
         </content>
