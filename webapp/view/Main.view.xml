@@ -90,6 +90,8 @@
         <VBox class="sapUiSmallMargin">
             <Label text="Product Name"/>
             <Input id="productNameText"/>
+            <!-- <Label text="Product Id"/>
+            <Input id="productIdText"/> -->
             <Label text="Price"/>
             <Input id="productPriceText" type="Number"/>
             <Label text="Rating"/>
