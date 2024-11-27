@@ -44,19 +44,16 @@ sap.ui.define([
                     sap.m.MessageToast.show("'search' event fired with 'searchButtonPressed' parameter");
                 }
             },
-        onShowData(event) {
-            const Item = event.getSource();
-            const bindingContext = Item.getBindingContext();
-            const product = bindingContext.getObject();
-
-            this.byId("productId").setText("Product ID: " + product.ID);
-            this.byId("productName").setText("Name: " + product.Name);
-            this.byId("productPrice").setText("Price: " + product.Price);
-            this.byId("productRating").setText("Rating: " + product.Rating);
-            this.byId("productReleaseDate").setText("Release Date: " + product.ReleaseDate);
-
-            // MessageBox.show("Selected Product: " + product.Name);
-        },
+                        onShowData(event) {
+                const Item = event.getSource();
+                const bindingContext = Item.getBindingContext();
+                const productId = bindingContext.getProperty("ID");
+            
+                const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+                oRouter.navTo("detail", {
+                    productId: productId
+                });
+            },
 
         onShowProductDialog() {
             this.byId("createProductDialog").open();

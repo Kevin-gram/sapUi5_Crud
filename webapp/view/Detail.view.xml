@@ -1,0 +1,21 @@
+<mvc:View
+    controllerName="crud.controller.Detail"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    displayBlock="true">
+
+    <Page
+        title="Product Details"
+        showNavButton="true"
+        navButtonPress="onNavBack">
+        <content>
+            <VBox class="sapUiSmallMargin">
+                <Text id="productId" text="" />
+                <Text id="productName" text="" />
+                <Text id="productPrice" text="" />
+                <Text id="productRating" text="" />
+                <Text id="productReleaseDate" text="" />
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

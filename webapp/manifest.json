@@ -54,7 +54,7 @@
 			}
 		},
 
-		"routing": {
+				"routing": {
 			"config": {
 				"routerClass": "sap.m.routing.Router",
 				"viewType": "XML",
@@ -68,12 +68,25 @@
 					"pattern": "",
 					"name": "main",
 					"target": "main"
+				},
+				{
+					"pattern": "detail/{productId}",
+					"name": "detail",
+					"target": "detail"
 				}
 			],
 			"targets": {
 				"main": {
-					"viewId": "main",
-					"viewName": "Main"
+					"viewName": "Main",
+					"viewLevel": 1
+				},
+				"detail": {
+					"viewName": "Detail",
+					"viewLevel": 2
+				},
+				"notFound": {
+					"viewName": "NotFound",
+					"viewLevel": 3
 				}
 			}
 		}

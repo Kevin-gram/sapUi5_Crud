@@ -73,7 +73,7 @@
                 </items>
             </Table>
 
-            <Panel id="productPanel" headerText="Product Detail">
+            <!-- <Panel id="productPanel" headerText="Product Detail">
                 <VBox>
                     <Text id="productId" text=""></Text>
                     <Text id="productName" text=""></Text>
@@ -81,7 +81,7 @@
                     <Text id="productRating" text=""></Text>
                     <Text id="productReleaseDate" text=""></Text>
                 </VBox>
-            </Panel>
+            </Panel> -->
         </content>
     </Page>
 
