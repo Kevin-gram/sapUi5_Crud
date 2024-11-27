@@ -14,7 +14,12 @@
             </Toolbar>
         </headerContent>
         <content>
-        <SearchField width="50%" search="onSearch"/>
+        <HBox width="100%">
+        <SearchField width="100%" search="onSearch"/> 
+        <Button text="Persons" press="onSeePersons"/>
+        <Button text="Suppliers" press="onSeePersons"/>
+        <Button text="Advertisements" press="onSeePersons"/>
+        </HBox>
             <Table id="odataTable" inset="false" items="{/Products}">
                 <headerToolbar>
                     <Toolbar>

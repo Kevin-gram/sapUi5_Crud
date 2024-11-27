@@ -73,6 +73,11 @@
 					"pattern": "detail/{productId}",
 					"name": "detail",
 					"target": "detail"
+				},
+				{
+					"pattern": "persons",
+					"name": "persons",
+					"target": "persons"
 				}
 			],
 			"targets": {
@@ -83,6 +88,10 @@
 				"detail": {
 					"viewName": "Detail",
 					"viewLevel": 2
+				},
+				"persons":{
+					"viewName":"Prsons",
+					"viewLevel": 4
 				},
 				"notFound": {
 					"viewName": "NotFound",
