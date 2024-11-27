@@ -1,12 +1,14 @@
 sap.ui.define([
     "./BaseController", "sap/m/MessageBox",
-    "sap/ui/model/odata/v2/ODataModel"
+    "sap/ui/model/odata/v2/ODataModel",
+    "sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator"
 ], function (BaseController, MessageBox, ODataModel) {
     "use strict";
 
     return BaseController.extend("crud.controller.Main", {
         onInit() {
-            let oModel = new ODataModel("http://localhost:5000/odata", {
+            let oModel = new ODataModel("http://localhost:3000/odata", {
                 defaultBindingMode: "TwoWay",
                 useBatch: false,
                 headers: {
@@ -23,6 +25,25 @@ sap.ui.define([
             });
         },
 
+	                   onSearch: function (event) {
+                // Build filter array
+                const aFilter = [];
+                const sQuery = event.getParameter("query");
+            
+                if (sQuery) {
+                    // Create a filter for the Name field
+                    aFilter.push(new sap.ui.model.Filter("Name", sap.ui.model.FilterOperator.Contains, sQuery));
+                }
+            
+                // Filter binding
+                const oList = this.byId("odataTable");
+                const oBinding = oList.getBinding("items");
+                oBinding.filter(aFilter);
+            
+                if (event.getParameter("searchButtonPressed")) {
+                    sap.m.MessageToast.show("'search' event fired with 'searchButtonPressed' parameter");
+                }
+            },
         onShowData(event) {
             const Item = event.getSource();
             const bindingContext = Item.getBindingContext();
@@ -34,7 +55,7 @@ sap.ui.define([
             this.byId("productRating").setText("Rating: " + product.Rating);
             this.byId("productReleaseDate").setText("Release Date: " + product.ReleaseDate);
 
-            MessageBox.show("Selected Product: " + product.Name);
+            // MessageBox.show("Selected Product: " + product.Name);
         },
 
         onShowProductDialog() {
@@ -100,7 +121,7 @@ sap.ui.define([
                 </content>
             </entry>`;
 
-            fetch("http://localhost:5000/odata/Products", {
+            fetch("http://localhost:3000/odata/Products", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/atom+xml",
@@ -148,7 +169,7 @@ sap.ui.define([
                 </content>
             </entry>`;
 
-            fetch(`http://localhost:5000/odata/Products(${productId})`, {
+            fetch(`http://localhost:3000/odata/Products(${productId})`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/atom+xml",

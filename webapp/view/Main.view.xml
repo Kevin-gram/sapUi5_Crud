@@ -14,6 +14,7 @@
             </Toolbar>
         </headerContent>
         <content>
+        <SearchField width="50%" search="onSearch"/>
             <Table id="odataTable" inset="false" items="{/Products}">
                 <headerToolbar>
                     <Toolbar>
