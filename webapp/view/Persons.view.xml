@@ -1,9 +1,33 @@
 <mvc:View
-xmlns="sap.m"
-xmlns="sap.ui.core.mvc"
-xmlns:core="sap.ui.core"
-displayBlock="true"
-controllerName="crud.controller.Main"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
 >
-
+    <Page
+        title="{i18n>personsTitle}"
+        id="person"
+        class="sapUiSmallMargin"
+    >
+        <headerContent>
+            <Toolbar>
+                <Button
+                    text="Add new Person"
+                    press="onShowProductDialog"
+                />
+            </Toolbar>
+        </headerContent>
+        <content>
+            <HBox width="100%">
+                <SearchField
+                    width="100%"
+                    search="onsearch"
+                />
+                <Button
+                    text="Products"
+                    press="onSeeProducts"
+                />
+            </HBox>
+        </content>
+    </Page>
 </mvc:View>
