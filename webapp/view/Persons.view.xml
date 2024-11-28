@@ -3,31 +3,51 @@
     xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:core="sap.ui.core"
->
+    controllerName="crud.controller.Persons">
+
     <Page
         title="{i18n>personsTitle}"
-        id="person"
-        class="sapUiSmallMargin"
-    >
+        id="personPage"
+        class="sapUiSmallMargin">
         <headerContent>
             <Toolbar>
                 <Button
                     text="Add new Person"
-                    press="onShowProductDialog"
-                />
+                    press="onShowProductDialog"/>
             </Toolbar>
         </headerContent>
         <content>
-            <HBox width="100%">
-                <SearchField
-                    width="100%"
-                    search="onsearch"
-                />
-                <Button
-                    text="Products"
-                    press="onSeeProducts"
-                />
-            </HBox>
+            <SearchField width="50%" search="onSearch" />
+            <Table
+                id="personsTable"
+                inset="false"
+                items="{/Persons}">
+                <headerToolbar>
+                    <Toolbar>
+                        <Title text="Persons List"/>
+                    </Toolbar>
+                </headerToolbar>
+                <columns>
+                    <Column>
+                        <header>
+                            <Label text="ID"/>
+                        </header>
+                    </Column>
+                    <Column>
+                        <header>
+                            <Label text="Name"/>
+                        </header>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <Text text="{ID}"/>
+                            <Text text="{Name}"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
         </content>
     </Page>
 </mvc:View>
