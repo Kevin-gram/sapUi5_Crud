@@ -54,6 +54,10 @@ sap.ui.define([
                     productId: productId
                 });
             },
+            onSeePersons(){
+                const oRouter =sap.ui.core.UIComponent.getRouterFor(this);
+                oRouter.navTo("persons");
+            },
 
         onShowProductDialog() {
             this.byId("createProductDialog").open();
