@@ -28,6 +28,7 @@
                     </Toolbar>
                 </headerToolbar>
                 <columns>
+                
                     <Column>
                         <header>
                             <Label text="ID"/>
@@ -38,10 +39,11 @@
                             <Label text="Name"/>
                         </header>
                     </Column>
+                   
                 </columns>
                 <items>
-                    <ColumnListItem>
-                        <cells>
+                    <ColumnListItem type="Navigation" press="onPersonPress">
+                        <cells >
                             <Text text="{ID}"/>
                             <Text text="{Name}"/>
                         </cells>

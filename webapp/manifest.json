@@ -1,60 +1,68 @@
 {
-	"_version": "1.12.0",
+    "_version": "1.12.0",
 
-	"sap.app": {
-		"id": "crud",
-		"type": "application",
-		"i18n": "i18n/i18n.properties",
-		"title": "{{appTitle}}",
-		"description": "{{appDescription}}",
-		"applicationVersion": {
-			"version": "${version}"
-		}
-	},
+    "sap.app": {
+        "id": "crud",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "applicationVersion": {
+            "version": "${version}"
+        }
+    },
 
-	"sap.ui": {
-		"technology": "UI5",
-		"icons": {},
-		"deviceTypes": {
-			"desktop": true,
-			"tablet": true,
-			"phone": true
-		}
-	},
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {},
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
 
-	"sap.ui5": {
-		"rootView": {
-			"viewName": "crud.view.App",
-			"type": "XML",
-			"async": true,
-			"id": "app"
-		},
+    "sap.ui5": {
+        "rootView": {
+            "viewName": "crud.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "app"
+        },
 
-		"dependencies": {
-			"minUI5Version": "1.130.2",
-			"libs": {
-				"sap.ui.core": {},
-				"sap.m": {}
-			}
-		},
+        "dependencies": {
+            "minUI5Version": "1.130.2",
+            "libs": {
+                "sap.ui.core": {},
+                "sap.m": {}
+            }
+        },
 
-		"handleValidation": true,
+        "handleValidation": true,
 
-		"contentDensities": {
-			"compact": true,
-			"cozy": true
-		},
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
 
-		"models": {
-			"i18n": {
-				"type": "sap.ui.model.resource.ResourceModel",
-				"settings": {
-					"bundleName": "crud.i18n.i18n"
-				}
-			}
-		},
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "crud.i18n.i18n"
+                }
+            }
+        },
 
-				"routing": {
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/index.css"
+                }
+            ]
+        },
+
+        		"routing": {
 			"config": {
 				"routerClass": "sap.m.routing.Router",
 				"viewType": "XML",
@@ -78,6 +86,11 @@
 					"pattern": "persons",
 					"name": "persons",
 					"target": "persons"
+				},
+				{
+					"pattern": "personDetail/{personId}",
+					"name": "personDetail",
+					"target": "personDetail"
 				}
 			],
 			"targets": {
@@ -89,15 +102,18 @@
 					"viewName": "Detail",
 					"viewLevel": 2
 				},
-				"persons":{
-					"viewName":"Persons",
+				"persons": {
+					"viewName": "Persons",
 					"viewLevel": 4
+				},
+				"personDetail": {
+					"viewName": "PersonDetail",
+					"viewLevel": 5
 				},
 				"notFound": {
 					"viewName": "NotFound",
 					"viewLevel": 3
 				}
 			}
-		}
-	}
+		}}
 }
