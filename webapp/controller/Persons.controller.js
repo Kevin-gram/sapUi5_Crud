@@ -23,9 +23,9 @@ sap.ui.define([
                 urlParameters: {
                     "$expand": "PersonDetail"
                 },
-                success: (data) =>{
+                success: (data) => {
                     console.log(data);
-                    let personsData = data.results.map(person=>person.PersonDetail);
+                    let personsData = data.results.map(person => person.PersonDetail);
                     let personModel = new sap.ui.model.json.JSONModel(personsData);
                     this.getOwnerComponent().setModel(personModel, "persons");
                     // Iterate over each person and log their data

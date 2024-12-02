@@ -6,29 +6,25 @@ sap.ui.define([
 
     return BaseController.extend("crud.controller.PersonDetail", {
         onInit: function () {
-            let personModel = this.getOwnerComponent().getModel("person");
-            this.getView().setModel(personModel );
-            console.log(personModel);
-
+            const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+            const oRoute = oRouter.getRoute("personDetail");
+            oRoute.attachPatternMatched(this._onPersonMatched, this);
         },
+        
+        _onPersonMatched: function (oEvent) {
+            const personId = oEvent.getParameter("arguments").personId; // Get the personId from the URL
+            const oModel = this.getOwnerComponent().getModel("persons");
+        
+            // Assuming the "persons" model is an array of persons, bind to the correct person using personId
+            const oBindingContext = oModel.createBindingContext("/" + personId); // Use the correct path for the personId
+            
+            // Bind the view to the selected person
+            this.getView().setBindingContext(oBindingContext, "persons");
+        }
+        ,
+        
 
-        _onObjectMatched: function (oEvent) {
-            const sPersonData = oEvent.getParameter("arguments").personData;
-            console.log("Received personData:", sPersonData); // Debugging
-
-            if (!sPersonData) {
-                console.error("personData is undefined or empty.");
-                return;
-            }
-
-            try {
-                const oPersonData = JSON.parse(sPersonData);
-                this.getView().setModel(new JSONModel(oPersonData), "person");
-            } catch (error) {
-                console.error("Error parsing JSON:", error);
-            }
-        },
-
+       
         onNavBack: function () {
             const oHistory = sap.ui.core.routing.History.getInstance();
             const sPreviousHash = oHistory.getPreviousHash();

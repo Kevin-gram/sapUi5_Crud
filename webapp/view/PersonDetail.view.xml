@@ -7,20 +7,17 @@
         title="Person Details"
         showNavButton="true"
         navButtonPress="onNavBack">
-        <content >
-            <VBox class="sapUiSmallMargin" items="{persons/}">
-                <Text text="ID:" />
-                <Text text="{persons>/ID}" />
-                <Text text="Name:" />
-                <Text text="{persons>/Name}" />
-                <Text text="Age:" />
-                <Text text="{persons/Age}" />
-                <Text text="Gender:" />
-                <Text text="{persons/Gender}" />
-                <Text text="Phone:" />
-                <Text text="{persons/Phone}" />
-                <Text text="Address:" />
-                <Text text="{person>/PersonDetail/Address/Street}, {person>/PersonDetail/Address/City}, {person>/PersonDetail/Address/State}, {person>/PersonDetail/Address/ZipCode}" />
+        <content>
+            <VBox class="sapUiSmallMargin">
+        <Label text="ID">
+                <Text text="{persons>ID}" />
+                 <Label text="ID">
+                <Text text="{persons>Name}" />
+                <Text text="{persons>Age}" />
+                <Text text="{persons>Gender}" />
+                <Text text="{persons>Phone}" />
+
+                <Text text="{persons>Address/Street}, {persons>Address/City}, {persons>Address/State}, {persons>Address/ZipCode}" />
             </VBox>
         </content>
     </Page>

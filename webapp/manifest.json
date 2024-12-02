@@ -61,59 +61,60 @@
                 }
             ]
         },
-
-        		"routing": {
-			"config": {
-				"routerClass": "sap.m.routing.Router",
-				"viewType": "XML",
-				"viewPath": "crud.view",
-				"controlId": "app",
-				"controlAggregation": "pages",
-				"async": true
-			},
-			"routes": [
-				{
-					"pattern": "",
-					"name": "main",
-					"target": "main"
-				},
-				{
-					"pattern": "detail/{productId}",
-					"name": "detail",
-					"target": "detail"
-				},
-				{
-					"pattern": "persons",
-					"name": "persons",
-					"target": "persons"
-				},
-				{
-					"pattern": "personDetail/{personId}",
-					"name": "personDetail",
-					"target": "personDetail"
-				}
-			],
-			"targets": {
-				"main": {
-					"viewName": "Main",
-					"viewLevel": 1
-				},
-				"detail": {
-					"viewName": "Detail",
-					"viewLevel": 2
-				},
-				"persons": {
-					"viewName": "Persons",
-					"viewLevel": 4
-				},
-				"personDetail": {
-					"viewName": "PersonDetail",
-					"viewLevel": 5
-				},
-				"notFound": {
-					"viewName": "NotFound",
-					"viewLevel": 3
-				}
-			}
-		}}
+        "theme": "sap_fiori_3",
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "viewPath": "crud.view",
+                "controlId": "app",
+                "controlAggregation": "pages",
+                "async": true
+            },
+            "routes": [
+                {
+                    "pattern": "",
+                    "name": "main",
+                    "target": "main"
+                },
+                {
+                    "pattern": "detail/{productId}",
+                    "name": "detail",
+                    "target": "detail"
+                },
+                {
+                    "pattern": "persons",
+                    "name": "persons",
+                    "target": "persons"
+                },
+                {
+                    "pattern": "personDetail/{personId}",
+                    "name": "personDetail",
+                    "target": "personDetail"
+                }
+            ],
+            "targets": {
+                "main": {
+                    "viewName": "Main",
+                    "viewLevel": 1
+                },
+                "detail": {
+                    "viewName": "Detail",
+                    "viewLevel": 2
+                },
+                "persons": {
+                    "viewName": "Persons",
+                    "viewLevel": 4
+                },
+                "personDetail": {
+                    "viewName": "PersonDetail",
+                    "viewLevel": 5
+                },
+                "notFound": {
+                    "viewName": "NotFound",
+                    "viewLevel": 3
+                }
+            }
+        }
+    }
 }
