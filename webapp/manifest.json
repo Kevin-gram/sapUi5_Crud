@@ -57,7 +57,7 @@
         "resources": {
             "css": [
                 {
-                    "uri": "css/index.css"
+                    "uri": "index.css"
                 }
             ]
         },

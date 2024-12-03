@@ -3,6 +3,7 @@
     displayBlock="true"
     xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc"
+    xmlns:custom="crud.controls"
     xmlns:core="sap.ui.core"
 >
     <Page
@@ -19,13 +20,19 @@
             </Toolbar>
         </headerContent>
         <content>
-            <HBox alignItems="Center"
-            >
+            <HBox alignItems="Center">
                 <Link
                     text="Persons"
                     press="onSeePersons"
                     class="customLinkText"
                 />
+                <!-- <custom:CustomButton
+                    text="Custom Button"
+                    customProperty="Custom Value"
+                    width="200px"
+                    padding="10px"
+                    backgroundColor="#21432c"
+                    customPress="onCustomPress" /> -->
             </HBox>
             <SearchField
                 width="50%"
@@ -90,7 +97,7 @@
                         />
 
                         <!-- Ensure both Edit and Delete buttons are visible -->
-                        <HBox>
+                        <HBox class="gap">
                             <Button
                                 icon="sap-icon://edit"
                                 text="Edit"
@@ -98,6 +105,7 @@
                                 visible="true"
                             />
                             <Button
+                                class="deleteButton"
                                 icon="sap-icon://delete"
                                 text="Delete"
                                 press="onDeletePress"
