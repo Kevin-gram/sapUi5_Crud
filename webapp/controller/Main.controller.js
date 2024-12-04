@@ -46,10 +46,40 @@ sap.ui.define([
         onShowData(event) {
             const item = event.getSource();
             const bindingContext = item.getBindingContext();
+            if (!bindingContext) {
+                console.error("Binding context is undefined");
+                return;
+            }
             const productId = bindingContext.getProperty("ID");
 
             const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
             oRouter.navTo("detail", { productId: productId });
+
+            const oFlexibleColumnLayout = this.byId("layout");
+            oFlexibleColumnLayout.setLayout(sap.f.LayoutType.TwoColumnsMidExpanded);
+
+            const oDetailPage = this.byId("layout").getMidColumnPages()[0];
+            oDetailPage.setBindingContext(bindingContext);
+        },
+
+        onOpenDetailColumn() {
+            const oFlexibleColumnLayout = this.byId("layout");
+            oFlexibleColumnLayout.setLayout(sap.f.LayoutType.TwoColumnsMidExpanded);
+        },
+
+        onOpenEndColumn() {
+            const oFlexibleColumnLayout = this.byId("layout");
+            oFlexibleColumnLayout.setLayout(sap.f.LayoutType.ThreeColumnsMidExpanded);
+        },
+
+        onCloseDetailColumn() {
+            const oFlexibleColumnLayout = this.byId("layout");
+            oFlexibleColumnLayout.setLayout(sap.f.LayoutType.OneColumn);
+        },
+
+        onCloseEndColumn() {
+            const oFlexibleColumnLayout = this.byId("layout");
+            oFlexibleColumnLayout.setLayout(sap.f.LayoutType.TwoColumnsMidExpanded);
         },
 
         onSeePersons() {

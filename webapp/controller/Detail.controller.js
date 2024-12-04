@@ -12,7 +12,6 @@ sap.ui.define([
                 maxDataServiceVersion: "3.0"
             });
             this.getView().setModel(oModel);
-            
         },
 
         onObjectMatched: function (oEvent) {
@@ -20,13 +19,17 @@ sap.ui.define([
             const model = this.getView().getModel();
 
             model.read(`/Products(${productId})`, {
-                success: (data)=> {
+                success: (data) => {
+                    console.log("Product Data:", data); // Log product data to console for testing
                     this.getView().setModel(new sap.ui.model.json.JSONModel(data), "product");
                     this.byId("productId").setText("Product ID: " + data.ID);
-            this.byId("productName").setText("Name: " + data.Name);
-            this.byId("productPrice").setText("Price: " + data.Price);
-            this.byId("productRating").setText("Rating: " + data.Rating);
-            this.byId("productReleaseDate").setText("Release Date: " + data.ReleaseDate);
+                    this.byId("productName").setText("Name: " + data.Name);
+                    this.byId("productPrice").setText("Price: " + data.Price);
+                    this.byId("productRating").setText("Rating: " + data.Rating);
+                    this.byId("productReleaseDate").setText("Release Date: " + data.ReleaseDate);
+                },
+                error: (error) => {
+                    console.error("Error fetching product data:", error);
                 }
             });
         },

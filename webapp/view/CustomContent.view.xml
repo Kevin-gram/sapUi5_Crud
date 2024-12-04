@@ -1,16 +1,61 @@
-<!-- <mvc:View
+<mvc:View
+    controllerName="crud.controller.CustomContent"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
-    displayBlock="true">
-
+    xmlns:custom="crud.controls"
+    displayBlock="true"
+>
     <Page
-        title="Product Details"
+        title="Extra Details"
         showNavButton="true"
-        navButtonPress="onNavBack">
+        navButtonPress="onNavBack"
+    >
         <content>
             <VBox class="sapUiSmallMargin">
-                <Text id="" text="ghghgh" />
+                <custom:CustomButton
+                    text="Custom Button"
+                    customProperty="Custom Value"
+                    width="100px"
+                    padding="4px"
+                    backgroundColor="hsl(231, 75%, 28%)"
+                    customPress="onCustomPress"
+                />
+                <custom:CustomProgressBar
+                    value="50"
+                    maxValue="100"
+                />
+                <custom:CustomTable
+                    headerText="Product List"
+                    items="{/Products}"
+                >
+                    <custom:columns>
+                        <custom:Column>
+                            <Label text="Product ID" />
+                        </custom:Column>
+                        <custom:Column>
+                            <Label text="Name" />
+                        </custom:Column>
+                        <custom:Column>
+                            <Label text="Price" />
+                        </custom:Column>
+                        <custom:Column>
+                            <Label text="Rating" />
+                        </custom:Column>
+                        <custom:Column>
+                            <Label text="Release Date" />
+                        </custom:Column>
+                    </custom:columns>
+                    <custom:items>
+                        <custom:ColumnListItem>
+                            <Text text="{ID}" />
+                            <Text text="{Name}" />
+                            <Text text="{Price}" />
+                            <Text text="{Rating}" />
+                            <Text text="{path: 'ReleaseDate', formatter: '.formatter.formatDate'}" />
+                        </custom:ColumnListItem>
+                    </custom:items>
+                </custom:CustomTable>
             </VBox>
         </content>
     </Page>
-</mvc:View> -->
+</mvc:View>
