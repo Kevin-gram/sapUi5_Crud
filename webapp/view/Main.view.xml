@@ -1,45 +1,16 @@
 <mvc:View
-    controllerName="crud.controller.Main"
-    displayBlock="true"
-    xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc"
-    xmlns:custom="crud.controls"
-    xmlns:core="sap.ui.core"
->
-    <Page
-        title="{i18n>appTitle}"
-        id="page"
-        class="sapUiSmallMargin"
-    >
-        <headerContent>
-            <Toolbar>
-                <Button
-                    text="Create Product"
-                    press="onShowProductDialog"
-                />
-            </Toolbar>
-        </headerContent>
-        <content>
-            <HBox alignItems="Center">
-                <Link
-                    text="Persons"
-                    press="onSeePersons"
-                    class="customLinkText"
-                />
-                <!-- <custom:CustomButton
-                    text="Custom Button"
-                    customProperty="Custom Value"
-                    width="200px"
-                    padding="10px"
-                    backgroundColor="#21432c"
-                    customPress="onCustomPress" /> -->
-            </HBox>
-            <SearchField
-                width="50%"
-                search="onSearch"
-            />
-
-            <Table
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    controllerName="crud.controller.Main">
+    <f:FlexibleColumnLayout
+        id="layout"
+        layout="TwoColumnsMidExpanded">
+        <!-- Master Column -->
+        <f:beginColumnPages>
+        
+            <Page title="Product List">
+               <Table
                 id="odataTable"
                 inset="false"
                 items="{/Products}"
@@ -82,12 +53,10 @@
                     </Column>
                 </columns>
                 <items>
-                    <!-- Simplified ColumnListItem for debugging purposes -->
                     <ColumnListItem
                         type="Active"
                         press="onShowData"
                     >
-                        <!-- Text for debugging purposes -->
                         <Text text="{ID}" />
                         <Text text="{Name}" />
                         <Text text="{Price}" />
@@ -95,8 +64,6 @@
                         <Text
                             text="{path: 'ReleaseDate', formatter: '.formatter.formatDate'}"
                         />
-
-                        <!-- Ensure both Edit and Delete buttons are visible -->
                         <HBox class="gap">
                             <Button
                                 icon="sap-icon://edit"
@@ -115,92 +82,26 @@
                     </ColumnListItem>
                 </items>
             </Table>
-        </content>
-    </Page>
+            </Page>
+        </f:beginColumnPages>
 
-    <!-- Update Product Dialog -->
-    <Dialog
-        id="updateDialog"
-        title="Update Product"
-    >
-        <VBox class="sapUiSmallMargin">
-            <Label text="Product Name" />
-            <Input id="productNameText" />
-            <!-- <Label text="Product Id"/>
-            <Input id="productIdText"/> -->
-            <Label text="Price" />
-            <Input
-                id="productPriceText"
-                type="Number"
-            />
-            <Label text="Rating" />
-            <Input
-                id="productRatingText"
-                type="Number"
-            />
-            <Label text="Release Date" />
-            <DatePicker
-                id="productReleaseDateText"
-                valueFormat="yyyy-MM-dd"
-                displayFormat="yyyy-MM-dd"
-            />
-        </VBox>
-        <beginButton>
-            <Button
-                text="Save"
-                press="onEditPress"
-            />
-        </beginButton>
-        <endButton>
-            <Button
-                text="Cancel"
-                press="onCloseEditingDialog"
-            />
-        </endButton>
-    </Dialog>
+        <!-- Detail Column -->
+        <f:midColumnPages>
+            <Page title="Product Details">
+                <!-- Add content specific to product details -->
+                <VBox>
+                    <Text text="Details will appear here." />
+                </VBox>
+            </Page>
+        </f:midColumnPages>
 
-    <!-- Create Product Dialog -->
-    <Dialog
-        id="createProductDialog"
-        title="Create Product"
-        type="Message"
-    >
-        <VBox class="sapUiSmallMargin">
-            <Label text="Product ID" />
-            <Input
-                id="newProductId"
-                type="Number"
-            />
-            <Label text="Name" />
-            <Input id="newProductName" />
-            <Label text="Price" />
-            <Input
-                id="newProductPrice"
-                type="Number"
-            />
-            <Label text="Rating" />
-            <Input
-                id="newProductRating"
-                type="Number"
-            />
-            <Label text="Release Date" />
-            <DatePicker
-                id="newProductReleaseDate"
-                valueFormat="yyyy-MM-dd"
-                displayFormat="yyyy-MM-dd"
-            />
-        </VBox>
-        <beginButton>
-            <Button
-                text="Create"
-                press="onCreate"
-            />
-        </beginButton>
-        <endButton>
-            <Button
-                text="Cancel"
-                press="onCloseProductDialog"
-            />
-        </endButton>
-    </Dialog>
+        <!-- End Column -->
+        <f:endColumnPages>
+            <Page title="Extra Details">
+                <VBox>
+                    <Text text="Extra details or editing view." />
+                </VBox>
+            </Page>
+        </f:endColumnPages>
+    </f:FlexibleColumnLayout>
 </mvc:View>

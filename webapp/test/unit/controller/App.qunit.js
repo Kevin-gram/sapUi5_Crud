@@ -1,11 +1,20 @@
-/* global QUnit */
-sap.ui.define(["crud/controller/Main.controller"], function (MainController) {
+/*global QUnit */
+sap.ui.define([], function() {
 	"use strict";
-
-	QUnit.module("Sample App controller test");
-
-	QUnit.test("The AppController class has a sayHello method", function (assert) {
-		// as a very basic test example just check the presence of the "sayHello" method
-		assert.strictEqual(typeof MainController.prototype.sayHello, "function");
+  
+	QUnit.module("Module A"); 
+  
+	QUnit.test("Basic test example", function(assert) {
+	  assert.ok(true, "this test is fine"); 
+	  var value = "hello1"; 
+	  assert.equal(value, "hello1", "We expect value to be 'hello1'"); 
 	});
-});
+  
+	return {
+		tests: {
+			"unit/MyTest": {
+				title: "Unit tests for <NAMESPACE>"
+			},
+		}
+	};
+  });

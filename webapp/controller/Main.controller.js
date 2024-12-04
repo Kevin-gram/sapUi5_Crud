@@ -1,8 +1,9 @@
 sap.ui.define([
-    "./BaseController", "sap/m/MessageBox",
+    "./BaseController", 
+    "sap/m/MessageBox",
     "sap/ui/model/odata/v2/ODataModel",
     "sap/ui/model/Filter",
-	"sap/ui/model/FilterOperator"
+    "sap/ui/model/FilterOperator"
 ], function (BaseController, MessageBox, ODataModel) {
     "use strict";
 
@@ -25,39 +26,41 @@ sap.ui.define([
             });
         },
 
-	                   onSearch: function (event) {
-                // Build filter array
-                const aFilter = [];
-                const sQuery = event.getParameter("query");
-            
-                if (sQuery) {
-                    // Create a filter for the Name field
-                    aFilter.push(new sap.ui.model.Filter("Name", sap.ui.model.FilterOperator.Contains, sQuery));
-                }
-            
-                // Filter binding
-                const oList = this.byId("odataTable");
-                const oBinding = oList.getBinding("items");
-                oBinding.filter(aFilter);
-            
-                if (event.getParameter("searchButtonPressed")) {
-                    sap.m.MessageToast.show("'search' event fired with 'searchButtonPressed' parameter");
-                }
-            },
-                        onShowData(event) {
-                const Item = event.getSource();
-                const bindingContext = Item.getBindingContext();
-                const productId = bindingContext.getProperty("ID");
-            
-                const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-                oRouter.navTo("detail", {
-                    productId: productId
-                });
-            },
-            onSeePersons(){
-                const oRouter =sap.ui.core.UIComponent.getRouterFor(this);
-                oRouter.navTo("persons");
-            },
+        onSearch(event) {
+            const aFilter = [];
+            const sQuery = event.getParameter("query");
+
+            if (sQuery) {
+                aFilter.push(new sap.ui.model.Filter("Name", sap.ui.model.FilterOperator.Contains, sQuery));
+            }
+
+            const oList = this.byId("odataTable");
+            const oBinding = oList.getBinding("items");
+            oBinding.filter(aFilter);
+
+            if (event.getParameter("searchButtonPressed")) {
+                sap.m.MessageToast.show("'search' event fired with 'searchButtonPressed' parameter");
+            }
+        },
+
+        onShowData(event) {
+            const item = event.getSource();
+            const bindingContext = item.getBindingContext();
+            const productId = bindingContext.getProperty("ID");
+
+            const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+            oRouter.navTo("detail", { productId: productId });
+        },
+
+        onSeePersons() {
+            const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+            oRouter.navTo("persons");
+        },
+
+        onSeeCustomContent() {
+            const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+            oRouter.navTo("customContent");
+        },
 
         onShowProductDialog() {
             this.byId("createProductDialog").open();
@@ -94,6 +97,10 @@ sap.ui.define([
             return d.getFullYear() + '-' + 
                    String(d.getMonth() + 1).padStart(2, '0') + '-' + 
                    String(d.getDate()).padStart(2, '0');
+        },
+
+        onCustomPress() {
+            MessageBox.show("Custom button pressed!");
         },
 
         onCreate() {

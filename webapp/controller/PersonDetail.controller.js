@@ -1,40 +1,17 @@
 sap.ui.define([
-    "./BaseController",
-    "sap/ui/model/json/JSONModel"
-], function (BaseController, JSONModel) {
+    "sap/ui/core/mvc/Controller",
+    "sap/m/MessageToast"
+], function (Controller, MessageToast) {
     "use strict";
 
-    return BaseController.extend("crud.controller.PersonDetail", {
+    return Controller.extend("crud.controller.PersonDetail", {
         onInit: function () {
-            const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-            const oRoute = oRouter.getRoute("personDetail");
-            oRoute.attachPatternMatched(this._onPersonMatched, this);
+            // Initialization logic
         },
-        
-        _onPersonMatched: function (oEvent) {
-            const personId = oEvent.getParameter("arguments").personId; // Get the personId from the URL
-            const oModel = this.getOwnerComponent().getModel("persons");
-        
-            // Assuming the "persons" model is an array of persons, bind to the correct person using personId
-            const oBindingContext = oModel.createBindingContext("/" + personId); // Use the correct path for the personId
-            
-            // Bind the view to the selected person
-            this.getView().setBindingContext(oBindingContext, "persons");
-        }
-        ,
-        
-
-       
-        onNavBack: function () {
-            const oHistory = sap.ui.core.routing.History.getInstance();
-            const sPreviousHash = oHistory.getPreviousHash();
-
-            if (sPreviousHash !== undefined) {
-                window.history.go(-1);
-            } else {
-                const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-                oRouter.navTo("main", {}, true);
-            }
+        onCustomPress: function () {
+            // Additional actions to be performed on button press
+            MessageToast.show("Custom button pressed!");
+            // Add your extra logic here
         }
     });
 });

@@ -34,7 +34,8 @@
             "minUI5Version": "1.130.2",
             "libs": {
                 "sap.ui.core": {},
-                "sap.m": {}
+                "sap.m": {},
+                "sap.f": {}  
             }
         },
 
@@ -57,12 +58,72 @@
         "resources": {
             "css": [
                 {
-                    "uri": "index.css"
+                    "uri": "css/index.css"
                 }
             ]
         },
-        "theme": "sap_fiori_3",
-        "routing": {
+             "routing": {
+                "config": {
+                    "routerClass": "sap.m.routing.Router",
+                    "viewType": "XML",
+                    "viewPath": "crud.view",
+                    "controlId": "app",
+                    "controlAggregation": "pages",
+                    "async": true
+                },
+                "routes": [
+
+                    {
+                        "pattern": "",
+                        "name": "ProductList",
+                        "target": "ProductList"
+                    },
+                    {
+                        "pattern": "product/{productId}",
+                        "name": "detail",
+                        "target": ["ProductList", "ProductDetails"]
+                    },
+                    {
+                        "pattern": "persons",
+                        "name": "persons",
+                        "target": "persons"
+                    },
+                    {
+                        "pattern": "personDetail/{personId}",
+                        "name": "personDetail",
+                        "target": "personDetail"
+                    },
+                    {
+                        "pattern": "customContent",
+                        "name": "customContent",
+                        "target": "customContents"
+                    }
+                ],
+                "targets": {
+                    "detail": {
+                        "viewName": "Detail",
+                        "viewLevel": 2
+                    },
+                    "persons": {
+                        "viewName": "Persons",
+                        "viewLevel": 4
+                    },
+                  "ProductList": {
+                "viewId": "ProductList",
+                "viewName": "Main"
+            },
+            "ProductDetails": {
+                "viewId": "ProductDetails",
+                "viewName": "ProductDetails",
+                "controlAggregation": "midColumnPages"
+            },
+                    "customContents": {
+                        "viewName": "CustomContent",
+                        "viewLevel": 6
+                    }
+                }
+            },
+        
             "config": {
                 "routerClass": "sap.m.routing.Router",
                 "viewType": "XML",
@@ -91,6 +152,10 @@
                     "pattern": "personDetail/{personId}",
                     "name": "personDetail",
                     "target": "personDetail"
+                },{
+                    "pattern": "customContent",
+                    "name": "customContent",
+                    "target": "customContents"
                 }
             ],
             "targets": {
@@ -107,14 +172,18 @@
                     "viewLevel": 4
                 },
                 "personDetail": {
-                    "viewName": "PersonDetail",
-                    "viewLevel": 5
+                    "viewName": "PersonDetail"
+                   
+                },
+                "customContents": {
+                    "viewName": "CustomContent"
+                    
                 },
                 "notFound": {
-                    "viewName": "NotFound",
-                    "viewLevel": 3
+                    "viewName": "NotFound"
+                  
                 }
             }
-        }
+        
     }
 }

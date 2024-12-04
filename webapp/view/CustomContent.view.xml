@@ -1,0 +1,16 @@
+<!-- <mvc:View
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    displayBlock="true">
+
+    <Page
+        title="Product Details"
+        showNavButton="true"
+        navButtonPress="onNavBack">
+        <content>
+            <VBox class="sapUiSmallMargin">
+                <Text id="" text="ghghgh" />
+            </VBox>
+        </content>
+    </Page>
+</mvc:View> -->

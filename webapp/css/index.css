@@ -1,0 +1,62 @@
+.customLinkText {
+    font-size: 30px;  
+}
+:root{
+    --sapButton_Background: hsl(231, 75%, 28%);
+    --sapButton_Text: #ffffff;
+    --sapFontFamily: 	"72","72full",Arial,Helvetica,sans-serif;
+}
+.gap{
+    display: flexbox;
+    gap: 10px;
+}
+.page{
+    font:"72","72full",Arial,Helvetica,sans-serif;
+}
+.customProgressBar {
+    width: 100%;
+    height: 20px;
+    background-color: #c51010;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.customProgressBarFill {
+    height: 100%;
+    background-color: #76c7c0;
+    border-radius: 10px;
+}
+.customTable {
+    margin-top: 20px;
+    border: 2px solid #4CAF50;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.customTable .sapMTableHeader {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+}
+
+.customTable .sapMListTblRow {
+    background-color: #f9f9f9;
+}
+
+.customTable .sapMListTblRow:hover {
+    background-color: #042429;
+}
+
+.customTable .sapMText {
+    color: #243079;
+    font-size: 14px;
+}
+
+/* Alternate row coloring */
+.customTable .sapMListTblRow:nth-child(even) {
+    background-color: #7c7a7a;
+}
+
+.customTable .sapMListTblRow:nth-child(odd) {
+    background-color: #949090;
+}
