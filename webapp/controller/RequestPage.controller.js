@@ -1,8 +1,9 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/m/MessageToast",
+    "sap/m/Text",
     "sap/ui/model/odata/v2/ODataModel"
-], function (Controller, MessageToast, ODataModel) {
+], function (Controller, MessageToast, Text, ODataModel) {
     "use strict";
 
     return Controller.extend("crud.controller.RequestPage", {
@@ -66,7 +67,18 @@ sap.ui.define([
             const product = this.byId("product").getValue();
             const description = this.byId("description").getValue();
 
-            // Handle form submission logic here
+            // Display the submitted data in the second column
+            const submittedDataBox = this.byId("submittedDataBox");
+            submittedDataBox.removeAllItems();
+            submittedDataBox.addItem(new Text({ text: "Person's Name: " + personName }));
+            submittedDataBox.addItem(new Text({ text: "Supplier: " + supplier }));
+            submittedDataBox.addItem(new Text({ text: "Product: " + product }));
+            submittedDataBox.addItem(new Text({ text: "Description: " + description }));
+
+            // Navigate to the second column
+            const flexibleColumnLayout = this.byId("flexibleColumnLayout");
+            flexibleColumnLayout.setLayout(sap.f.LayoutType.TwoColumnsMidExpanded);
+
             MessageToast.show("Form submitted successfully!");
         },
 
@@ -124,6 +136,11 @@ sap.ui.define([
         onCloseProductHelp: function () {
             // Close the value help dialog for product
             this.byId("productHelpDialog").close();
+        },
+       onCloseDetailColumn: function () {
+            // Close the detail column
+            const flexibleColumnLayout = this.byId("flexibleColumnLayout");
+            flexibleColumnLayout.setLayout(sap.f.LayoutType.OneColumn);
         }
     });
 });
