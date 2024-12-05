@@ -79,12 +79,10 @@ sap.ui.define([
             const flexibleColumnLayout = this.byId("flexibleColumnLayout");
             flexibleColumnLayout.setLayout(sap.f.LayoutType.TwoColumnsMidExpanded);
 
-            MessageToast.show("Form submitted successfully!");
         },
 
         onCancel: function () {
             // Handle form cancellation logic here
-            MessageToast.show("Form submission cancelled.");
         },
 
         onPersonHelp: function () {

@@ -3,6 +3,7 @@
     xmlns="sap.m"
     xmlns:form="sap.ui.layout.form"
     xmlns:core="sap.ui.core"
+    xmlns:layout="sap.ui.layout"
     xmlns:f="sap.f"
     controllerName="crud.controller.RequestPage"
 >
@@ -10,46 +11,47 @@
         <f:beginColumnPages>
             <Page title="Request Form">
                 <content>
-                    <form:SimpleForm
-                        id="requestForm"
-                        layout="ResponsiveGridLayout"
-                        editable="true"
-                        title="Request Form"
-                        width="100%"
-                    >
-                        <Label text="Person's Name" />
-                        <Input
-                            id="personName"
-                            placeholder="Enter your name"
-                            showValueHelp="true"
-                            valueHelpRequest="onPersonHelp"
-                        />
+                    <layout:VerticalLayout width="100%">
+                        <form:SimpleForm
+                            id="requestForm"
+                            editable="true"
+                            title="Request Form"
+                            width="100%"
+                        >
+                            <Label text="Person's Name" />
+                            <Input
+                                id="personName"
+                                placeholder="Enter your name"
+                                showValueHelp="true"
+                                valueHelpRequest="onPersonHelp"
+                            />
 
-                        <Label text="Supplier" />
-                        <Input
-                            id="supplier"
-                            placeholder="Enter supplier name"
-                            showValueHelp="true"
-                            valueHelpRequest="onSupplierHelp"
-                        />
+                            <Label text="Supplier" />
+                            <Input
+                                id="supplier"
+                                placeholder="Enter supplier name"
+                                showValueHelp="true"
+                                valueHelpRequest="onSupplierHelp"
+                            />
 
-                        <Label text="Product" />
-                        <Input
-                            id="product"
-                            placeholder="Select a product"
-                            showValueHelp="true"
-                            valueHelpRequest="onProductHelp"
-                        />
+                            <Label text="Product" />
+                            <Input
+                                id="product"
+                                placeholder="Select a product"
+                                showValueHelp="true"
+                                valueHelpRequest="onProductHelp"
+                            />
 
-                        <Label text="Description" />
-                        <TextArea id="description" placeholder="Enter description" rows="4" />
+                            <Label text="Description" />
+                            <TextArea id="description" placeholder="Enter description" rows="4" />
 
-                        <Toolbar>
-                            <ToolbarSpacer />
-                            <Button text="Submit" press="onSubmit" />
-                            <Button text="Cancel" press="onCancel" />
-                        </Toolbar>
-                    </form:SimpleForm>
+                            <Toolbar>
+                                <ToolbarSpacer />
+                                <Button text="Submit" press="onSubmit" />
+                                <Button text="Cancel" press="onCancel" />
+                            </Toolbar>
+                        </form:SimpleForm>
+                    </layout:VerticalLayout>
                 </content>
             </Page>
         </f:beginColumnPages>
@@ -57,13 +59,15 @@
         <f:midColumnPages>
             <Page title="Submitted Data">
                 <content>
-                    <VBox id="submittedDataBox" class="sapUiSmallMargin">
-                        <!-- Submitted data will be displayed here -->
-                    </VBox>
-                    <Button
-                        text="Close"
-                        press="onCloseDetailColumn"
-                    />
+                    <layout:VerticalLayout width="100%">
+                        <VBox id="submittedDataBox" class="sapUiSmallMargin">
+                            <!-- Submitted data will be displayed here -->
+                        </VBox>
+                        <Button
+                            text="Close"
+                            press="onCloseDetailColumn"
+                        />
+                    </layout:VerticalLayout>
                 </content>
             </Page>
         </f:midColumnPages>
