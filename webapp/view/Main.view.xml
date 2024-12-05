@@ -141,6 +141,7 @@
             <Page title="Extra Details">
                 <headerContent>
                     <Toolbar>
+                        <Title text="Extra Details" />
                         <ToolbarSpacer />
                         <Button
                             text="Close"
@@ -148,9 +149,32 @@
                         />
                     </Toolbar>
                 </headerContent>
-                <VBox>
-                    <Text text="Extra details or editing view." />
-                </VBox>
+                <content>
+                    <VBox class="sapUiSmallMargin">
+                        <Panel headerText="Product Information" expandable="true" expanded="false">
+                            <content>
+                                <List>
+                                    <StandardListItem title="Product ID" description="{ID}" />
+                                    <StandardListItem title="Name" description="{Name}" />
+                                    <StandardListItem title="Price" description="{Price}" />
+                                    <StandardListItem title="Rating" description="{Rating}" />
+                                    <StandardListItem title="Release Date" description="{path: 'ReleaseDate', formatter: '.formatter.formatDate'}" />
+                                </List>
+                            </content>
+                        </Panel>
+                        <Panel headerText="Progress" expandable="true" expanded="false">
+                            <content>
+                                <ProgressIndicator percentValue="95" displayValue="95%" state="Success" />
+                            </content>
+                        </Panel>
+                        <Panel headerText="Actions" expandable="true" expanded="false">
+                            <content>
+                                <Button text="Action 1" press="onAction1Press" />
+                                <Button text="Action 2" press="onAction2Press" />
+                            </content>
+                        </Panel>
+                    </VBox>
+                </content>
             </Page>
         </f:endColumnPages>
     </f:FlexibleColumnLayout>
