@@ -3,49 +3,59 @@
     xmlns="sap.m"
     xmlns:form="sap.ui.layout.form"
     xmlns:core="sap.ui.core"
+    xmlns:layout="sap.ui.layout"
     controllerName="crud.controller.RequestPage"
 >
     <Page title="Request Form">
         <content>
-            <form:SimpleForm
-                id="requestForm"
-                layout="ResponsiveGridLayout"
-                editable="true"
-                title="Request Form"
+            <layout:Grid
+                id="requestFormGrid"
+                defaultSpan="L10 M10 S10"
+                width="100%"
             >
-                <Label text="Person's Name" />
-                <Input
-                    id="personName"
-                    placeholder="Enter your name"
-                    showValueHelp="true"
-                    valueHelpRequest="onPersonHelp"
-                />
+                <layout:content>
+                    <Label text="Person's Name" />
+                    <Input
+                        id="personName"
+                        placeholder="Enter your name"
+                        showValueHelp="true"
+                        valueHelpRequest="onPersonHelp"
+                        layoutData="{layout:GridData}"
+                    />
 
-                <Label text="Supplier" />
-                <Input
-                    id="supplier"
-                    placeholder="Enter supplier name"
-                    showValueHelp="true"
-                    valueHelpRequest="onSupplierHelp"
-                />
+                    <Label text="Supplier" />
+                    <Input
+                        id="supplier"
+                        placeholder="Enter supplier name"
+                        showValueHelp="true"
+                        valueHelpRequest="onSupplierHelp"
+                        layoutData="{layout:GridData}"
+                    />
 
-                <Label text="Product" />
-                <Input
-                    id="product"
-                    placeholder="Select a product"
-                    showValueHelp="true"
-                    valueHelpRequest="onProductHelp"
-                />
+                    <Label text="Product" />
+                    <Input
+                        id="product"
+                        placeholder="Select a product"
+                        showValueHelp="true"
+                        valueHelpRequest="onProductHelp"
+                        layoutData="{layout:GridData}"
+                    />
 
-                <Label text="Description" />
-                <TextArea id="description" placeholder="Enter description" rows="4" />
+                    <Label text="Description" />
+                    <TextArea
+                        id="description"
+                        placeholder="Enter description"
+                        rows="4"
+                        layoutData="{layout:GridData}"
+                    />
 
-                <Toolbar>
-                    <ToolbarSpacer />
-                    <Button text="Submit" press="onSubmit" />
-                    <Button text="Cancel" press="onCancel" />
-                </Toolbar>
-            </form:SimpleForm>
+                    <Toolbar>
+                        <ToolbarSpacer />
+                        <Button text="Submit" press="onSubmit" />
+                        <Button text="Cancel" press="onCancel" />
+                    </Toolbar>
+                </layout:content>
+            </layout:Grid>
         </content>
     </Page>
 
