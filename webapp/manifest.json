@@ -97,6 +97,10 @@
                         "pattern": "customContent",
                         "name": "customContent",
                         "target": "customContents"
+                    },{
+                        "pattern": "requestPage",
+                        "name": "requestPage",
+                        "target": "requestPage"
                     }
                 ],
                 "targets": {
@@ -120,7 +124,12 @@
                     "customContents": {
                         "viewName": "CustomContent",
                         "viewLevel": 6
-                    }
+                    },
+                
+                        "requestPage": {
+                            "viewName": "RequestPage",
+                            "viewLevel": 7
+                        }
                 }
             },
         
