@@ -4,7 +4,7 @@ sap.ui.define([
     "sap/ui/model/odata/v2/ODataModel",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator"
-], function (BaseController, MessageBox, ODataModel) {
+], function (BaseController, MessageBox, ODataModel, Filter, FilterOperator) {
     "use strict";
 
     return BaseController.extend("crud.controller.Main", {
@@ -24,6 +24,27 @@ sap.ui.define([
                     console.log(data);
                 }
             });
+        },
+
+        onFilterSelect: function (oEvent) {
+            const sKey = oEvent.getParameter("key");
+            const oTable = this.byId("odataTable");
+            const oBinding = oTable.getBinding("items");
+            let aFilters = [];
+
+            switch (sKey) {
+                case "highRating":
+                    aFilters.push(new Filter("Rating", FilterOperator.GT, 4));
+                    break;
+                case "highPrice":
+                    aFilters.push(new Filter("Price", FilterOperator.GT, 100));
+                    break;
+                default:
+                    // No filter for "All"
+                    break;
+            }
+
+            oBinding.filter(aFilters);
         },
 
         onSearch(event) {
@@ -82,16 +103,6 @@ sap.ui.define([
             oFlexibleColumnLayout.setLayout(sap.f.LayoutType.TwoColumnsMidExpanded);
         },
 
-        onSeePersons() {
-            const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-            oRouter.navTo("persons");
-        },
-
-        onSeeCustomContent() {
-            const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-            oRouter.navTo("customContent");
-        },
-
         onShowProductDialog() {
             this.byId("createProductDialog").open();
         },
@@ -127,10 +138,6 @@ sap.ui.define([
             return d.getFullYear() + '-' + 
                    String(d.getMonth() + 1).padStart(2, '0') + '-' + 
                    String(d.getDate()).padStart(2, '0');
-        },
-
-        onCustomPress() {
-            MessageBox.show("Custom button pressed!");
         },
 
         onCreate() {

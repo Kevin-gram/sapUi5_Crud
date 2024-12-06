@@ -1,23 +1,28 @@
 <mvc:View
     controllerName="crud.controller.PersonDetail"
     xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.m">
-
+    xmlns="sap.m"
+>
     <Page
         title="Person Details"
         showNavButton="true"
-        navButtonPress="onNavBack">
+        navButtonPress="onNavBack"
+    >
         <content>
             <VBox class="sapUiSmallMargin">
-        <Label text="ID">
                 <Text text="{persons>ID}" />
-                 <Label text="ID">
+
                 <Text text="{persons>Name}" />
+
                 <Text text="{persons>Age}" />
+
                 <Text text="{persons>Gender}" />
+
                 <Text text="{persons>Phone}" />
 
-                <Text text="{persons>Address/Street}, {persons>Address/City}, {persons>Address/State}, {persons>Address/ZipCode}" />
+                <Text
+                    text="{persons>Address/Street}, {persons>Address/City}, {persons>Address/State}, {persons>Address/ZipCode}"
+                />
             </VBox>
         </content>
     </Page>

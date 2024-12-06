@@ -26,6 +26,26 @@
                     </Toolbar>
                 </headerContent>
                 <content>
+                    <IconTabBar id="iconTabBar" select="onFilterSelect">
+                        <items>
+                            <IconTabFilter
+                                key="all"
+                                text="All"
+                                icon="sap-icon://filter">
+                            </IconTabFilter>
+                            <IconTabFilter
+                                key="highRating"
+                                text="High Rating"
+                                icon="sap-icon://favorite">
+                            </IconTabFilter>
+                            <IconTabFilter
+                                key="highPrice"
+                                text="High Price"
+                                icon="sap-icon://money-bills">
+                            </IconTabFilter>
+                        </items>
+                    </IconTabBar>
+
                     <HBox justifyContent="Inherit">
                         <Link
                             text="Persons"

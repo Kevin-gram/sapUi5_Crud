@@ -1,0 +1,20 @@
+<mvc:XMLView xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <Page title="Login Page" showNavButton="false" navButtonPress="onNavBack">
+        <content>
+            <VBox class="sapUiSmallMargin">
+                <Input id="username" placeholder="Enter Username" />
+                <Input id="password" placeholder="Enter Password" type="Password" />
+                <ComboBox id="countryComboBox" placeholder="Select Country">
+                    <core:ListItem key="US" text="United States" />
+                    <core:ListItem key="CA" text="Canada" />
+                    <core:ListItem key="GB" text="United Kingdom" />
+                    <core:ListItem key="DE" text="Germany" />
+                    <core:ListItem key="FR" text="France" />
+                </ComboBox>
+                <Button text="Login" press="onLogin" />
+            </VBox>
+        </content>
+    </Page>
+</mvc:XMLView>

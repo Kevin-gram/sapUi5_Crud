@@ -102,6 +102,12 @@
                         "name": "requestPage",
                         "target": "requestPage"
                     }
+                    ,
+                    {
+                        "pattern": "loginPage",
+                        "name": "loginPage",
+                        "target": "loginPage"
+                    }
                 ],
                 "targets": {
                     "detail": {
@@ -129,6 +135,10 @@
                         "requestPage": {
                             "viewName": "RequestPage",
                             "viewLevel": 7
+                        },
+                        "loginPage": {
+                            "viewName": "LoginPage",
+                            "viewLevel": 8
                         }
                 }
             },
