@@ -23,6 +23,18 @@
                             text="Open Detail Column"
                             press="onOpenDetailColumn"
                         />
+                        <Button
+                            text="See Persons"
+                            press="onSeePersons"
+                        />
+                        <Button
+                            text="Open Login Page"
+                            press="onOpenLoginPage"
+                        />
+                        <Button
+                            text="Open Request Products"
+                            press="onOpenRequestproducts"
+                        />
                     </Toolbar>
                 </headerContent>
                 <content>
@@ -45,7 +57,6 @@
                             </IconTabFilter>
                         </items>
                     </IconTabBar>
-
                     <HBox justifyContent="Inherit">
                         <Link
                             text="Persons"

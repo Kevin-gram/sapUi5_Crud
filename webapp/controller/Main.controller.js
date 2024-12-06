@@ -1,5 +1,5 @@
 sap.ui.define([
-    "./BaseController", 
+    "./BaseController",
     "sap/m/MessageBox",
     "sap/ui/model/odata/v2/ODataModel",
     "sap/ui/model/Filter",
@@ -116,15 +116,15 @@ sap.ui.define([
             const listItem = button.getParent();
             const context = listItem.getBindingContext();
             const productData = context.getObject();
-            
+
             this._selectedProductId = productData.ID;
-            
+
             const dialog = this.byId("updateDialog");
             this.byId("productNameText").setValue(productData.Name);
             this.byId("productPriceText").setValue(productData.Price);
             this.byId("productRatingText").setValue(productData.Rating);
             this.byId("productReleaseDateText").setValue(productData.ReleaseDate);
-            
+
             dialog.open();
         },
 
@@ -135,9 +135,9 @@ sap.ui.define([
         formatDateForOData(date) {
             if (!date) return null;
             const d = date instanceof Date ? date : new Date(date);
-            return d.getFullYear() + '-' + 
-                   String(d.getMonth() + 1).padStart(2, '0') + '-' + 
-                   String(d.getDate()).padStart(2, '0');
+            return d.getFullYear() + '-' +
+                String(d.getMonth() + 1).padStart(2, '0') + '-' +
+                String(d.getDate()).padStart(2, '0');
         },
 
         onCreate() {
@@ -173,19 +173,19 @@ sap.ui.define([
                 },
                 body: atomXml
             })
-            .then(response => {
-                if (!response.ok) {
-                    return response.text().then(errorText => {
-                        throw new Error(`HTTP error! Status: ${response.status} - ${errorText}`);
-                    });
-                }
-                MessageBox.success("Product created successfully!");
-                this.onCloseProductDialog();
-                this.getView().getModel().refresh(true);
-            })
-            .catch(error => {
-                MessageBox.error("Error creating product: " + error.message);
-            });
+                .then(response => {
+                    if (!response.ok) {
+                        return response.text().then(errorText => {
+                            throw new Error(`HTTP error! Status: ${response.status} - ${errorText}`);
+                        });
+                    }
+                    MessageBox.success("Product created successfully!");
+                    this.onCloseProductDialog();
+                    this.getView().getModel().refresh(true);
+                })
+                .catch(error => {
+                    MessageBox.error("Error creating product: " + error.message);
+                });
         },
 
         onEditPress() {
@@ -221,21 +221,34 @@ sap.ui.define([
                 },
                 body: atomXml
             })
-            .then(response => {
-                if (!response.ok) {
-                    return response.text().then(errorText => {
-                        throw new Error(`HTTP error! Status: ${response.status} - ${errorText}`);
-                    });
-                }
-                MessageBox.success("Product updated successfully!");
-                this.onCloseEditingDialog();
-                this.getView().getModel().refresh(true);
-            })
-            .catch(error => {
-                MessageBox.error("Error updating product: " + error.message);
-            });
+                .then(response => {
+                    if (!response.ok) {
+                        return response.text().then(errorText => {
+                            throw new Error(`HTTP error! Status: ${response.status} - ${errorText}`);
+                        });
+                    }
+                    MessageBox.success("Product updated successfully!");
+                    this.onCloseEditingDialog();
+                    this.getView().getModel().refresh(true);
+                })
+                .catch(error => {
+                    MessageBox.error("Error updating product: " + error.message);
+                });
+        },
+        onSeePersons: function () {
+            const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+            oRouter.navTo("persons");
         },
 
+        onOpenLoginPage: function () {
+            const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+            oRouter.navTo("loginPage");
+        },
+
+        onOpenRequestproducts: function () {
+            const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+            oRouter.navTo("requestPage");
+        },
         onDeletePress(oEvent) {
             const button = oEvent.getSource();
             const listItem = button.getParent();
