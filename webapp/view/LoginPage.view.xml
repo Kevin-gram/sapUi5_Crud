@@ -13,6 +13,20 @@
                     <core:ListItem key="DE" text="Germany" />
                     <core:ListItem key="FR" text="France" />
                 </ComboBox>
+
+
+	<MultiComboBox
+			showSecondaryValues= "true"
+			width="500px"
+		>
+        <core:ListItem key="US" text="United States" />
+                    <core:ListItem key="CA" text="Canada" />
+                    <core:ListItem key="GB" text="United Kingdom" />
+                    <core:ListItem key="DE" text="Germany" />
+                    <core:ListItem key="FR" text="France" />
+			<core:ListItem />
+		</MultiComboBox>
+
                 <Button text="Login" press="onLogin" />
             </VBox>
         </content>
