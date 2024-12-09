@@ -6,7 +6,7 @@ const app = express()
 app.use(cors())
 
 app.use("/odata", createProxyMiddleware({
-    target: "https://services.odata.org/V3/(S(hzn4vwyj2pljjfroa0zssf5s))/OData/OData.svc/",
+    target: "https://services.odata.org/v2/northwind/northwind.svc/",
     changeOrigin: true,
     pathRewrite: {
         '^/odata': ''

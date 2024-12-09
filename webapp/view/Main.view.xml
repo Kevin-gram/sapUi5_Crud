@@ -73,6 +73,7 @@
                         inset="false"
                         items="{/Products}"
                         itemPress="onShowData"
+                        growing="true" growingScrollToLoad="true" growingThreshold='18'
                     >
                         <columns>
                             <Column width="150px">
@@ -92,12 +93,12 @@
                             </Column>
                             <Column width="150px">
                                 <header>
-                                    <Label text="Rating" />
+                                    <Label text="QuantityPerUnit" />
                                 </header>
                             </Column>
                             <Column width="150px">
                                 <header>
-                                    <Label text="Release Date" />
+                                    <Label text="Discontinued" />
                                 </header>
                             </Column>
                             <Column width="150px">
@@ -111,12 +112,12 @@
                                 type="Active"
                                 press="onShowData"
                             >
-                                <Text text="{ID}" />
-                                <Text text="{Name}" />
-                                <Text text="{Price}" />
-                                <Text text="{Rating}" />
+                                <Text text="{ProductID}" />
+                                <Text text="{ProductName}" />
+                                <Text text="{UnitPrice}" />
+                                <Text text="{QuantityPerUnit}" />
                                 <Text
-                                    text="{path: 'ReleaseDate', formatter: '.formatter.formatDate'}"
+                                    text="{Discontinued}"
                                 />
                                 <HBox class="gap">
                                     <Button
