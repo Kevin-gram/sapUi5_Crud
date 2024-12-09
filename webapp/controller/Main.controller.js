@@ -9,6 +9,10 @@ sap.ui.define([
 
     return BaseController.extend("crud.controller.Main", {
         onInit() {
+            this._iPageSize = 5; // Number of items to load per request
+            this._iCurrentPage = 1; // Current page number
+            this._bLoading = false; // Flag to prevent multiple requests
+
             let oModel = new ODataModel("http://localhost:3000/odata", {
                 defaultBindingMode: "TwoWay",
                 useBatch: false,
@@ -19,11 +23,37 @@ sap.ui.define([
                 maxDataServiceVersion: "3.0"
             });
             this.getView().setModel(oModel);
-            oModel.read("/Products", {
-                success(data) {
-                    console.log(data);
+            this._loadData();
+        },
+
+        _loadData() {
+            if (this._bLoading) return;
+            this._bLoading = true;
+
+            let oModel = this.getView().getModel();
+            let sPath = `/Products?$skip=${(this._iCurrentPage - 1) * this._iPageSize}&$top=${this._iPageSize}`;
+
+            oModel.read(sPath, {
+                success: (data) => {
+                    let oData = this.getView().getModel().getProperty("/Products") || [];
+                    oData = oData.concat(data.results);
+                    this.getView().getModel().setProperty("/Products", oData);
+                    this._iCurrentPage++;
+                    this._bLoading = false;
+                },
+                error: (error) => {
+                    MessageBox.error("Error loading data: " + error.message);
+                    this._bLoading = false;
                 }
             });
+        },
+
+        onScroll: function (oEvent) {
+            let oScrollContainer = oEvent.getSource();
+            let oDomRef = oScrollContainer.getDomRef();
+            if (oDomRef.scrollTop + oDomRef.clientHeight >= oDomRef.scrollHeight) {
+                this._loadData();
+            }
         },
 
         onFilterSelect: function (oEvent) {
@@ -235,6 +265,7 @@ sap.ui.define([
                     MessageBox.error("Error updating product: " + error.message);
                 });
         },
+
         onSeePersons: function () {
             const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
             oRouter.navTo("persons");
@@ -249,6 +280,7 @@ sap.ui.define([
             const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
             oRouter.navTo("requestPage");
         },
+
         onDeletePress(oEvent) {
             const button = oEvent.getSource();
             const listItem = button.getParent();

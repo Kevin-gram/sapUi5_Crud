@@ -1,6 +1,5 @@
 {
     "_version": "1.12.0",
-
     "sap.app": {
         "id": "crud",
         "type": "application",
@@ -11,7 +10,6 @@
             "version": "${version}"
         }
     },
-
     "sap.ui": {
         "technology": "UI5",
         "icons": {},
@@ -21,7 +19,6 @@
             "phone": true
         }
     },
-
     "sap.ui5": {
         "rootView": {
             "viewName": "crud.view.App",
@@ -29,23 +26,19 @@
             "async": true,
             "id": "app"
         },
-
         "dependencies": {
             "minUI5Version": "1.130.2",
             "libs": {
                 "sap.ui.core": {},
                 "sap.m": {},
-                "sap.f": {}  
+                "sap.f": {}
             }
         },
-
         "handleValidation": true,
-
         "contentDensities": {
             "compact": true,
             "cozy": true
         },
-
         "models": {
             "i18n": {
                 "type": "sap.ui.model.resource.ResourceModel",
@@ -54,7 +47,6 @@
                 }
             }
         },
-
         "resources": {
             "css": [
                 {
@@ -62,87 +54,7 @@
                 }
             ]
         },
-             "routing": {
-                "config": {
-                    "routerClass": "sap.m.routing.Router",
-                    "viewType": "XML",
-                    "viewPath": "crud.view",
-                    "controlId": "app",
-                    "controlAggregation": "pages",
-                    "async": true
-                },
-                "routes": [
-
-                    {
-                        "pattern": "",
-                        "name": "ProductList",
-                        "target": "ProductList"
-                    },
-                    {
-                        "pattern": "product/{productId}",
-                        "name": "detail",
-                        "target": ["ProductList", "ProductDetails"]
-                    },
-                    {
-                        "pattern": "persons",
-                        "name": "persons",
-                        "target": "persons"
-                    },
-                    {
-                        "pattern": "personDetail/{personId}",
-                        "name": "personDetail",
-                        "target": "personDetail"
-                    },
-                    {
-                        "pattern": "customContent",
-                        "name": "customContent",
-                        "target": "customContents"
-                    },{
-                        "pattern": "requestPage",
-                        "name": "requestPage",
-                        "target": "requestPage"
-                    }
-                    ,
-                    {
-                        "pattern": "loginPage",
-                        "name": "loginPage",
-                        "target": "loginPage"
-                    }
-                ],
-                "targets": {
-                    "detail": {
-                        "viewName": "Detail",
-                        "viewLevel": 2
-                    },
-                    "persons": {
-                        "viewName": "Persons",
-                        "viewLevel": 4
-                    },
-                  "ProductList": {
-                "viewId": "ProductList",
-                "viewName": "Main"
-            },
-            "ProductDetails": {
-                "viewId": "ProductDetails",
-                "viewName": "ProductDetails",
-                "controlAggregation": "midColumnPages"
-            },
-                    "customContents": {
-                        "viewName": "CustomContent",
-                        "viewLevel": 6
-                    },
-                
-                        "requestPage": {
-                            "viewName": "RequestPage",
-                            "viewLevel": 7
-                        },
-                        "loginPage": {
-                            "viewName": "LoginPage",
-                            "viewLevel": 8
-                        }
-                }
-            },
-        
+        "routing": {
             "config": {
                 "routerClass": "sap.m.routing.Router",
                 "viewType": "XML",
@@ -154,13 +66,13 @@
             "routes": [
                 {
                     "pattern": "",
-                    "name": "main",
-                    "target": "main"
+                    "name": "ProductList",
+                    "target": "ProductList"
                 },
                 {
-                    "pattern": "detail/{productId}",
+                    "pattern": "product/{productId}",
                     "name": "detail",
-                    "target": "detail"
+                    "target": ["ProductList", "ProductDetails"]
                 },
                 {
                     "pattern": "persons",
@@ -171,38 +83,61 @@
                     "pattern": "personDetail/{personId}",
                     "name": "personDetail",
                     "target": "personDetail"
-                },{
+                },
+                {
                     "pattern": "customContent",
                     "name": "customContent",
                     "target": "customContents"
+                },
+                {
+                    "pattern": "requestPage",
+                    "name": "requestPage",
+                    "target": "requestPage"
+                },
+                {
+                    "pattern": "loginPage",
+                    "name": "loginPage",
+                    "target": "loginPage"
                 }
             ],
             "targets": {
-                "main": {
-                    "viewName": "Main",
-                    "viewLevel": 1
+                "ProductList": {
+                    "viewId": "ProductList",
+                    "viewName": "Main"
                 },
-                "detail": {
-                    "viewName": "Detail",
-                    "viewLevel": 2
+                "ProductDetails": {
+                    "viewId": "ProductDetails",
+                    "viewName": "ProductDetails",
+                    "controlAggregation": "midColumnPages"
                 },
                 "persons": {
                     "viewName": "Persons",
                     "viewLevel": 4
                 },
                 "personDetail": {
-                    "viewName": "PersonDetail"
-                   
+                    "viewName": "PersonDetail",
+                    "viewLevel": 5
                 },
                 "customContents": {
-                    "viewName": "CustomContent"
-                    
+                    "viewName": "CustomContent",
+                    "viewLevel": 6
+                },
+                "requestPage": {
+                    "viewName": "RequestPage",
+                    "viewLevel": 7
+                },
+                "loginPage": {
+                    "viewName": "LoginPage",
+                    "viewLevel": 8
+                },
+                "detail": {
+                    "viewName": "Detail",
+                    "viewLevel": 2
                 },
                 "notFound": {
                     "viewName": "NotFound"
-                  
                 }
             }
-        
+        }
     }
 }
