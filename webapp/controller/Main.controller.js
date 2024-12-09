@@ -8,22 +8,68 @@ sap.ui.define([
     "use strict";
 
     return BaseController.extend("crud.controller.Main", {
-        onInit() {
-            let oModel = new ODataModel("http://localhost:3000/odata", {
+               onInit() {
+            this._iPageSize = 5; // Number of items to load per request
+            this._iCurrentPage = 1; // Current page number
+            this._bLoading = false; // Flag to prevent multiple requests
+        
+            const sServiceUrl = "http://localhost:3000/odata"; // Replace with your OData service URL
+            const oModel = new ODataModel(sServiceUrl, {
+                useBatch: false, // Disable batch processing for simplicity
                 defaultBindingMode: "TwoWay",
-                useBatch: false,
-                headers: {
-                    "Content-Type": "application/atom+xml",
-                },
-                json: false,
-                maxDataServiceVersion: "3.0"
+                defaultCountMode: "Inline",
+                loadMetadataAsync: true
             });
+        
+            oModel.attachMetadataFailed((oEvent) => {
+                const oParams = oEvent.getParameters();
+                MessageBox.error("Failed to load OData metadata: " + oParams.message);
+                console.error("Failed to load OData metadata:", oParams);
+            });
+        
+            oModel.attachRequestFailed((oEvent) => {
+                const oParams = oEvent.getParameters();
+                MessageBox.error("Failed to load data: " + oParams.message);
+                console.error("Failed to load data:", oParams);
+            });
+        
             this.getView().setModel(oModel);
+            this._loadData();
+        },
+
+        _loadData() {
+            if (this._bLoading) return;
+            this._bLoading = true;
+            const oModel = this.getView().getModel();
+            const iStartIndex = (this._iCurrentPage - 1) * this._iPageSize;
+            const iEndIndex = iStartIndex + this._iPageSize;
+
             oModel.read("/Products", {
-                success(data) {
-                    console.log(data);
+                urlParameters: {
+                    "$skip": iStartIndex,
+                    "$top": this._iPageSize
+                },
+                success: (oData) => {
+                    let aProducts = oModel.getProperty("/Products") || [];
+                    aProducts = aProducts.concat(oData.results);
+                    oModel.setProperty("/Products", aProducts);
+                    this._iCurrentPage++;
+                    this._bLoading = false;
+                    console.log("Loaded Products:", oModel.getProperty("/Products"));
+                },
+                error: () => {
+                    this._bLoading = false;
+                    console.error("Failed to load data");
                 }
             });
+        },
+
+        onScroll: function (oEvent) {
+            let oScrollContainer = oEvent.getSource();
+            let oDomRef = oScrollContainer.getDomRef();
+            if (oDomRef.scrollTop + oDomRef.clientHeight >= oDomRef.scrollHeight) {
+                this._loadData();
+            }
         },
 
         onFilterSelect: function (oEvent) {
@@ -235,6 +281,7 @@ sap.ui.define([
                     MessageBox.error("Error updating product: " + error.message);
                 });
         },
+
         onSeePersons: function () {
             const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
             oRouter.navTo("persons");
@@ -249,6 +296,7 @@ sap.ui.define([
             const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
             oRouter.navTo("requestPage");
         },
+
         onDeletePress(oEvent) {
             const button = oEvent.getSource();
             const listItem = button.getParent();

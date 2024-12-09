@@ -7,15 +7,14 @@
     xmlns:core="sap.ui.core"
     xmlns:f="sap.f"
 >
-     <Text text="Product List" class="customLinkText" />
+    <Text text="Product List" class="customLinkText" />
     <f:FlexibleColumnLayout id="layout" layout="OneColumn">
         <!-- Master Column -->
-   
         <f:beginColumnPages>
-            <Page title="">
+            <Page title="Product List">
                 <headerContent>
                     <Toolbar>
-                        <Title text="" />
+                        <Title text="Product List" />
                         <ToolbarSpacer />
                         <Button
                             text="Create Product"
@@ -32,18 +31,16 @@
                         <Button
                             text="Login Page"
                             press="onOpenLoginPage"
-                            
                         />
                         <Button
                             text="Request Products"
                             press="onOpenRequestproducts"
-                              class="customLinkText"
-
+                            class="customLinkText"
                         />
                     </Toolbar>
                 </headerContent>
                 <content>
-                    <IconTabBar id="iconTabBar" select="onFilterSelect">
+                    <IconTabBar id="iconTabBarMain" select="onFilterSelect">
                         <items>
                             <IconTabFilter
                                 key="all"
@@ -69,7 +66,7 @@
                         search="onSearch"
                     />
                     <Table
-                        id="odataTable"
+                        id="odataTableMain"
                         inset="false"
                         items="{/Products}"
                         itemPress="onShowData"
@@ -137,6 +134,18 @@
                             </ColumnListItem>
                         </items>
                     </Table>
+                    <!-- Added ScrollContainer for lazy loading -->
+                    <ScrollContainer
+                        id="scrollContainer"
+                        height="100%"
+                        vertical="true"
+                        horizontal="false"
+                        scroll="onScroll"
+                    >
+                        
+                       
+                    </ScrollContainer>
+                    <!-- End of ScrollContainer -->
                 </content>
             </Page>
         </f:beginColumnPages>
