@@ -22,7 +22,7 @@
                             press="onShowProductDialog"
                         />
                         <Button
-                            text="Open Detail Column"
+                            text="Detail Column"
                             press="onOpenDetailColumn"
                         />
                         <Button
@@ -30,12 +30,12 @@
                             press="onSeePersons"
                         />
                         <Button
-                            text="Open Login Page"
+                            text="Login Page"
                             press="onOpenLoginPage"
                             
                         />
                         <Button
-                            text="Open Request Products"
+                            text="Request Products"
                             press="onOpenRequestproducts"
                               class="customLinkText"
 
