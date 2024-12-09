@@ -1,10 +1,10 @@
 sap.ui.define([
     "./BaseController",
     "sap/m/MessageBox",
-    "sap/ui/model/odata/v2/ODataModel",
+    "sap/ui/model/json/JSONModel",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator"
-], function (BaseController, MessageBox, ODataModel, Filter, FilterOperator) {
+], function (BaseController, MessageBox, JSONModel, Filter, FilterOperator) {
     "use strict";
 
     return BaseController.extend("crud.controller.Main", {
@@ -13,15 +13,7 @@ sap.ui.define([
             this._iCurrentPage = 1; // Current page number
             this._bLoading = false; // Flag to prevent multiple requests
 
-            let oModel = new ODataModel("http://localhost:3000/odata", {
-                defaultBindingMode: "TwoWay",
-                useBatch: false,
-                headers: {
-                    "Content-Type": "application/atom+xml",
-                },
-                json: false,
-                maxDataServiceVersion: "3.0"
-            });
+            let oModel = new JSONModel();
             this.getView().setModel(oModel);
             this._loadData();
         },
@@ -30,22 +22,31 @@ sap.ui.define([
             if (this._bLoading) return;
             this._bLoading = true;
 
-            let oModel = this.getView().getModel();
-            let sPath = `/Products?$skip=${(this._iCurrentPage - 1) * this._iPageSize}&$top=${this._iPageSize}`;
+            // Mock data for testing lazy loading
+            let aMockData = [];
+            for (let i = 1; i <= 100; i++) {
+                aMockData.push({
+                    ID: i,
+                    Name: "Product " + i,
+                    Price: (Math.random() * 100).toFixed(2),
+                    Rating: (Math.random() * 5).toFixed(1),
+                    ReleaseDate: new Date().toISOString().split('T')[0]
+                });
+            }
 
-            oModel.read(sPath, {
-                success: (data) => {
-                    let oData = this.getView().getModel().getProperty("/Products") || [];
-                    oData = oData.concat(data.results);
-                    this.getView().getModel().setProperty("/Products", oData);
-                    this._iCurrentPage++;
-                    this._bLoading = false;
-                },
-                error: (error) => {
-                    MessageBox.error("Error loading data: " + error.message);
-                    this._bLoading = false;
-                }
-            });
+            let oModel = this.getView().getModel();
+            let oData = oModel.getProperty("/Products") || [];
+            let iStartIndex = (this._iCurrentPage - 1) * this._iPageSize;
+            let iEndIndex = iStartIndex + this._iPageSize;
+            let aPageData = aMockData.slice(iStartIndex, iEndIndex);
+
+            oData = oData.concat(aPageData);
+            oModel.setProperty("/Products", oData);
+            this._iCurrentPage++;
+            this._bLoading = false;
+
+            // Log all products to the console
+            console.log("Loaded Products:", oModel.getProperty("/Products"));
         },
 
         onScroll: function (oEvent) {
