@@ -7,15 +7,14 @@
     xmlns:core="sap.ui.core"
     xmlns:f="sap.f"
 >
-     <Text text="Product List" class="customLinkText" />
+    <Text text="Product List" class="customLinkText" />
     <f:FlexibleColumnLayout id="layout" layout="OneColumn">
         <!-- Master Column -->
-   
         <f:beginColumnPages>
-            <Page title="">
+            <Page title="Product List">
                 <headerContent>
                     <Toolbar>
-                      
+                        <Title text="Product List" />
                         <ToolbarSpacer />
                         <Button
                             text="Create Product"
@@ -32,110 +31,114 @@
                         <Button
                             text="Login Page"
                             press="onOpenLoginPage"
-                            
                         />
                         <Button
                             text="Request Products"
                             press="onOpenRequestproducts"
-                              class="customLinkText"
-
+                            class="customLinkText"
                         />
                     </Toolbar>
                 </headerContent>
                 <content>
-                    <IconTabBar id="iconTabBar" select="onFilterSelect">
-                        <items>
-                            <IconTabFilter
-                                key="all"
-                                text="All"
-                                icon="sap-icon://filter">
-                            </IconTabFilter>
-                            <IconTabFilter
-                                key="highRating"
-                                text="High Rating"
-                                icon="sap-icon://favorite">
-                            </IconTabFilter>
-                            <IconTabFilter
-                                key="highPrice"
-                                text="High Price"
-                                icon="sap-icon://money-bills">
-                            </IconTabFilter>
-                        </items>
-                    </IconTabBar>
-                    <HBox justifyContent="Inherit">
-                    </HBox>
-                    <SearchField
-                        width="50%"
-                        search="onSearch"
-                    />
-                    <Table
-                        id="odataTable"
-                        inset="false"
-                        items="{/Products}"
-                        itemPress="onShowData"
-                    >
-                        <columns>
-                            <Column width="150px">
-                                <header>
-                                    <Label text="Product ID" />
-                                </header>
-                            </Column>
-                            <Column width="150px">
-                                <header>
-                                    <Label text="Name" />
-                                </header>
-                            </Column>
-                            <Column width="150px">
-                                <header>
-                                    <Label text="Price" />
-                                </header>
-                            </Column>
-                            <Column width="150px">
-                                <header>
-                                    <Label text="Rating" />
-                                </header>
-                            </Column>
-                            <Column width="150px">
-                                <header>
-                                    <Label text="Release Date" />
-                                </header>
-                            </Column>
-                            <Column width="150px">
-                                <header>
-                                    <Label text="Actions" />
-                                </header>
-                            </Column>
-                        </columns>
-                        <items>
-                            <ColumnListItem
-                                type="Active"
-                                press="onShowData"
-                            >
-                                <Text text="{ID}" />
-                                <Text text="{Name}" />
-                                <Text text="{Price}" />
-                                <Text text="{Rating}" />
-                                <Text
-                                    text="{path: 'ReleaseDate', formatter: '.formatter.formatDate'}"
-                                />
-                                <HBox class="gap">
-                                    <Button
-                                        icon="sap-icon://edit"
-                                        text="Edit"
-                                        press="onShowEditingDialog"
-                                        visible="true"
+                    <!-- Place BusyIndicator outside of VBox -->
+                    <BusyIndicator id="busyIndicator" visible="false" />
+
+                    <VBox>
+                        <IconTabBar id="iconTabBar" select="onFilterSelect">
+                            <items>
+                                <IconTabFilter
+                                    key="all"
+                                    text="All"
+                                    icon="sap-icon://filter">
+                                </IconTabFilter>
+                                <IconTabFilter
+                                    key="highRating"
+                                    text="High Rating"
+                                    icon="sap-icon://favorite">
+                                </IconTabFilter>
+                                <IconTabFilter
+                                    key="highPrice"
+                                    text="High Price"
+                                    icon="sap-icon://money-bills">
+                                </IconTabFilter>
+                            </items>
+                        </IconTabBar>
+
+                        <HBox justifyContent="Inherit">
+                        </HBox>
+                        <SearchField
+                            width="50%"
+                            search="onSearch"
+                        />
+                        <Table
+                            id="odataTable"
+                            inset="false"
+                            items="{/Products}"
+                            itemPress="onShowData"
+                        >
+                            <columns>
+                                <Column width="150px">
+                                    <header>
+                                        <Label text="Product ID" />
+                                    </header>
+                                </Column>
+                                <Column width="150px">
+                                    <header>
+                                        <Label text="Name" />
+                                    </header>
+                                </Column>
+                                <Column width="150px">
+                                    <header>
+                                        <Label text="Price" />
+                                    </header>
+                                </Column>
+                                <Column width="150px">
+                                    <header>
+                                        <Label text="Rating" />
+                                    </header>
+                                </Column>
+                                <Column width="150px">
+                                    <header>
+                                        <Label text="Release Date" />
+                                    </header>
+                                </Column>
+                                <Column width="150px">
+                                    <header>
+                                        <Label text="Actions" />
+                                    </header>
+                                </Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem
+                                    type="Active"
+                                    press="onShowData"
+                                >
+                                    <Text text="{ID}" />
+                                    <Text text="{Name}" />
+                                    <Text text="{Price}" />
+                                    <Text text="{Rating}" />
+                                    <Text
+                                        text="{path: 'ReleaseDate', formatter: '.formatter.formatDate'}"
                                     />
-                                    <Button
-                                        class="deleteButton"
-                                        icon="sap-icon://delete"
-                                        text="Delete"
-                                        press="onDeletePress"
-                                        visible="true"
-                                    />
-                                </HBox>
-                            </ColumnListItem>
-                        </items>
-                    </Table>
+                                    <HBox class="gap">
+                                        <Button
+                                            icon="sap-icon://edit"
+                                            text="Edit"
+                                            press="onShowEditingDialog"
+                                            visible="true"
+                                        />
+                                        <Button
+                                            class="deleteButton"
+                                            icon="sap-icon://delete"
+                                            text="Delete"
+                                            press="onDeletePress"
+                                            visible="true"
+                                        />
+                                    </HBox>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </VBox>
                 </content>
             </Page>
         </f:beginColumnPages>
