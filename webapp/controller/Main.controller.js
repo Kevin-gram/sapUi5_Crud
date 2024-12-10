@@ -264,6 +264,14 @@ sap.ui.define([
                     MessageBox.error("Error deleting product: " + error.message);
                 }
             });
-        }
+        },
+        onLogout: function () {
+            // Remove the logged-in user from local storage
+            localStorage.removeItem("loggedInUser");
+            MessageToast.success("Logged out successfully!");
+
+            // Navigate to the login page
+            this.getRouter().navTo("loginPage");
+        },
     });
 });

@@ -35,6 +35,10 @@
                             text="Open Request Products"
                             press="onOpenRequestproducts"
                         />
+                         <Button
+                            text="Logout"
+                            press="onLogout"
+                        />
                     </Toolbar>
                 </headerContent>
                 <content>

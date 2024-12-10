@@ -66,8 +66,13 @@
             "routes": [
                 {
                     "pattern": "",
-                    "name": "ProductList",
-                    "target": "ProductList"
+                    "name": "loginPage",
+                    "target": "loginPage"
+                },
+                {
+                    "pattern": "main",
+                    "name": "main",
+                    "target": "main"
                 },
                 {
                     "pattern": "product/{productId}",
@@ -95,9 +100,9 @@
                     "target": "requestPage"
                 },
                 {
-                    "pattern": "loginPage",
-                    "name": "loginPage",
-                    "target": "loginPage"
+                    "pattern": "signupPage",
+                    "name": "signupPage",
+                    "target": "signupPage"
                 }
             ],
             "targets": {
@@ -129,6 +134,14 @@
                 "loginPage": {
                     "viewName": "LoginPage",
                     "viewLevel": 8
+                },
+                "signupPage": {
+                    "viewName": "SignupPage",
+                    "viewLevel": 9
+                },
+                "main": {
+                    "viewName": "Main",
+                    "viewLevel": 1
                 },
                 "detail": {
                     "viewName": "Detail",

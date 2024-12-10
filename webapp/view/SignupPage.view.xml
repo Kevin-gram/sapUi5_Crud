@@ -1,0 +1,17 @@
+<mvc:View
+    controllerName="crud.controller.SignupPage"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <Page title="Signup Page" showNavButton="true" navButtonPress="onNavBack">
+        <content>
+            <VBox class="sapUiSmallMargin" alignItems="Center" justifyContent="Center">
+                <Title text="Create an Account" level="H1" />
+                <Input id="signupUsername" placeholder="Enter Username" width="300px" />
+                <Input id="signupPassword" placeholder="Enter Password" type="Password" width="300px" />
+                <Button text="Sign Up" press="onSignup" width="300px" />
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>
