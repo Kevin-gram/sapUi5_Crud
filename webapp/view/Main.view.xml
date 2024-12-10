@@ -73,6 +73,9 @@
                         inset="false"
                         items="{/Products}"
                         itemPress="onShowData"
+                        growing="true"
+                        growingScrollToLoad="true" 
+                        growingThreshold="2"
                     >
                         <columns>
                             <Column width="150px">
