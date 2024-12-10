@@ -7,7 +7,6 @@
     xmlns:core="sap.ui.core"
     xmlns:f="sap.f"
 >
-    <Text text="Product List" class="customLinkText" />
     <f:FlexibleColumnLayout id="layout" layout="OneColumn">
         <!-- Master Column -->
         <f:beginColumnPages>
@@ -21,7 +20,7 @@
                             press="onShowProductDialog"
                         />
                         <Button
-                            text="Detail Column"
+                            text="Open Detail Column"
                             press="onOpenDetailColumn"
                         />
                         <Button
@@ -29,18 +28,17 @@
                             press="onSeePersons"
                         />
                         <Button
-                            text="Login Page"
+                            text="Open Login Page"
                             press="onOpenLoginPage"
                         />
                         <Button
-                            text="Request Products"
+                            text="Open Request Products"
                             press="onOpenRequestproducts"
-                            class="customLinkText"
                         />
                     </Toolbar>
                 </headerContent>
                 <content>
-                    <IconTabBar id="iconTabBarMain" select="onFilterSelect">
+                    <IconTabBar id="iconTabBar" select="onFilterSelect">
                         <items>
                             <IconTabFilter
                                 key="all"
@@ -60,17 +58,21 @@
                         </items>
                     </IconTabBar>
                     <HBox justifyContent="Inherit">
+                        <Link
+                            text="Persons"
+                            press="onSeePersons"
+                            class="customLinkText"
+                        />
                     </HBox>
                     <SearchField
                         width="50%"
                         search="onSearch"
                     />
                     <Table
-                        id="odataTableMain"
+                        id="odataTable"
                         inset="false"
                         items="{/Products}"
                         itemPress="onShowData"
-                        growing="true" growingScrollToLoad="true" growingThreshold='18'
                     >
                         <columns>
                             <Column width="150px">
@@ -90,12 +92,12 @@
                             </Column>
                             <Column width="150px">
                                 <header>
-                                    <Label text="QuantityPerUnit" />
+                                    <Label text="Rating" />
                                 </header>
                             </Column>
                             <Column width="150px">
                                 <header>
-                                    <Label text="Discontinued" />
+                                    <Label text="Release Date" />
                                 </header>
                             </Column>
                             <Column width="150px">
@@ -109,12 +111,12 @@
                                 type="Active"
                                 press="onShowData"
                             >
-                                <Text text="{ProductID}" />
-                                <Text text="{ProductName}" />
-                                <Text text="{UnitPrice}" />
-                                <Text text="{QuantityPerUnit}" />
+                                <Text text="{ID}" />
+                                <Text text="{Name}" />
+                                <Text text="{Price}" />
+                                <Text text="{Rating}" />
                                 <Text
-                                    text="{Discontinued}"
+                                    text="{path: 'ReleaseDate', formatter: '.formatter.formatDate'}"
                                 />
                                 <HBox class="gap">
                                     <Button
@@ -134,18 +136,6 @@
                             </ColumnListItem>
                         </items>
                     </Table>
-                    <!-- Added ScrollContainer for lazy loading -->
-                    <ScrollContainer
-                        id="scrollContainer"
-                        height="100%"
-                        vertical="true"
-                        horizontal="false"
-                        scroll="onScroll"
-                    >
-                        
-                       
-                    </ScrollContainer>
-                    <!-- End of ScrollContainer -->
                 </content>
             </Page>
         </f:beginColumnPages>
