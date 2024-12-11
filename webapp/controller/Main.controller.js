@@ -272,6 +272,6 @@ sap.ui.define([
 
             // Navigate to the login page
             this.getRouter().navTo("loginPage");
-        },
+        }
     });
 });

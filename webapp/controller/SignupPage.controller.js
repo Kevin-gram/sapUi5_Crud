@@ -11,7 +11,8 @@ sap.ui.define([
 
             if (username && password) {
                 // Get existing users from local storage
-                let users = JSON.parse(localStorage.getItem("users")) || [];
+                let users = localStorage.getItem("users");
+                users = users ? JSON.parse(users) : [];
 
                 // Check if the username already exists
                 if (users.some(user => user.username === username)) {
