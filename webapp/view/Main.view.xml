@@ -13,10 +13,11 @@
             <Page title="Product List">
                 <headerContent>
                     <Toolbar>
-                        <Title text="Product List" />
+                        
                         <ToolbarSpacer />
+                        <Label text="Add a Product" />
                         <Button
-                            text="Create Product"
+                            icon="sap-icon://add"
                             press="onShowProductDialog"
                         />
                         <Button
