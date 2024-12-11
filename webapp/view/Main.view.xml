@@ -20,7 +20,7 @@
                             press="onShowProductDialog"
                         />
                         <Button
-                            text="Open Detail Column"
+                            text="Detail Column"
                             press="onOpenDetailColumn"
                         />
                         <Button
@@ -28,16 +28,16 @@
                             press="onSeePersons"
                         />
                         <Button
-                            text="Open Login Page"
-                            press="onOpenLoginPage"
-                        />
-                        <Button
-                            text="Open Request Products"
+                            text="Request Products"
                             press="onOpenRequestproducts"
                         />
                          <Button
                             text="Logout"
                             press="onLogout"
+                        />
+                         <Button
+                            text="Create Product with Details"
+                            press="onShowProductWithDetailsDialog"
                         />
                     </Toolbar>
                 </headerContent>
@@ -297,6 +297,99 @@
             <Button
                 text="Cancel"
                 press="onCloseProductDialog"
+            />
+        </endButton>
+    </Dialog>
+
+    <!-- Create Product with Details Dialog -->
+    <Dialog
+        id="createProductWithDetailsDialog"
+        title="Create Product with Details"
+        type="Message"
+    >
+        <VBox class="sapUiSmallMargin">
+            <Label text="Product ID" />
+            <Input
+                id="newProductWithDetailsId"
+                type="Number"
+            />
+            <Label text="Name" />
+            <Input id="newProductWithDetailsName" />
+            <Label text="Price" />
+            <Input
+                id="newProductWithDetailsPrice"
+                type="Number"
+            />
+            <Label text="Rating" />
+            <Input
+                id="newProductWithDetailsRating"
+                type="Number"
+            />
+            <Label text="Release Date" />
+            <DatePicker
+                id="newProductWithDetailsReleaseDate"
+                valueFormat="yyyy-MM-dd"
+                displayFormat="yyyy-MM-dd"
+            />
+            <Label text="Category 1 ID" />
+            <Input
+                id="newProductWithDetailsCategory1Id"
+                type="Number"
+            />
+            <Label text="Category 1 Name" />
+            <Input id="newProductWithDetailsCategory1Name" />
+            <Label text="Category 2 ID" />
+            <Input
+                id="newProductWithDetailsCategory2Id"
+                type="Number"
+            />
+            <Label text="Category 2 Name" />
+            <Input id="newProductWithDetailsCategory2Name" />
+            <Label text="Supplier ID" />
+            <Input
+                id="newProductWithDetailsSupplierId"
+                type="Number"
+            />
+            <Label text="Supplier Name" />
+            <Input id="newProductWithDetailsSupplierName" />
+            <Label text="Supplier Street" />
+            <Input id="newProductWithDetailsSupplierStreet" />
+            <Label text="Supplier City" />
+            <Input id="newProductWithDetailsSupplierCity" />
+            <Label text="Supplier State" />
+            <Input id="newProductWithDetailsSupplierState" />
+            <Label text="Supplier ZipCode" />
+            <Input id="newProductWithDetailsSupplierZipCode" />
+            <Label text="Supplier Country" />
+            <Input id="newProductWithDetailsSupplierCountry" />
+            <Label text="Supplier Latitude" />
+            <Input
+                id="newProductWithDetailsSupplierLatitude"
+                type="Number"
+            />
+            <Label text="Supplier Longitude" />
+            <Input
+                id="newProductWithDetailsSupplierLongitude"
+                type="Number"
+            />
+            <Label text="Product Detail ID" />
+            <Input
+                id="newProductWithDetailsProductDetailId"
+                type="Number"
+            />
+            <Label text="Product Detail Description" />
+            <Input id="newProductWithDetailsProductDetailDescription" />
+        </VBox>
+        <beginButton>
+            <Button
+                text="Create"
+                press="onCreateProductWithDetails"
+            />
+        </beginButton>
+        <endButton>
+            <Button
+                text="Cancel"
+                press="onCloseProductWithDetailsDialog"
             />
         </endButton>
     </Dialog>

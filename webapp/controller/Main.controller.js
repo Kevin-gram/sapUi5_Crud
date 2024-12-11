@@ -1,10 +1,11 @@
 sap.ui.define([
     "./BaseController",
     "sap/m/MessageBox",
+    "sap/m/MessageToast",
     "sap/ui/model/odata/v2/ODataModel",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator"
-], function (BaseController, MessageBox, ODataModel, Filter, FilterOperator) {
+], function (BaseController, MessageBox, MessageToast, ODataModel, Filter, FilterOperator) {
     "use strict";
 
     return BaseController.extend("crud.controller.Main", {
@@ -21,7 +22,10 @@ sap.ui.define([
             this.getView().setModel(oModel);
             oModel.read("/Products", {
                 success(data) {
-                    console.log(data);
+                    console.log("Fetched products:", data);
+                },
+                error(error) {
+                    console.error("Error fetching products:", error);
                 }
             });
         },
@@ -111,6 +115,14 @@ sap.ui.define([
             this.byId("createProductDialog").close();
         },
 
+        onShowProductWithDetailsDialog() {
+            this.byId("createProductWithDetailsDialog").open();
+        },
+
+        onCloseProductWithDetailsDialog() {
+            this.byId("createProductWithDetailsDialog").close();
+        },
+
         onShowEditingDialog(oEvent) {
             const button = oEvent.getSource();
             const listItem = button.getParent();
@@ -188,6 +200,135 @@ sap.ui.define([
                 });
         },
 
+        onCreateProductWithDetails() {
+            const ID = this.byId("newProductWithDetailsId").getValue();
+            const Name = this.byId("newProductWithDetailsName").getValue();
+            const Price = this.byId("newProductWithDetailsPrice").getValue();
+            const Rating = this.byId("newProductWithDetailsRating").getValue();
+            const ReleaseDate = this.formatDateForOData(this.byId("newProductWithDetailsReleaseDate").getValue());
+
+            const Category1Id = this.byId("newProductWithDetailsCategory1Id").getValue();
+            const Category1Name = this.byId("newProductWithDetailsCategory1Name").getValue();
+            const Category2Id = this.byId("newProductWithDetailsCategory2Id").getValue();
+            const Category2Name = this.byId("newProductWithDetailsCategory2Name").getValue();
+
+            const SupplierId = this.byId("newProductWithDetailsSupplierId").getValue();
+            const SupplierName = this.byId("newProductWithDetailsSupplierName").getValue();
+            const SupplierStreet = this.byId("newProductWithDetailsSupplierStreet").getValue();
+            const SupplierCity = this.byId("newProductWithDetailsSupplierCity").getValue();
+            const SupplierState = this.byId("newProductWithDetailsSupplierState").getValue();
+            const SupplierZipCode = this.byId("newProductWithDetailsSupplierZipCode").getValue();
+            const SupplierCountry = this.byId("newProductWithDetailsSupplierCountry").getValue();
+            const SupplierLatitude = this.byId("newProductWithDetailsSupplierLatitude").getValue();
+            const SupplierLongitude = this.byId("newProductWithDetailsSupplierLongitude").getValue();
+
+            const ProductDetailId = this.byId("newProductWithDetailsProductDetailId").getValue();
+            const ProductDetailDescription = this.byId("newProductWithDetailsProductDetailDescription").getValue();
+
+            const atomXml = `<?xml version="1.0" encoding="utf-8"?>
+            <entry xmlns="http://www.w3.org/2005/Atom" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
+                <category term="ODataDemo.Product" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+                <title type="text">${Name}</title>
+                <updated>${new Date().toISOString()}</updated>
+                <author><name/></author>
+                <content type="application/xml">
+                    <m:properties>
+                        <d:ID m:type="Edm.Int32">${parseInt(ID)}</d:ID>
+                        <d:Name>${Name}</d:Name>
+                        <d:Description>New Product</d:Description>
+                        <d:ReleaseDate m:type="Edm.DateTime">${ReleaseDate}</d:ReleaseDate>
+                        <d:DiscontinuedDate m:null="true"/>
+                        <d:Rating m:type="Edm.Int16">${parseInt(Rating)}</d:Rating>
+                        <d:Price m:type="Edm.Double">${parseFloat(Price)}</d:Price>
+                    </m:properties>
+                </content>
+                <link rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Categories" type="application/atom+xml;type=feed" title="Categories">
+                    <m:inline>
+                        <feed>
+                            <entry>
+                                <category term="ODataDemo.Category" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+                                <content type="application/xml">
+                                    <m:properties>
+                                        <d:ID m:type="Edm.Int32">${parseInt(Category1Id)}</d:ID>
+                                        <d:Name>${Category1Name}</d:Name>
+                                    </m:properties>
+                                </content>
+                            </entry>
+                            <entry>
+                                <category term="ODataDemo.Category" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+                                <content type="application/xml">
+                                    <m:properties>
+                                        <d:ID m:type="Edm.Int32">${parseInt(Category2Id)}</d:ID>
+                                        <d:Name>${Category2Name}</d:Name>
+                                    </m:properties>
+                                </content>
+                            </entry>
+                        </feed>
+                    </m:inline>
+                </link>
+                <link rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Supplier" type="application/atom+xml;type=entry" title="Supplier">
+                    <m:inline>
+                        <entry>
+                            <category term="ODataDemo.Supplier" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+                            <content type="application/xml">
+                                <m:properties>
+                                    <d:ID m:type="Edm.Int32">${parseInt(SupplierId)}</d:ID>
+                                    <d:Name>${SupplierName}</d:Name>
+                                    <d:Address>
+                                        <d:Street>${SupplierStreet}</d:Street>
+                                        <d:City>${SupplierCity}</d:City>
+                                        <d:State>${SupplierState}</d:State>
+                                        <d:ZipCode>${SupplierZipCode}</d:ZipCode>
+                                        <d:Country>${SupplierCountry}</d:Country>
+                                    </d:Address>
+                                    <d:Location m:type="Edm.GeographyPoint">
+                                        <gml:Point xmlns:gml="http://www.opengis.net/gml">
+                                            <gml:pos>${SupplierLatitude} ${SupplierLongitude}</gml:pos>
+                                        </gml:Point>
+                                    </d:Location>
+                                    <d:Concurrency m:type="Edm.Int32">1</d:Concurrency>
+                                </m:properties>
+                            </content>
+                        </entry>
+                    </m:inline>
+                </link>
+                <link rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/ProductDetail" type="application/atom+xml;type=entry" title="ProductDetail">
+                    <m:inline>
+                        <entry>
+                            <category term="ODataDemo.ProductDetail" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+                            <content type="application/xml">
+                                <m:properties>
+                                    <d:ProductID m:type="Edm.Int32">${parseInt(ProductDetailId)}</d:ProductID>
+                                    <d:Details>${ProductDetailDescription}</d:Details>
+                                </m:properties>
+                            </content>
+                        </entry>
+                    </m:inline>
+                </link>
+            </entry>`;
+
+            fetch("http://localhost:3000/odata/Products", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/atom+xml",
+                },
+                body: atomXml
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.text().then(errorText => {
+                            throw new Error(`HTTP error! Status: ${response.status} - ${errorText}`);
+                        });
+                    }
+                    MessageBox.success("Product and related entities created successfully!");
+                    this.onCloseProductWithDetailsDialog();
+                    this.getView().getModel().refresh(true);
+                })
+                .catch(error => {
+                    MessageBox.error("Error creating product and related entities: " + error.message);
+                });
+        },
+
         onEditPress() {
             const Name = this.byId("productNameText").getValue();
             const Price = this.byId("productPriceText").getValue();
@@ -235,6 +376,7 @@ sap.ui.define([
                     MessageBox.error("Error updating product: " + error.message);
                 });
         },
+
         onSeePersons: function () {
             const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
             oRouter.navTo("persons");
@@ -249,6 +391,7 @@ sap.ui.define([
             const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
             oRouter.navTo("requestPage");
         },
+
         onDeletePress(oEvent) {
             const button = oEvent.getSource();
             const listItem = button.getParent();
@@ -265,6 +408,7 @@ sap.ui.define([
                 }
             });
         },
+
         onLogout: function () {
             // Remove the logged-in user from local storage
             localStorage.removeItem("loggedInUser");
