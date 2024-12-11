@@ -408,14 +408,14 @@ sap.ui.define([
                 }
             });
         },
-
         onLogout: function () {
             // Remove the logged-in user from local storage
             localStorage.removeItem("loggedInUser");
-            MessageToast.success("Logged out successfully!");
+            MessageToast.show("Logged out successfully!");
 
             // Navigate to the login page
             this.getRouter().navTo("loginPage");
-        }
+        },
+        
     });
 });
