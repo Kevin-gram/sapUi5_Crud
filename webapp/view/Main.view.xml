@@ -29,7 +29,7 @@
                             press="onOpenDetailColumn"
                         />
                         <Button
-                            text="See Persons"
+                            text="Persons"
                             press="onSeePersons"
                         />
                         <Button
