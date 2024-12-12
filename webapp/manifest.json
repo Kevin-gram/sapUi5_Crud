@@ -103,6 +103,11 @@
                     "pattern": "signupPage",
                     "name": "signupPage",
                     "target": "signupPage"
+                },
+                {
+                    "pattern": "chartPage",
+                    "name": "chartPage",
+                    "target": "chartPage"
                 }
             ],
             "targets": {
@@ -147,9 +152,11 @@
                     "viewName": "Detail",
                     "viewLevel": 2
                 },
-                "notFound": {
-                    "viewName": "NotFound"
+                "chartPage": {
+                    "viewName": "DataChart",
+                    "viewLevel": 10
                 }
+               
             }
         }
     }

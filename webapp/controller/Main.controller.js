@@ -387,6 +387,12 @@ sap.ui.define([
             oRouter.navTo("loginPage");
         },
 
+        onViewChart: function () {
+            const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+            oRouter.navTo("chartPage");
+        },
+
+
         onOpenRequestproducts: function () {
             const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
             oRouter.navTo("requestPage");

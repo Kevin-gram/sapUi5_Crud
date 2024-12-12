@@ -24,6 +24,10 @@
                             text="Create Product with Details"
                             press="onShowProductWithDetailsDialog"
                         />
+                         <Button
+                            text="View Chart"
+                            press="onViewChart"
+                        />
                         <Button
                             text="Detail Column"
                             press="onOpenDetailColumn"
