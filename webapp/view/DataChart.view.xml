@@ -7,7 +7,7 @@
     xmlns:viz.data="sap.viz.ui5.data"
     xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
 >
-    <Page title="Product Ratings Distribution">
+    <Page title="Product Ratings Chart">
         <content>
             <viz:VizFrame id="idVizFrame" uiConfig="{applicationSet:'fiori'}" height="400px" width="100%" vizType="pie">
                 <viz:dataset>
@@ -25,6 +25,20 @@
                     <viz.feeds:FeedItem uid="color" type="Dimension" values="Rating Category" />
                 </viz:feeds>
             </viz:VizFrame>
+            <VBox>
+                <Text text="High Rating Products:" />
+                <List items="{/RatingDistribution/0/Products}">
+                    <StandardListItem title="{Name}" press="onProductPress" />
+                </List>
+                <Text text="Medium Rating Products:" />
+                <List items="{/RatingDistribution/1/Products}">
+                    <StandardListItem title="{Name}" press="onProductPress" />
+                </List>
+                <Text text="Low Rating Products:" />
+                <List items="{/RatingDistribution/2/Products}">
+                    <StandardListItem title="{Name}" press="onProductPress" />
+                </List>
+            </VBox>
         </content>
     </Page>
 </mvc:View>
