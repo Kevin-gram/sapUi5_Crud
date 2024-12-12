@@ -23,7 +23,7 @@ sap.ui.define([
 
             oModel.read("/Products", {
                 success: (data) => {
-                    console.log(data);
+                    console.log("Fetched products:", data);
                     let ratingDistribution = {
                         RatingDistribution: [
                             { Category: "High", Count: 0, Products: [] },
@@ -47,9 +47,15 @@ sap.ui.define([
 
                     let oRatingModel = new JSONModel(ratingDistribution);
                     this.getView().setModel(oRatingModel);
+
+                    // Hide the BusyIndicator and show the content
+                    this.byId("busyIndicator").setVisible(false);
+                    this.byId("contentVBox").setVisible(true);
                 },
                 error: (error) => {
                     console.error("Error fetching products:", error);
+                    // Hide the BusyIndicator even if there is an error
+                    this.byId("busyIndicator").setVisible(false);
                 }
             });
         },

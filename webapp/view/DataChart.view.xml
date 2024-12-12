@@ -9,35 +9,85 @@
 >
     <Page title="Product Ratings Chart">
         <content>
-            <viz:VizFrame id="idVizFrame" uiConfig="{applicationSet:'fiori'}" height="400px" width="100%" vizType="pie">
-                <viz:dataset>
-                    <viz.data:FlattenedDataset data="{/RatingDistribution}">
-                        <viz.data:dimensions>
-                            <viz.data:DimensionDefinition name="Rating Category" value="{Category}" />
-                        </viz.data:dimensions>
-                        <viz.data:measures>
-                            <viz.data:MeasureDefinition name="Count" value="{Count}" />
-                        </viz.data:measures>
-                    </viz.data:FlattenedDataset>
-                </viz:dataset>
-                <viz:feeds>
-                    <viz.feeds:FeedItem uid="size" type="Measure" values="Count" />
-                    <viz.feeds:FeedItem uid="color" type="Dimension" values="Rating Category" />
-                </viz:feeds>
-            </viz:VizFrame>
             <VBox>
-                <Text text="High Rating Products:" />
-                <List items="{/RatingDistribution/0/Products}">
-                    <StandardListItem title="{Name}" press="onProductPress" />
-                </List>
-                <Text text="Medium Rating Products:" />
-                <List items="{/RatingDistribution/1/Products}">
-                    <StandardListItem title="{Name}" press="onProductPress" />
-                </List>
-                <Text text="Low Rating Products:" />
-                <List items="{/RatingDistribution/2/Products}">
-                    <StandardListItem title="{Name}" press="onProductPress" />
-                </List>
+                <VBox
+                    justifyContent="Center"
+                    alignItems="Center"
+                    height="100%"
+                >
+                    <BusyIndicator
+                        id="busyIndicator"
+                        visible="true"
+                        class="customBusyIndicator"
+                        text="Loading data, please wait..."
+                    />
+                </VBox>
+                <VBox
+                    id="contentVBox"
+                    visible="false"
+                >
+                    <viz:VizFrame
+                        id="idVizFrame"
+                        uiConfig="{applicationSet:'fiori'}"
+                        height="400px"
+                        width="100%"
+                        vizType="pie"
+                    >
+                        <viz:dataset>
+                            <viz.data:FlattenedDataset
+                                data="{/RatingDistribution}"
+                            >
+                                <viz.data:dimensions>
+                                    <viz.data:DimensionDefinition
+                                        name="Rating Category"
+                                        value="{Category}"
+                                    />
+                                </viz.data:dimensions>
+                                <viz.data:measures>
+                                    <viz.data:MeasureDefinition
+                                        name="Count"
+                                        value="{Count}"
+                                    />
+                                </viz.data:measures>
+                            </viz.data:FlattenedDataset>
+                        </viz:dataset>
+                        <viz:feeds>
+                            <viz.feeds:FeedItem
+                                uid="size"
+                                type="Measure"
+                                values="Count"
+                            />
+                            <viz.feeds:FeedItem
+                                uid="color"
+                                type="Dimension"
+                                values="Rating Category"
+                            />
+                        </viz:feeds>
+                    </viz:VizFrame>
+                    <VBox>
+                        <Text text="High Rating Products:" />
+                        <List items="{/RatingDistribution/0/Products}">
+                            <StandardListItem
+                                title="{Name}"
+                                press="onProductPress"
+                            />
+                        </List>
+                        <Text text="Medium Rating Products:" />
+                        <List items="{/RatingDistribution/1/Products}">
+                            <StandardListItem
+                                title="{Name}"
+                                press="onProductPress"
+                            />
+                        </List>
+                        <Text text="Low Rating Products:" />
+                        <List items="{/RatingDistribution/2/Products}">
+                            <StandardListItem
+                                title="{Name}"
+                                press="onProductPress"
+                            />
+                        </List>
+                    </VBox>
+                </VBox>
             </VBox>
         </content>
     </Page>
