@@ -19,11 +19,9 @@
             </Toolbar>
         </headerContent>
         <content>
-        
             <smartFilterBar:SmartFilterBar 
                 id="smartFilterBar"
                 entitySet="Persons"
-                
             >
                 <smartFilterBar:controlConfiguration>
                     <smartFilterBar:ControlConfiguration id="idPerson" visibleInAdvancedArea="true" label="Person ID" key="ID"></smartFilterBar:ControlConfiguration>
@@ -36,11 +34,17 @@
                 entitySet="Persons"
                 smartFilterId="smartFilterBar"
                 tableType="ResponsiveTable"
+                useVariantManagement="true"
                 enableAutoBinding="true"
                 header="Persons List"
                 initiallyVisibleFields="ID,Name"
+                useTablePersonalisation="true"
+                showRowCount="true"
+                demandPopin="true"
+                showFullScreenButton="true"
             >
                 <Table id="idResponsiveTable" selectionChange="handleSelectionChange" mode="SingleSelectMaster">
+                    <!-- No need to specify columns here -->
                 </Table>
             </smartTable:SmartTable>
         </content>
