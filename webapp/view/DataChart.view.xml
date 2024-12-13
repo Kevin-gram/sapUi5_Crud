@@ -14,7 +14,7 @@
             </VBox>
             <VBox id="contentVBox" visible="false">
                 <!-- Pie Chart -->
-                <viz:VizFrame id="idVizFramePie" uiConfig="{applicationSet:'fiori'}" height="400px" width="100%" vizType="pie">
+                <viz:VizFrame id="idVizFramePie" uiConfig="{applicationSet:'fiori'}" height="500px" width="100%" vizType="pie">
                     <viz:dataset>
                         <viz.data:FlattenedDataset data="{/RatingDistribution}">
                             <viz.data:dimensions>

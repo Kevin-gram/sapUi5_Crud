@@ -3,6 +3,8 @@
     xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:core="sap.ui.core"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
     controllerName="crud.controller.Persons">
 
     <Page
@@ -17,39 +19,30 @@
             </Toolbar>
         </headerContent>
         <content>
-            <SearchField width="50%" search="onSearch" />
-            <Table
-                id="personsTable"
-                inset="false"
-                items="{/Persons}">
-                <headerToolbar>
-                    <Toolbar>
-                        <Title text="Persons List"/>
-                    </Toolbar>
-                </headerToolbar>
-                <columns>
+        
+            <smartFilterBar:SmartFilterBar 
+                id="smartFilterBar"
+                entitySet="Persons"
                 
-                    <Column>
-                        <header>
-                            <Label text="ID"/>
-                        </header>
-                    </Column>
-                    <Column>
-                        <header>
-                            <Label text="Name"/>
-                        </header>
-                    </Column>
-                   
-                </columns>
-                <items>
-                    <ColumnListItem type="Navigation" press="onPersonPress">
-                        <cells >
-                            <Text text="{ID}"/>
-                            <Text text="{Name}"/>
-                        </cells>
-                    </ColumnListItem>
-                </items>
-            </Table>
+            >
+                <smartFilterBar:controlConfiguration>
+                    <smartFilterBar:ControlConfiguration id="idPerson" visibleInAdvancedArea="true" label="Person ID" key="ID"></smartFilterBar:ControlConfiguration>
+                    <smartFilterBar:ControlConfiguration id="name" visibleInAdvancedArea="true" label="Name" key="Name"></smartFilterBar:ControlConfiguration>
+                </smartFilterBar:controlConfiguration>
+            </smartFilterBar:SmartFilterBar>
+
+            <smartTable:SmartTable
+                id="smartTable"
+                entitySet="Persons"
+                smartFilterId="smartFilterBar"
+                tableType="ResponsiveTable"
+                enableAutoBinding="true"
+                header="Persons List"
+                initiallyVisibleFields="ID,Name"
+            >
+                <Table id="idResponsiveTable" selectionChange="handleSelectionChange" mode="SingleSelectMaster">
+                </Table>
+            </smartTable:SmartTable>
         </content>
     </Page>
 </mvc:View>
