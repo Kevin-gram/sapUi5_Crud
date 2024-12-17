@@ -1,30 +1,16 @@
 {
     "compilerOptions": {
-        "moduleResolution": "node",
-        "module": "commonjs",
-        "target": "es2022",
-        "lib": [
-            "es2022",
-            "dom"
-        ],
-        "types": [
-            "node",
-            "@wdio/globals/types",
-            "expect-webdriverio",
-            "@wdio/mocha-framework"
-        ],
-        "skipLibCheck": true,
-        "noEmit": true,
-        "allowImportingTsExtensions": true,
-        "resolveJsonModule": true,
-        "isolatedModules": true,
-        "strict": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "noFallthroughCasesInSwitch": true
+      "target": "ESNext",
+      "module": "CommonJS",  // Use CommonJS to avoid conflicts with WebDriverIO
+      "moduleResolution": "node",
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "strict": true,
+      "resolveJsonModule": true
     },
     "include": [
-        "test",
-        "wdio.conf.ts"
+      "wdio.conf.ts",
+      "test/**/*.ts"
     ]
-}
+  }
+  

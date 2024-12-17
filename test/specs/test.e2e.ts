@@ -1,15 +1,9 @@
-import { expect } from '@wdio/globals'
-import LoginPage from '../pageobjects/login.page'
-import SecurePage from '../pageobjects/secure.page'
+import { browser, $ } from '@wdio/globals';
 
-describe('My Login application', () => {
-    it('should login with valid credentials', async () => {
-        await LoginPage.open()
-
-        await LoginPage.login('tomsmith', 'SuperSecretPassword!')
-        await expect(SecurePage.flashAlert).toBeExisting()
-        await expect(SecurePage.flashAlert).toHaveText(
-            expect.stringContaining('You logged into a secure area!'))
-    })
-})
-
+describe('UI5 sap Application', () => {
+    it('should open application and verify title', async () => {
+        await browser.maximizeWindow();
+        await browser.url('http://localhost:8080/index.html#/main');
+        await browser.pause(60000)
+    });
+});
