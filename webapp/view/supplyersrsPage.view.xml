@@ -1,0 +1,65 @@
+<mvc:View
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    controllerName="crud.controller.SupplyersrsPage">
+
+    <Page
+        title="Suppliers"
+        id="suppliersPage"
+        class="sapUiSmallMargin">
+        <headerContent>
+            <Toolbar>
+                <Button
+                    text="Add new Supplier"
+                    press="onShowSupplierDialog"/>
+            </Toolbar>
+        </headerContent>
+        <content>
+            <Table
+                id="suppliersTable"
+                items="{suppliers>/value}"
+                growing="true"
+                growingScrollToLoad="true"
+                growingThreshold="10">
+                <columns>
+                    <Column>
+                        <Text text="ID" />
+                    </Column>
+                    <Column>
+                        <Text text="Name" />
+                    </Column>
+                    <Column>
+                        <Text text="Street" />
+                    </Column>
+                    <Column>
+                        <Text text="City" />
+                    </Column>
+                    <Column>
+                        <Text text="State" />
+                    </Column>
+                    <Column>
+                        <Text text="ZipCode" />
+                    </Column>
+                    <Column>
+                        <Text text="Country" />
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <Text text="{suppliers>ID}" />
+                            <Text text="{suppliers>Name}" />
+                            <Text text="{suppliers>Address/Street}" />
+                            <Text text="{suppliers>Address/City}" />
+                            <Text text="{suppliers>Address/State}" />
+                            <Text text="{suppliers>Address/ZipCode}" />
+                            <Text text="{suppliers>Address/Country}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+    </Page>
+</mvc:View>

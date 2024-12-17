@@ -67,7 +67,23 @@ sap.ui.define([
                 sap.m.MessageToast.show("'search' event fired with 'searchButtonPressed' parameter");
             }
         },
+        onLiveChange: function (oEvent) {
+            // Get the search query
+            let sQuery = oEvent.getParameter("newValue");
 
+            // Get the table and its binding
+            let oTable = this.byId("odataTable");
+            let oBinding = oTable.getBinding("items");
+
+            // Create a filter for the search query
+            let aFilters = [];
+            if (sQuery && sQuery.length > 0) {
+                aFilters.push(new Filter("Name", FilterOperator.Contains, sQuery));
+            }
+
+            // Apply the filter to the table binding
+            oBinding.filter(aFilters);
+        },
         onShowData(event) {
             const item = event.getSource();
             const bindingContext = item.getBindingContext();
@@ -380,6 +396,10 @@ sap.ui.define([
         onSeePersons: function () {
             const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
             oRouter.navTo("persons");
+        },
+        onSeeSuppliers: function () {
+            const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+            oRouter.navTo("supplyersrsPage");
         },
 
         onOpenLoginPage: function () {

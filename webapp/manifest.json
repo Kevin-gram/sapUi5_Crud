@@ -108,6 +108,11 @@
                     "pattern": "chartPage",
                     "name": "chartPage",
                     "target": "chartPage"
+                },
+                {
+                    "pattern": "supplyersrsPage",
+                    "name": "supplyersrsPage",
+                    "target": "supplyersrsPage"
                 }
             ],
             "targets": {
@@ -154,6 +159,10 @@
                 },
                 "chartPage": {
                     "viewName": "DataChart",
+                    "viewLevel": 10
+                },
+                "supplyersrsPage": {
+                    "viewName": "supplyersrsPage",
                     "viewLevel": 10
                 }
                

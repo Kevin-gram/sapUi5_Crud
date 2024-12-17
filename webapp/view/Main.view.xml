@@ -17,6 +17,7 @@
                         <ToolbarSpacer />
                         <Label text="Add a Product" />
                         <Button
+                        id="addButton"
                             icon="sap-icon://add"
                             press="onShowProductDialog"
                         />
@@ -39,6 +40,10 @@
                         <Button
                             text="Request Products"
                             press="onOpenRequestproducts"
+                        />
+                        <Button
+                            text="Suppliers"
+                            press="onSeeSuppliers"
                         />
                         <Button
                             icon="sap-icon://log"
@@ -76,6 +81,7 @@
                     <SearchField
                         width="50%"
                         search="onSearch"
+                        liveChange="onLiveChange"
                     />
                     <Table
                         id="odataTable"

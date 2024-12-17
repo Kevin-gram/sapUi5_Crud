@@ -5,5 +5,6 @@ describe('UI5 sap Application', () => {
         await browser.maximizeWindow();
         await browser.url('http://localhost:8080/index.html#/main');
         await browser.pause(60000)
+        await browser.browserClose
     });
 });

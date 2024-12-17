@@ -1,0 +1,119 @@
+{
+    "value": [
+        {
+            "odata.etag": "W/\"0\"",
+            "ID": 0,
+            "Name": "Exotic Liquids",
+            "Address": {
+                "Street": "NE 228th",
+                "City": "Sammamish",
+                "State": "WA",
+                "ZipCode": "98074",
+                "Country": "USA"
+            },
+            "Location": {
+                "type": "Point",
+                "coordinates": [-122.03547668457, 47.6316604614258],
+                "crs": {
+                    "type": "name",
+                    "properties": {
+                        "name": "EPSG:4326"
+                    }
+                }
+            },
+            "Concurrency": 0
+        },
+        {
+            "odata.etag": "W/\"0\"",
+            "ID": 1,
+            "Name": "Tokyo Traders",
+            "Address": {
+                "Street": "NE 40th",
+                "City": "Redmond",
+                "State": "WA",
+                "ZipCode": "98052",
+                "Country": "USA"
+            },
+            "Location": {
+                "type": "Point",
+                "coordinates": [-122.107711791992, 47.6472206115723],
+                "crs": {
+                    "type": "name",
+                    "properties": {
+                        "name": "EPSG:4326"
+                    }
+                }
+            },
+            "Concurrency": 0
+        },
+        {
+            "odata.etag": "W/\"5\"",
+            "ID": 1,
+            "Name": "Supplier 1",
+            "Address": {
+                "Street": "123 Main St",
+                "City": "Anytown",
+                "State": "CA",
+                "ZipCode": "12345",
+                "Country": "USA"
+            },
+            "Location": {
+                "type": "Point",
+                "coordinates": [-122.4194, 37.7749],
+                "crs": {
+                    "type": "name",
+                    "properties": {
+                        "name": "EPSG:4326"
+                    }
+                }
+            },
+            "Concurrency": 5
+        },
+        {
+            "odata.etag": "W/\"5\"",
+            "ID": 1,
+            "Name": "Supplier One",
+            "Address": {
+                "Street": "123 Supplier St",
+                "City": "kigali",
+                "State": "WA",
+                "ZipCode": "98074",
+                "Country": "Rwanda"
+            },
+            "Location": {
+                "type": "Point",
+                "coordinates": [-127.4194, 37.7749],
+                "crs": {
+                    "type": "name",
+                    "properties": {
+                        "name": "EPSG:4326"
+                    }
+                }
+            },
+            "Concurrency": 5
+        },
+        {
+            "odata.etag": "W/\"5\"",
+            "ID": 1,
+            "Name": "Supplier One",
+            "Address": {
+                "Street": "123 Supplier St",
+                "City": "kigali",
+                "State": "WA",
+                "ZipCode": "98074",
+                "Country": "Rwanda"
+            },
+            "Location": {
+                "type": "Point",
+                "coordinates": [-127.4194, 37.7749],
+                "crs": {
+                    "type": "name",
+                    "properties": {
+                        "name": "EPSG:4326"
+                    }
+                }
+            },
+            "Concurrency": 5
+        }
+    ]
+}
