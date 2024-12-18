@@ -67,23 +67,38 @@ sap.ui.define([
                 sap.m.MessageToast.show("'search' event fired with 'searchButtonPressed' parameter");
             }
         },
-        onLiveChange: function (oEvent) {
-            // Get the search query
-            let sQuery = oEvent.getParameter("newValue");
-
-            // Get the table and its binding
-            let oTable = this.byId("odataTable");
-            let oBinding = oTable.getBinding("items");
-
-            // Create a filter for the search query
-            let aFilters = [];
-            if (sQuery && sQuery.length > 0) {
-                aFilters.push(new Filter("Name", FilterOperator.Contains, sQuery));
+        onLiveChange: function(oEvent) {
+            let query = oEvent.getParameter("newValue");  // Get the search query from the event
+            let table = this.byId("odataTable");          // Get the table control
+            let binding = table.getBinding("items");     // Get the binding of the table items
+        
+            let aFilters = [];                            // Initialize an array to hold the filters
+        
+            if (query) {  // Only proceed if there is a query (non-empty search)
+                let queryNumber = parseFloat(query);     // Try to convert the query to a number
+        
+                if (!isNaN(queryNumber)) {  // If it's a number, filter by numeric fields
+                    aFilters.push(
+                        new Filter({
+                            filters: [
+                                new Filter("ID", FilterOperator.EQ, queryNumber),       // Product ID
+                                new Filter("Price", FilterOperator.EQ, queryNumber),    // Price
+                                new Filter("Rating", FilterOperator.EQ, queryNumber)   // Rating
+                            ],
+                            and: false  // Use 'or' logic, i.e., match any of the filters
+                        })
+                    );
+                } else {  // If it's a string (text search), filter by Name
+                    aFilters.push(
+                        new Filter("Name", FilterOperator.Contains, query)  // Search Name field using Contains operator
+                    );
+                }
             }
-
-            // Apply the filter to the table binding
-            oBinding.filter(aFilters);
-        },
+        
+            // Apply the filters to the table binding
+            binding.filter(aFilters);
+        }
+        ,
         onShowData(event) {
             const item = event.getSource();
             const bindingContext = item.getBindingContext();
