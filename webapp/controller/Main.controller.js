@@ -169,12 +169,47 @@ sap.ui.define([
         },
 
         onCreate() {
+            // Get the input values
             const ID = this.byId("newProductId").getValue();
             const Name = this.byId("newProductName").getValue();
             const Price = this.byId("newProductPrice").getValue();
             const Rating = this.byId("newProductRating").getValue();
-            const ReleaseDate = this.formatDateForOData(this.byId("newProductReleaseDate").getValue());
-
+            const ReleaseDate = this.byId("newProductReleaseDate").getValue();
+        
+            // Validate ID (must be a valid integer)
+            if (!ID || isNaN(ID) || parseInt(ID) <= 0) {
+                MessageBox.error("Please enter a valid Product ID.");
+                return;
+            }
+        
+            // Validate Name (must not be empty)
+            if (!Name || Name.trim() === "") {
+                MessageBox.error("Please enter a valid Product Name.");
+                return;
+            }
+        
+            // Validate Price (must be a valid number and greater than 0)
+            if (!Price || isNaN(Price) || parseFloat(Price) <= 0) {
+                MessageBox.error("Please enter a valid Product Price.");
+                return;
+            }
+        
+            // Validate Rating (must be an integer between 1 and 5)
+            if (!Rating || isNaN(Rating) || parseInt(Rating) < 1 || parseInt(Rating) > 5) {
+                MessageBox.error("Please enter a valid Rating (1 to 5).");
+                return;
+            }
+        
+            // Validate ReleaseDate (must be a valid date)
+            if (!ReleaseDate || !this.isValidDate(ReleaseDate)) {
+                MessageBox.error("Please enter a valid Release Date.");
+                return;
+            }
+        
+            // Format the Release Date for OData
+            const formattedReleaseDate = this.formatDateForOData(ReleaseDate);
+        
+            // Create the Atom XML for the new product
             const atomXml = `<?xml version="1.0" encoding="utf-8"?>
             <entry xmlns="http://www.w3.org/2005/Atom" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
                 <category term="ODataDemo.Product" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
@@ -186,14 +221,15 @@ sap.ui.define([
                         <d:ID m:type="Edm.Int32">${parseInt(ID)}</d:ID>
                         <d:Name>${Name}</d:Name>
                         <d:Description>New Product</d:Description>
-                        <d:ReleaseDate m:type="Edm.DateTime">${ReleaseDate}</d:ReleaseDate>
+                        <d:ReleaseDate m:type="Edm.DateTime">${formattedReleaseDate}</d:ReleaseDate>
                         <d:DiscontinuedDate m:null="true"/>
                         <d:Rating m:type="Edm.Int16">${parseInt(Rating)}</d:Rating>
                         <d:Price m:type="Edm.Double">${parseFloat(Price)}</d:Price>
                     </m:properties>
                 </content>
             </entry>`;
-
+        
+            // Make the POST request to create the product
             fetch("http://localhost:3000/odata/Products", {
                 method: "POST",
                 headers: {
@@ -215,6 +251,13 @@ sap.ui.define([
                     MessageBox.error("Error creating product: " + error.message);
                 });
         },
+        
+        // Helper function to validate if a date is in the correct format
+        isValidDate(dateString) {
+            const date = new Date(dateString);
+            return !isNaN(date.getTime());
+        }
+        ,
 
         onCreateProductWithDetails() {
             const ID = this.byId("newProductWithDetailsId").getValue();
@@ -349,9 +392,33 @@ sap.ui.define([
             const Name = this.byId("productNameText").getValue();
             const Price = this.byId("productPriceText").getValue();
             const Rating = this.byId("productRatingText").getValue();
-            const ReleaseDate = this.formatDateForOData(this.byId("productReleaseDateText").getValue());
+            const ReleaseDate = this.byId("productReleaseDateText").getValue();
             const productId = this._selectedProductId;
-
+        
+            // Validate fields
+            if (!Name) {
+                sap.m.MessageToast.show("Product Name cannot be empty.");
+                return;
+            }
+        
+            if (!Price || isNaN(Price) || parseFloat(Price) <= 0) {
+                sap.m.MessageToast.show("Please enter a valid price greater than 0.");
+                return;
+            }
+        
+            if (!Rating || isNaN(Rating) || parseInt(Rating) < 1 || parseInt(Rating) > 5) {
+                sap.m.MessageToast.show("Please enter a valid rating between 1 and 5.");
+                return;
+            }
+        
+            if (!ReleaseDate) {
+                sap.m.MessageToast.show("Release Date cannot be empty.");
+                return;
+            }
+        
+            // Format the date for OData if ReleaseDate is valid
+            const formattedReleaseDate = this.formatDateForOData(ReleaseDate);
+        
             const atomXml = `<?xml version="1.0" encoding="utf-8"?>
             <entry xmlns="http://www.w3.org/2005/Atom" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
                 <category term="ODataDemo.Product" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
@@ -363,14 +430,14 @@ sap.ui.define([
                         <d:ID m:type="Edm.Int32">${productId}</d:ID>
                         <d:Name>${Name}</d:Name>
                         <d:Description>Updated Product</d:Description>
-                        <d:ReleaseDate m:type="Edm.DateTime">${ReleaseDate}</d:ReleaseDate>
+                        <d:ReleaseDate m:type="Edm.DateTime">${formattedReleaseDate}</d:ReleaseDate>
                         <d:DiscontinuedDate m:null="true"/>
                         <d:Rating m:type="Edm.Int16">${parseInt(Rating)}</d:Rating>
                         <d:Price m:type="Edm.Double">${parseFloat(Price)}</d:Price>
                     </m:properties>
                 </content>
             </entry>`;
-
+        
             fetch(`http://localhost:3000/odata/Products(${productId})`, {
                 method: "PUT",
                 headers: {
@@ -378,20 +445,21 @@ sap.ui.define([
                 },
                 body: atomXml
             })
-                .then(response => {
-                    if (!response.ok) {
-                        return response.text().then(errorText => {
-                            throw new Error(`HTTP error! Status: ${response.status} - ${errorText}`);
-                        });
-                    }
-                    MessageBox.success("Product updated successfully!");
-                    this.onCloseEditingDialog();
-                    this.getView().getModel().refresh(true);
-                })
-                .catch(error => {
-                    MessageBox.error("Error updating product: " + error.message);
-                });
-        },
+            .then(response => {
+                if (!response.ok) {
+                    return response.text().then(errorText => {
+                        throw new Error(`HTTP error! Status: ${response.status} - ${errorText}`);
+                    });
+                }
+                MessageBox.success("Product updated successfully!");
+                this.onCloseEditingDialog();
+                this.getView().getModel().refresh(true);
+            })
+            .catch(error => {
+                MessageBox.error("Error updating product: " + error.message);
+            });
+        }
+        ,
 
         onSeePersons: function () {
             const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
