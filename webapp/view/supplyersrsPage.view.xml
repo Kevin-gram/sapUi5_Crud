@@ -62,4 +62,35 @@
             </Table>
         </content>
     </Page>
+
+    <!-- Dialog for adding a new supplier -->
+    <Dialog
+        id="addSupplierDialog"
+        title="Add New Supplier"
+    >
+        <content>
+            <VBox>
+                <Label text="ID" />
+                <Input id="newSupplierId" />
+                <Label text="Name" />
+                <Input id="newSupplierName" />
+                <Label text="Street" />
+                <Input id="newSupplierStreet" />
+                <Label text="City" />
+                <Input id="newSupplierCity" />
+                <Label text="State" />
+                <Input id="newSupplierState" />
+                <Label text="ZipCode" />
+                <Input id="newSupplierZipCode" />
+                <Label text="Country" />
+                <Input id="newSupplierCountry" />
+            </VBox>
+        </content>
+        <beginButton>
+            <Button text="Save" press="onSaveSupplier" />
+        </beginButton>
+        <endButton>
+            <Button text="Cancel" press="onCancelSupplierDialog" />
+        </endButton>
+    </Dialog>
 </mvc:View>

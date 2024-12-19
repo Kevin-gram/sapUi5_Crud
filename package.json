@@ -4,6 +4,7 @@
     "description": "UI5 Application: crud",
     "author": "kevin-gram",
     "license": "Apache-2.0",
+    "type": "module",
     "scripts": {
         "clean": "rimraf dist coverage",
         "build": "ui5 build --clean-dest",
