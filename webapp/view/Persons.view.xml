@@ -19,13 +19,15 @@
                 <Button
                     text="Add new Person"
                     press="onShowProductDialog"/>
+                <Button
+                    text="Back"
+                    press="onNavBack"/>
             </Toolbar>
         </headerContent>
         <content>
             <smartFilterBar:SmartFilterBar 
                 id="smartFilterBar"
-                entitySet="Persons"
-            >
+                entitySet="Persons">
                 <smartFilterBar:controlConfiguration>
                     <smartFilterBar:ControlConfiguration id="idPerson" visibleInAdvancedArea="true" label="Person ID" key="ID"></smartFilterBar:ControlConfiguration>
                     <smartFilterBar:ControlConfiguration id="name" visibleInAdvancedArea="true" label="Name" key="Name"></smartFilterBar:ControlConfiguration>
@@ -44,8 +46,7 @@
                 useTablePersonalisation="false"
                 showRowCount="true"
                 demandPopin="true"
-                showFullScreenButton="true"
-            >
+                showFullScreenButton="true">
                 <Table id="idResponsiveTable" selectionChange="handleSelectionChange" mode="SingleSelectMaster">
                     <!-- No need to specify columns here -->
                 </Table>

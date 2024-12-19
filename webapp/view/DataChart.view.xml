@@ -8,8 +8,17 @@
     xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
 >
     <Page title="Product Ratings Chart">
+        <headerContent>
+            <Toolbar>
+                <Button
+                    icon="sap-icon://nav-back"
+                    press="onNavBack"
+                    tooltip="Back"
+                />
+            </Toolbar>
+        </headerContent>
         <content>
-            <VBox id="loadingVBox" justifyContent="Center" alignItems="Center"  class="loadingVBox">
+            <VBox id="loadingVBox" justifyContent="Center" alignItems="Center" class="loadingVBox">
                 <BusyIndicator id="busyIndicator" visible="true" text="Loading data, please wait..." />
             </VBox>
             <VBox id="contentVBox" visible="false">

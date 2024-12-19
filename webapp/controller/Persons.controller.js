@@ -9,6 +9,10 @@ sap.ui.define(["./BaseController", "sap/ui/model/odata/v2/ODataModel"], function
             });
             // Correctly set the model to the view
             this.getView().setModel(oModel); // Corrected method name
+        },
+        onNavBack: function () {
+            const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+            oRouter.navTo("main");
         }
     });
 });

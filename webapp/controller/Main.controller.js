@@ -183,7 +183,7 @@ sap.ui.define([
                 String(d.getDate()).padStart(2, '0');
         },
 
-        onCreate() {
+        onCreate: async function () {
             // Get the input values
             const ID = this.byId("newProductId").getValue();
             const Name = this.byId("newProductName").getValue();
@@ -218,6 +218,35 @@ sap.ui.define([
             // Validate ReleaseDate (must be a valid date)
             if (!ReleaseDate || !this.isValidDate(ReleaseDate)) {
                 MessageBox.error("Please enter a valid Release Date.");
+                return;
+            }
+        
+            // Fetch existing products to check for duplicates
+            try {
+                const response = await fetch("http://localhost:3000/odata/Products", {
+                    headers: {
+                        "Accept": "application/json"
+                    }
+                });
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const data = await response.json();
+                const existingProducts = data.value;
+        
+                // Check for duplicate ID
+                if (existingProducts.some(product => product.ID === parseInt(ID))) {
+                    MessageBox.error("A product with the same ID already exists.");
+                    return;
+                }
+        
+                // Check for duplicate Name
+                if (existingProducts.some(product => product.Name === Name)) {
+                    MessageBox.error("A product with the same Name already exists.");
+                    return;
+                }
+            } catch (error) {
+                MessageBox.error("Error fetching existing products: " + error.message);
                 return;
             }
         
