@@ -509,11 +509,11 @@ sap.ui.define([
 
             this.getView().getModel().remove(`/Products(${productId})`, {
                 success: () => {
-                    MessageBox.success("Product deleted successfully!");
+                    MessageToast.show("Product deleted successfully!");
                     this.getView().getModel().refresh(true);
                 },
                 error: (error) => {
-                    MessageBox.error("Error deleting product: " + error.message);
+                    MessageToast.show("Error deleting product: " + error.message);
                 }
             });
         },

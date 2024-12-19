@@ -90,7 +90,7 @@
                         itemPress="onShowData"
                         growing="true"
                         growingScrollToLoad="true" 
-                        growingThreshold="2"
+                        growingThreshold="9"
                     >
                         <columns>
                             <Column width="150px">
