@@ -59,7 +59,7 @@
                             <Text text="{suppliers>Address/State}" />
                             <Text text="{suppliers>Address/ZipCode}" />
                             <Text text="{suppliers>Address/Country}" />
-                            <HBox>
+                            <HBox class="gap">
                                 <Button text="Edit" press="onShowEditSupplierDialog" />
                                 <Button text="Delete" press="onDeleteSupplier" />
                             </HBox>
@@ -122,10 +122,12 @@
                 <Input id="editSupplierCountry" />
             </VBox>
         </content>
-        <HBox justifyContent="">
+               <beginButton>
             <Button text="Save" press="onSaveEditSupplier" />
+        </beginButton>
+        <endButton>
             <Button text="Cancel" press="onCancelEditSupplierDialog" />
-        </HBox>
+        </endButton>
        
     </Dialog>
 </mvc:View>
