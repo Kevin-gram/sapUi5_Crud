@@ -1,38 +1,47 @@
 sap.ui.define([
     "./BaseController",
     "sap/ui/model/json/JSONModel",
-    "sap/m/MessageToast",
-    "sap/ui/core/Fragment"
-], function (BaseController, JSONModel, MessageToast, Fragment) {
+    "sap/m/MessageToast"
+], function (BaseController, JSONModel, MessageToast) {
     "use strict";
     return BaseController.extend("crud.controller.SupplyersrsPage", {
         onInit: function () {
-            // Load the mock data
+            // Load the data from the correct endpoint
             let oModel = new JSONModel();
-            oModel.loadData("/suppliers");
+            oModel.loadData("http://localhost:3001/suppliers", null, false);
+            oModel.attachRequestCompleted(function() {
+                console.log("Suppliers data fetched:", oModel.getData());
+            });
+            oModel.attachRequestFailed(function() {
+                console.error("Failed to fetch suppliers data");
+            });
             this.getView().setModel(oModel, "suppliers");
         },
 
-        onShowSupplierDialog: function () {
-            if (!this._oDialog) {
-                Fragment.load({
-                    id: this.getView().getId(),
-                    name: "crud.view.AddSupplierDialog",
-                    controller: this
-                }).then(function (oDialog) {
-                    this._oDialog = oDialog;
-                    this.getView().addDependent(this._oDialog);
-                    this._oDialog.open();
-                }.bind(this));
-            } else {
-                this._oDialog.open();
+        onShowAddSupplierDialog: function () {
+            const oView = this.getView();
+            const oDialog = oView.byId("addSupplierDialog");
+            if (oDialog) {
+                oDialog.open();
             }
         },
 
-        onSaveSupplier: function () {
+        onShowEditSupplierDialog: function (oEvent) {
+            const oItem = oEvent.getSource().getParent().getParent();
+            const oContext = oItem.getBindingContext("suppliers");
+            const oSupplier = oContext.getObject();
+
+            const oView = this.getView();
+            const oDialog = oView.byId("editSupplierDialog");
+            if (oDialog) {
+                this._populateEditDialog(oSupplier);
+                oDialog.open();
+            }
+        },
+
+        onSaveNewSupplier: function () {
             const oView = this.getView();
             const oModel = oView.getModel("suppliers");
-            const aSuppliers = oModel.getProperty("/value");
 
             const oNewSupplier = {
                 ID: oView.byId("newSupplierId").getValue(),
@@ -47,7 +56,7 @@ sap.ui.define([
             };
 
             // Send the new supplier data to the backend service
-            fetch('/suppliers', {
+            fetch('http://localhost:3001/suppliers', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -55,22 +64,98 @@ sap.ui.define([
                 body: JSON.stringify(oNewSupplier)
             }).then(response => {
                 if (response.ok) {
-                    return response.json();
+                    return response.text(); // Expecting a text response
                 } else {
                     throw new Error('Failed to save supplier');
                 }
             }).then(() => {
                 // Fetch the updated suppliers data
-                oModel.loadData("/suppliers", null, true);
+                oModel.loadData("http://localhost:3001/suppliers", null, true);
                 MessageToast.show("Supplier added successfully!");
-                this._oDialog.close();
+                oView.byId("addSupplierDialog").close();
             }).catch(error => {
                 MessageToast.show("Error saving supplier: " + error.message);
             });
         },
 
-        onCancelSupplierDialog: function () {
-            this._oDialog.close();
+        onSaveEditSupplier: function () {
+            const oView = this.getView();
+            const oModel = oView.getModel("suppliers");
+
+            const oEditedSupplier = {
+                ID: oView.byId("editSupplierId").getValue(),
+                Name: oView.byId("editSupplierName").getValue(),
+                Address: {
+                    Street: oView.byId("editSupplierStreet").getValue(),
+                    City: oView.byId("editSupplierCity").getValue(),
+                    State: oView.byId("editSupplierState").getValue(),
+                    ZipCode: oView.byId("editSupplierZipCode").getValue(),
+                    Country: oView.byId("editSupplierCountry").getValue()
+                }
+            };
+
+            // Send the updated supplier data to the backend service
+            fetch(`http://localhost:3001/suppliers/${oEditedSupplier.ID}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(oEditedSupplier)
+            }).then(response => {
+                if (response.ok) {
+                    return response.text(); // Expecting a text response
+                } else {
+                    throw new Error('Failed to update supplier');
+                }
+            }).then(() => {
+                // Fetch the updated suppliers data
+                oModel.loadData("http://localhost:3001/suppliers", null, true);
+                MessageToast.show("Supplier updated successfully!");
+                oView.byId("editSupplierDialog").close();
+            }).catch(error => {
+                MessageToast.show("Error updating supplier: " + error.message);
+            });
+        },
+
+        onCancelAddSupplierDialog: function () {
+            this.getView().byId("addSupplierDialog").close();
+        },
+
+        onCancelEditSupplierDialog: function () {
+            this.getView().byId("editSupplierDialog").close();
+        },
+
+        _populateEditDialog: function (oSupplier) {
+            const oView = this.getView();
+            oView.byId("editSupplierId").setValue(oSupplier.ID);
+            oView.byId("editSupplierName").setValue(oSupplier.Name);
+            oView.byId("editSupplierStreet").setValue(oSupplier.Address.Street);
+            oView.byId("editSupplierCity").setValue(oSupplier.Address.City);
+            oView.byId("editSupplierState").setValue(oSupplier.Address.State);
+            oView.byId("editSupplierZipCode").setValue(oSupplier.Address.ZipCode);
+            oView.byId("editSupplierCountry").setValue(oSupplier.Address.Country);
+        },
+
+        onDeleteSupplier: function (oEvent) {
+            const oItem = oEvent.getSource().getParent().getParent();
+            const oContext = oItem.getBindingContext("suppliers");
+            const sSupplierId = oContext.getProperty("ID");
+
+            // Send the delete request to the backend service
+            fetch(`http://localhost:3001/suppliers/${sSupplierId}`, {
+                method: 'DELETE'
+            }).then(response => {
+                if (response.ok) {
+                    // Fetch the updated suppliers data
+                    const oModel = this.getView().getModel("suppliers");
+                    oModel.loadData("http://localhost:3001/suppliers", null, true);
+                    MessageToast.show("Supplier deleted successfully!");
+                } else {
+                    throw new Error('Failed to delete supplier');
+                }
+            }).catch(error => {
+                MessageToast.show("Error deleting supplier: " + error.message);
+            });
         }
     });
 });

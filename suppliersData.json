@@ -1,0 +1,137 @@
+{
+  "value": [
+    {
+      "odata.etag": "W/\"5\"",
+      "ID": 1,
+      "Name": "Supplier 1",
+      "Address": {
+        "Street": "123 Main St",
+        "City": "Anytown",
+        "State": "CA",
+        "ZipCode": "12345",
+        "Country": "USA"
+      },
+      "Location": {
+        "type": "Point",
+        "coordinates": [
+          -122.4194,
+          37.7749
+        ],
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "EPSG:4326"
+          }
+        }
+      },
+      "Concurrency": 5
+    },
+    {
+      "odata.etag": "W/\"5\"",
+      "ID": 1,
+      "Name": "Supplier One",
+      "Address": {
+        "Street": "123 Supplier St",
+        "City": "kigali",
+        "State": "WA",
+        "ZipCode": "98074",
+        "Country": "Rwanda"
+      },
+      "Location": {
+        "type": "Point",
+        "coordinates": [
+          -127.4194,
+          37.7749
+        ],
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "EPSG:4326"
+          }
+        }
+      },
+      "Concurrency": 5
+    },
+    {
+      "odata.etag": "W/\"5\"",
+      "ID": 1,
+      "Name": "Supplier One",
+      "Address": {
+        "Street": "123 Supplier St",
+        "City": "kigali",
+        "State": "WA",
+        "ZipCode": "98074",
+        "Country": "Rwanda"
+      },
+      "Location": {
+        "type": "Point",
+        "coordinates": [
+          -127.4194,
+          37.7749
+        ],
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "EPSG:4326"
+          }
+        }
+      },
+      "Concurrency": 5
+    },
+    {
+      "ID": "2",
+      "Name": "Supplier 1",
+      "Address": {
+        "Street": "123 Main St",
+        "City": "Anytown",
+        "State": "CA",
+        "ZipCode": "12345",
+        "Country": "USA"
+      }
+    },
+    {
+      "ID": "2",
+      "Name": "kadogo",
+      "Address": {
+        "Street": "NE 40th",
+        "City": "Redmond",
+        "State": "WA",
+        "ZipCode": "98052",
+        "Country": "United States"
+      }
+    },
+    {
+      "ID": "123",
+      "Name": "New Supplier",
+      "Address": {
+        "Street": "123 Main",
+        "City": "kiga",
+        "State": "CA",
+        "ZipCode": "12345",
+        "Country": "USA"
+      }
+    },
+    {
+      "ID": "3",
+      "Name": "Supplier 1",
+      "Address": {
+        "Street": "123 Main St",
+        "City": "Kibungo",
+        "State": "CA",
+        "ZipCode": "12345",
+        "Country": "USA"
+      }
+    },
+    {
+      "ID": "4",
+      "Name": "NYIRINGANGO Kevin",
+      "Address": {
+        "Street": "+250787119178",
+        "City": "kigali",
+        "State": "WA",
+        "ZipCode": "98052",
+        "Country": "Rwanda"
+      }
+    }
+  ]
+}
