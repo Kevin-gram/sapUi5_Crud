@@ -24,6 +24,7 @@ export const config = {
   services: ['chromedriver'],  // Ensure chromedriver service is installed
 
   framework: 'mocha',
+  reporters: ['spec'],  // Add the spec reporter here
   mochaOpts: {
     ui: 'bdd',
     timeout: 60000,

@@ -1,7 +1,8 @@
 import { browser, $$, $ } from '@wdio/globals';
 
 // filepath: /c:/Users/KevinNyiringango/sapUi5_Crud/test/specs/test.e2e.ts
-describe('UI5 SAP Application', () => {
+
+describe('UI5 SAP Application - Delete Product', () => {
     it('should delete a random product successfully', async () => {
         // Step 1: Maximize the browser window
         await browser.maximizeWindow();
@@ -26,7 +27,9 @@ describe('UI5 SAP Application', () => {
         await randomDeleteButton.waitForClickable({ timeout: 5000 });  // Increased wait time
         await randomDeleteButton.click();
     });
+});
 
+describe('UI5 SAP Application - View Chart', () => {
     it('should click the "View Chart" button and navigate to the chart page', async () => {
         // Step 1: Maximize the browser window
         await browser.maximizeWindow();
@@ -37,17 +40,17 @@ describe('UI5 SAP Application', () => {
         // Step 3: Wait for the page to load (extended wait time)
         await browser.pause(5000);  // Wait for page to load completely
 
-    // Adjust based on your actual title
-
-        // Step 5: Find and click the "View Chart" button
+        // Step 4: Find and click the "View Chart" button
         const viewChartButton = await $('button=View Chart');
         await viewChartButton.waitForClickable({ timeout: 10000 }); 
         await viewChartButton.click();
 
-        // Step 8: Wait for a minute on the chart page
+        // Step 5: Wait for a minute on the chart page
         await browser.pause(20000);  // Wait for a minute
     });
+});
 
+describe('UI5 SAP Application - Detail Columns', () => {
     it('should navigate to the main page and then to the Detail columns page', async () => {
         // Step 1: Maximize the browser window
         await browser.maximizeWindow();
@@ -68,7 +71,12 @@ describe('UI5 SAP Application', () => {
         await detailColumnButton.waitForClickable({ timeout: 10000 });  // Increased wait time
         await detailColumnButton.click();
 
-        // Final wait to keep the test environment stable
-        await browser.pause(20000);  // Final wait for stability before the test completes
+        await browser.pause(20000)
+        // Step 8: Find and click the "Close" button to close the details column
+        const closeButton = await $('button=Close');
+        await closeButton.waitForClickable({ timeout: 10000 });
+        await closeButton.click();
+    // Final wait to keep the test environment stable
+        await browser.pause(10000);  // Final wait for stability before the test completes
     });
 });

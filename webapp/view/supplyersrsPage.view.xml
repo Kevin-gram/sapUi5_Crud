@@ -61,7 +61,7 @@
                             <Text text="{suppliers>Address/State}" />
                             <Text text="{suppliers>Address/ZipCode}" />
                             <Text text="{suppliers>Address/Country}" />
-                            <HBox>
+                            <HBox class="gap">
                                 <Button text="Edit" press="onShowEditSupplierDialog" />
                                 <Button text="Delete" press="onDeleteSupplier" />
                             </HBox>
