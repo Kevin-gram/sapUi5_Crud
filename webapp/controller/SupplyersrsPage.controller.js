@@ -18,6 +18,11 @@ sap.ui.define([
             this.getView().setModel(oModel, "suppliers");
         },
 
+        onNavBack: function () {
+            const oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+            oRouter.navTo("main");
+        },
+
         onShowAddSupplierDialog: function () {
             const oView = this.getView();
             const oDialog = oView.byId("addSupplierDialog");

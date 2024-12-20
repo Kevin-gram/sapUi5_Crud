@@ -4,7 +4,6 @@
     "description": "UI5 Application: crud",
     "author": "kevin-gram",
     "license": "Apache-2.0",
-    "type": "module",
     "scripts": {
         "clean": "rimraf dist coverage",
         "build": "ui5 build --clean-dest",
@@ -22,6 +21,7 @@
     "devDependencies": {
         "@types/chai": "^5.0.1",
         "@types/mocha": "^10.0.10",
+        "@types/node": "^22.10.2",
         "@types/webdriverio": "^4.13.3",
         "@ui5/cli": "^4.0.6",
         "@ui5/middleware-code-coverage": "^2.0.0",

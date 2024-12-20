@@ -8,7 +8,9 @@
     <Page
         title="Suppliers"
         id="suppliersPage"
-        class="sapUiSmallMargin">
+        class="sapUiSmallMargin"
+        showNavButton="true"
+        navButtonPress="onNavBack">
         <headerContent>
             <Toolbar>
                 <Button
@@ -59,7 +61,7 @@
                             <Text text="{suppliers>Address/State}" />
                             <Text text="{suppliers>Address/ZipCode}" />
                             <Text text="{suppliers>Address/Country}" />
-                            <HBox class="gap">
+                            <HBox>
                                 <Button text="Edit" press="onShowEditSupplierDialog" />
                                 <Button text="Delete" press="onDeleteSupplier" />
                             </HBox>
@@ -122,12 +124,9 @@
                 <Input id="editSupplierCountry" />
             </VBox>
         </content>
-               <beginButton>
+        <HBox justifyContent="SpaceBetween">
             <Button text="Save" press="onSaveEditSupplier" />
-        </beginButton>
-        <endButton>
             <Button text="Cancel" press="onCancelEditSupplierDialog" />
-        </endButton>
-       
+        </HBox>
     </Dialog>
 </mvc:View>

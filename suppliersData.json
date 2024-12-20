@@ -1,30 +1,15 @@
 {
   "value": [
     {
-      "odata.etag": "W/\"5\"",
-      "ID": 1,
+      "ID": "1",
       "Name": "Supplier 1",
       "Address": {
         "Street": "123 Main St",
         "City": "Anytown",
-        "State": "CA",
+        "State": "C",
         "ZipCode": "12345",
         "Country": "USA"
-      },
-      "Location": {
-        "type": "Point",
-        "coordinates": [
-          -122.4194,
-          37.7749
-        ],
-        "crs": {
-          "type": "name",
-          "properties": {
-            "name": "EPSG:4326"
-          }
-        }
-      },
-      "Concurrency": 5
+      }
     },
     {
       "odata.etag": "W/\"5\"",
@@ -120,6 +105,17 @@
         "State": "CA",
         "ZipCode": "12345",
         "Country": "USA"
+      }
+    },
+    {
+      "ID": "23",
+      "Name": "Tokyo",
+      "Address": {
+        "Street": "NE 40th",
+        "City": "Redmond",
+        "State": "WA",
+        "ZipCode": "98052",
+        "Country": "United States"
       }
     }
   ]
