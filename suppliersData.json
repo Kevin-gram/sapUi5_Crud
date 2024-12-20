@@ -121,17 +121,6 @@
         "ZipCode": "12345",
         "Country": "USA"
       }
-    },
-    {
-      "ID": "4",
-      "Name": "NYIRINGANGO Kevin",
-      "Address": {
-        "Street": "+250787119178",
-        "City": "kigali",
-        "State": "WA",
-        "ZipCode": "98052",
-        "Country": "Rwanda"
-      }
     }
   ]
 }

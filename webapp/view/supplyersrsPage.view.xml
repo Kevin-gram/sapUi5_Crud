@@ -122,11 +122,10 @@
                 <Input id="editSupplierCountry" />
             </VBox>
         </content>
-        <beginButton>
+        <HBox justifyContent="">
             <Button text="Save" press="onSaveEditSupplier" />
-        </beginButton>
-        <endButton>
             <Button text="Cancel" press="onCancelEditSupplierDialog" />
-        </endButton>
+        </HBox>
+       
     </Dialog>
 </mvc:View>
