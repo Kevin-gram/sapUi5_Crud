@@ -15,8 +15,9 @@
                     <Toolbar>
                         
                         <ToolbarSpacer />
-                        <Label text="Add a Product" />
+                       
                         <Button
+                        text="Add Product"
                         id="addButton"
                             icon="sap-icon://add"
                             press="onShowProductDialog"
@@ -276,23 +277,27 @@
         <VBox class="sapUiSmallMargin">
             <Label text="Product ID" />
             <Input
+                name="ID"
                 id="newProductId"
                 type="Number"
             />
             <Label text="Name" />
-            <Input id="newProductName" />
+            <Input name="Name" id="newProductName" />
             <Label text="Price" />
             <Input
+            name="Price"
                 id="newProductPrice"
                 type="Number"
             />
             <Label text="Rating" />
             <Input
+            name="Rate"
                 id="newProductRating"
                 type="Number"
             />
             <Label text="Release Date" />
             <DatePicker
+            name="Date"
                 id="newProductReleaseDate"
                 valueFormat="yyyy-MM-dd"
                 displayFormat="yyyy-MM-dd"

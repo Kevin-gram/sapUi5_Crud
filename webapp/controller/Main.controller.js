@@ -287,12 +287,12 @@ sap.ui.define([
                             throw new Error(`HTTP error! Status: ${response.status} - ${errorText}`);
                         });
                     }
-                    MessageBox.success("Product created successfully!");
+                    MessageToast("Product created successfully!");
                     this.onCloseProductDialog();
                     this.getView().getModel().refresh(true);
                 })
                 .catch(error => {
-                    MessageBox.error("Error creating product: " + error.message);
+                    MessageToast("Error creating product: " + error.message);
                 });
         },
         
