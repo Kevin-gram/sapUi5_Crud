@@ -1,7 +1,5 @@
 import { browser, $$, $ } from '@wdio/globals';
 
-filepath: /c:/Users/KevinNyiringango/sapUi5_Crud/test/specs/test.e2e.ts
-
 describe('UI5 SAP Application - Delete Product', () => {
     it('should delete a random product successfully', async () => {
         // Step 1: Maximize the browser window
