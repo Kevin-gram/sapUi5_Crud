@@ -101,8 +101,8 @@ describe('UI5 SAP Application - Product Management', () => {
 
         // Step 5: Fill in the product details
         const testProduct = {
-            id: '16',
-            name: ' Iphone 16 promax',
+            id: '17',
+            name: ' Iphone 17 promax fold',
             price: '200',
             rating: '5',
             releaseDate: '2023-12-31'
