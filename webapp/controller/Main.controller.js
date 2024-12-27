@@ -287,12 +287,12 @@ sap.ui.define([
                             throw new Error(`HTTP error! Status: ${response.status} - ${errorText}`);
                         });
                     }
-                    MessageToast("Product created successfully!");
+                    MessageBox.success("Product created successfully!");
                     this.onCloseProductDialog();
                     this.getView().getModel().refresh(true);
                 })
                 .catch(error => {
-                    MessageToast("Error creating product: " + error.message);
+                    MessageBox.error("Error creating product: " + error.message);
                 });
         },
         
@@ -301,18 +301,20 @@ sap.ui.define([
             const date = new Date(dateString);
             return !isNaN(date.getTime());
         }
-        ,        onCreateProductWithDetails() {
+        ,
+
+        onCreateProductWithDetails() {
             const ID = this.byId("newProductWithDetailsId").getValue();
             const Name = this.byId("newProductWithDetailsName").getValue();
             const Price = this.byId("newProductWithDetailsPrice").getValue();
             const Rating = this.byId("newProductWithDetailsRating").getValue();
-            const ReleaseDate = this.byId("newProductWithDetailsReleaseDate").getValue();
-        
+            const ReleaseDate = this.formatDateForOData(this.byId("newProductWithDetailsReleaseDate").getValue());
+
             const Category1Id = this.byId("newProductWithDetailsCategory1Id").getValue();
             const Category1Name = this.byId("newProductWithDetailsCategory1Name").getValue();
             const Category2Id = this.byId("newProductWithDetailsCategory2Id").getValue();
             const Category2Name = this.byId("newProductWithDetailsCategory2Name").getValue();
-        
+
             const SupplierId = this.byId("newProductWithDetailsSupplierId").getValue();
             const SupplierName = this.byId("newProductWithDetailsSupplierName").getValue();
             const SupplierStreet = this.byId("newProductWithDetailsSupplierStreet").getValue();
@@ -322,40 +324,10 @@ sap.ui.define([
             const SupplierCountry = this.byId("newProductWithDetailsSupplierCountry").getValue();
             const SupplierLatitude = this.byId("newProductWithDetailsSupplierLatitude").getValue();
             const SupplierLongitude = this.byId("newProductWithDetailsSupplierLongitude").getValue();
-        
+
             const ProductDetailId = this.byId("newProductWithDetailsProductDetailId").getValue();
             const ProductDetailDescription = this.byId("newProductWithDetailsProductDetailDescription").getValue();
-        
-            // Validation
-            let isValid = true;
-        
-            const fields = [
-                { id: "newProductWithDetailsId", value: ID, message: "ID is required" },
-                { id: "newProductWithDetailsName", value: Name, message: "Name is required" },
-                { id: "newProductWithDetailsPrice", value: Price, message: "Price is required" },
-                { id: "newProductWithDetailsRating", value: Rating, message: "Rating is required" },
-                { id: "newProductWithDetailsReleaseDate", value: ReleaseDate, message: "Release Date is required" }
-            ];
-        
-            fields.forEach(field => {
-                const input = this.byId(field.id);
-                if (!field.value) {
-                    input.setValueState("Error").setValueStateText(field.message);
-                    input.addStyleClass("error-state");
-                    isValid = false;
-                } else {
-                    input.setValueState("None");
-                    input.removeStyleClass("error-state");
-                }
-            });
-        
-            if (!isValid) {
-                MessageBox.error("Please fill in all required fields.");
-                return;
-            }
-        
-            const formattedReleaseDate = this.formatDateForOData(ReleaseDate);
-        
+
             const atomXml = `<?xml version="1.0" encoding="utf-8"?>
             <entry xmlns="http://www.w3.org/2005/Atom" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
                 <category term="ODataDemo.Product" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
@@ -367,7 +339,7 @@ sap.ui.define([
                         <d:ID m:type="Edm.Int32">${parseInt(ID)}</d:ID>
                         <d:Name>${Name}</d:Name>
                         <d:Description>New Product</d:Description>
-                        <d:ReleaseDate m:type="Edm.DateTime">${formattedReleaseDate}</d:ReleaseDate>
+                        <d:ReleaseDate m:type="Edm.DateTime">${ReleaseDate}</d:ReleaseDate>
                         <d:DiscontinuedDate m:null="true"/>
                         <d:Rating m:type="Edm.Int16">${parseInt(Rating)}</d:Rating>
                         <d:Price m:type="Edm.Double">${parseFloat(Price)}</d:Price>
@@ -437,7 +409,7 @@ sap.ui.define([
                     </m:inline>
                 </link>
             </entry>`;
-        
+
             fetch("http://localhost:3000/odata/Products", {
                 method: "POST",
                 headers: {
