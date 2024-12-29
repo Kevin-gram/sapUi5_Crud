@@ -79,7 +79,6 @@ describe('UI5 SAP Application - Detail Columns', () => {
     });
 
 });
-
 describe('UI5 SAP Application - Product Management', () => {
     it('should create a new product', async () => {
         // Step 1: Maximize the browser window
@@ -102,8 +101,8 @@ describe('UI5 SAP Application - Product Management', () => {
 
         // Step 5: Fill in the product details
         const testProduct = {
-            id: '21',
-            name: ' ultra',
+            id: '18',
+            name: 'samsung S22 ultra',
             price: '200',
             rating: '5',
             releaseDate: '2023-12-31'
@@ -120,10 +119,6 @@ describe('UI5 SAP Application - Product Management', () => {
         await createButton.waitForClickable({ timeout: 20000 });
         await createButton.click();
 
-        // Step 7: Refresh the page to ensure the product list is updated
-        await browser.refresh();
-        await browser.pause(10000);  // Wait for the page to reload completely
-
         // Final wait to keep the test environment stable
         await browser.pause(10000);  // Final wait for stability before the test completes
     });
@@ -138,41 +133,45 @@ describe('UI5 SAP Application - Product Management', () => {
         // Step 3: Wait for the page to load (extended wait time)
         await browser.pause(20000);  // Wait for page to load completely
 
+        // Step 4: Refresh the page to ensure the product list is updated
+        await browser.refresh();
+        await browser.pause(10000);  // Wait for the page to reload completely
+
         // Debugging Step: Check if the page is loaded correctly
         const pageTitle = await browser.getTitle();
         console.log('Page Title:', pageTitle);
 
-        // Step 4: Find the product to edit
+        // Step 5: Find the product to edit
         const productRows = await $$('#odataTable .sapMListTblRow');
         let productRow;
         for (const row of productRows) {
             const idText = await row.$('.sapMText').getText();
-            if (idText === '21') {
+            if (idText === '18') {
                 productRow = row;
                 break;
             }
         }
 
         if (!productRow) {
-            throw new Error('Product with ID 21 not found');
+            throw new Error('Product with ID 18 not found');
         }
 
-        // Step 5: Click the "Edit" button for the product
+        // Step 6: Click the "Edit" button for the product
         const editButton = await productRow.$('button=Edit');
         await editButton.waitForClickable({ timeout: 20000 });
         await editButton.click();
 
-        // Step 6: Wait for the update product dialog to open
+        // Step 7: Wait for the update product dialog to open
         const updateDialog = await $('#updateDialog');
         await updateDialog.waitForDisplayed({ timeout: 20000 });
 
-        // Step 7: Generate a random price
+        // Step 8: Generate a random price
         const randomPrice = (Math.random() * 1000).toFixed(2);
 
-        // Step 8: Update the product price
+        // Step 9: Update the product price
         await $('input[name="Price"]').setValue(randomPrice);
 
-        // Step 9: Click the "Save" button to update the product
+        // Step 10: Click the "Save" button to update the product
         const saveButton = await $('button=Save');
         await saveButton.waitForClickable({ timeout: 20000 });
         await saveButton.click();
