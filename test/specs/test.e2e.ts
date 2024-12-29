@@ -81,25 +81,17 @@ describe('UI5 SAP Application - Detail Columns', () => {
 });
 describe('UI5 SAP Application - Product Management', () => {
     it('should create a new product', async () => {
-        // Step 1: Maximize the browser window
         await browser.maximizeWindow();
-
-        // Step 2: Open the SAPUI5 application URL
         await browser.url('http://localhost:8080/index.html#/main');
+        await browser.pause(20000);
 
-        // Step 3: Wait for the page to load (extended wait time)
-        await browser.pause(20000);  // Wait for page to load completely
-
-        // Debugging Step: Check if the page is loaded correctly
         const pageTitle = await browser.getTitle();
         console.log('Page Title:', pageTitle);
 
-        // Step 4: Find and click the "Add Product" button
         const addButton = await $('button=Add Product');
         await addButton.waitForClickable({ timeout: 20000 });
         await addButton.click();
 
-        // Step 5: Fill in the product details
         const testProduct = {
             id: '18',
             name: 'samsung S22 ultra',
@@ -114,69 +106,73 @@ describe('UI5 SAP Application - Product Management', () => {
         await $('input[name="Rate"]').setValue(testProduct.rating);
         await $('input[name="Date"]').setValue(testProduct.releaseDate);
 
-        // Step 6: Click the "Create" button to create the product
         const createButton = await $('button=Create');
         await createButton.waitForClickable({ timeout: 20000 });
         await createButton.click();
 
-        // Final wait to keep the test environment stable
-        await browser.pause(10000);  // Final wait for stability before the test completes
+        // Add verification step
+        await browser.pause(5000); // Wait for UI to update
+        const productRow = await $(`#odataTable .sapMListTblRow=${testProduct.id}`);
+        await productRow.waitForExist({ timeout: 20000 });
+        console.log('Product created successfully');
     });
 
     it('should edit an existing product and change its price to a random number', async () => {
-        // Step 1: Maximize the browser window
         await browser.maximizeWindow();
-
-        // Step 2: Open the SAPUI5 application URL
         await browser.url('http://localhost:8080/index.html#/main');
-
-        // Step 3: Wait for the page to load (extended wait time)
-        await browser.pause(20000);  // Wait for page to load completely
-
-        // Step 4: Refresh the page to ensure the product list is updated
-        await browser.refresh();
-        await browser.pause(10000);  // Wait for the page to reload completely
-
-        // Debugging Step: Check if the page is loaded correctly
-        const pageTitle = await browser.getTitle();
-        console.log('Page Title:', pageTitle);
-
-        // Step 5: Find the product to edit
-        const productRows = await $$('#odataTable .sapMListTblRow');
+        
+        // Instead of a fixed pause, wait for the table to be visible
+        const table = await $('#odataTable');
+        await table.waitForDisplayed({ timeout: 20000 });
+        
+        // Try multiple times to find the product
+        let maxAttempts = 3;
         let productRow;
-        for (const row of productRows) {
-            const idText = await row.$('.sapMText').getText();
-            if (idText === '18') {
-                productRow = row;
-                break;
+        
+        for (let attempt = 0; attempt < maxAttempts; attempt++) {
+            try {
+                const productRows = await $$('#odataTable .sapMListTblRow');
+                for (const row of productRows) {
+                    const idText = await row.$('.sapMText').getText();
+                    if (idText === '18') {
+                        productRow = row;
+                        break;
+                    }
+                }
+                
+                if (productRow) break;
+                
+                // If product not found, refresh and wait
+                console.log(`Attempt ${attempt + 1}: Product not found, refreshing...`);
+                await browser.refresh();
+                await table.waitForDisplayed({ timeout: 20000 });
+            } catch (error) {
+                console.log(`Attempt ${attempt + 1} failed:`, error);
             }
         }
 
         if (!productRow) {
-            throw new Error('Product with ID 18 not found');
+            throw new Error('Product with ID 18 not found after multiple attempts');
         }
 
-        // Step 6: Click the "Edit" button for the product
         const editButton = await productRow.$('button=Edit');
         await editButton.waitForClickable({ timeout: 20000 });
         await editButton.click();
 
-        // Step 7: Wait for the update product dialog to open
         const updateDialog = await $('#updateDialog');
         await updateDialog.waitForDisplayed({ timeout: 20000 });
 
-        // Step 8: Generate a random price
         const randomPrice = (Math.random() * 1000).toFixed(2);
-
-        // Step 9: Update the product price
         await $('input[name="Price"]').setValue(randomPrice);
 
-        // Step 10: Click the "Save" button to update the product
         const saveButton = await $('button=Save');
         await saveButton.waitForClickable({ timeout: 20000 });
         await saveButton.click();
 
-        // Final wait to keep the test environment stable
-        await browser.pause(10000);  // Final wait for stability before the test completes
+        // Add verification for the price update
+        await browser.pause(5000); // Wait for UI to update
+        const updatedPrice = await productRow.$('.sapMText*=' + randomPrice);
+        await updatedPrice.waitForExist({ timeout: 20000 });
+        console.log('Product price updated successfully');
     });
 });
