@@ -102,8 +102,8 @@ describe('UI5 SAP Application - Product Management', () => {
         // Step 5: Fill in the product details
         const testProduct = {
             id: '17',
-            name: ' Iphone 17 promax fold',
-            price: '200',
+            name: 'Iphone 15',
+            price: '250',
             rating: '5',
             releaseDate: '2023-12-31'
         };
@@ -118,6 +118,48 @@ describe('UI5 SAP Application - Product Management', () => {
         const createButton = await $('button=Create');
         await createButton.waitForClickable({ timeout: 20000 });
         await createButton.click();
+
+        // Final wait to keep the test environment stable
+        await browser.pause(10000);  // Final wait for stability before the test completes
+    });
+
+    it('should edit an existing product and change its price to a random number', async () => {
+        // Step 1: Maximize the browser window
+        await browser.maximizeWindow();
+
+        // Step 2: Open the SAPUI5 application URL
+        await browser.url('http://localhost:8080/index.html#/main');
+
+        // Step 3: Wait for the page to load (extended wait time)
+        await browser.pause(20000);  // Wait for page to load completely
+
+        // Debugging Step: Check if the page is loaded correctly
+        const pageTitle = await browser.getTitle();
+        console.log('Page Title:', pageTitle);
+
+        // Step 4: Find the product to edit
+        const productRow = await $(`.sapMListTblRow:has(.sapMText:contains("17"))`);
+        await productRow.waitForDisplayed({ timeout: 20000 });
+
+        // Step 5: Click the "Edit" button for the product
+        const editButton = await productRow.$('button=Edit');
+        await editButton.waitForClickable({ timeout: 20000 });
+        await editButton.click();
+
+        // Step 6: Wait for the update product dialog to open
+        const updateDialog = await $('#updateDialog');
+        await updateDialog.waitForDisplayed({ timeout: 20000 });
+
+        // Step 7: Generate a random price
+        const randomPrice = (Math.random() * 1000).toFixed(2);
+
+        // Step 8: Update the product price
+        await $('input[name="Price"]').setValue(randomPrice);
+
+        // Step 9: Click the "Save" button to update the product
+        const saveButton = await $('button=Save');
+        await saveButton.waitForClickable({ timeout: 20000 });
+        await saveButton.click();
 
         // Final wait to keep the test environment stable
         await browser.pause(10000);  // Final wait for stability before the test completes
