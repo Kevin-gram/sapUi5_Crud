@@ -79,6 +79,7 @@ describe('UI5 SAP Application - Detail Columns', () => {
     });
 
 });
+
 describe('UI5 SAP Application - Product Management', () => {
     it('should create a new product', async () => {
         // Step 1: Maximize the browser window
@@ -101,9 +102,9 @@ describe('UI5 SAP Application - Product Management', () => {
 
         // Step 5: Fill in the product details
         const testProduct = {
-            id: '17',
-            name: 'Iphone 15',
-            price: '250',
+            id: '21',
+            name: ' ultra',
+            price: '200',
             rating: '5',
             releaseDate: '2023-12-31'
         };
@@ -118,6 +119,10 @@ describe('UI5 SAP Application - Product Management', () => {
         const createButton = await $('button=Create');
         await createButton.waitForClickable({ timeout: 20000 });
         await createButton.click();
+
+        // Step 7: Refresh the page to ensure the product list is updated
+        await browser.refresh();
+        await browser.pause(10000);  // Wait for the page to reload completely
 
         // Final wait to keep the test environment stable
         await browser.pause(10000);  // Final wait for stability before the test completes
@@ -138,8 +143,19 @@ describe('UI5 SAP Application - Product Management', () => {
         console.log('Page Title:', pageTitle);
 
         // Step 4: Find the product to edit
-        const productRow = await $(`.sapMListTblRow:has(.sapMText:contains("17"))`);
-        await productRow.waitForDisplayed({ timeout: 20000 });
+        const productRows = await $$('#odataTable .sapMListTblRow');
+        let productRow;
+        for (const row of productRows) {
+            const idText = await row.$('.sapMText').getText();
+            if (idText === '21') {
+                productRow = row;
+                break;
+            }
+        }
+
+        if (!productRow) {
+            throw new Error('Product with ID 21 not found');
+        }
 
         // Step 5: Click the "Edit" button for the product
         const editButton = await productRow.$('button=Edit');
