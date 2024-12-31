@@ -141,7 +141,6 @@ describe('UI5 SAP Application - Product Management', () => {
                 
                 if (productRow) break;
                 
-                // If product not found, refresh and wait
                 console.log(`Attempt ${attempt + 1}: Product not found, refreshing...`);
                 await browser.refresh();
                 await table.waitForDisplayed({ timeout: 20000 });
