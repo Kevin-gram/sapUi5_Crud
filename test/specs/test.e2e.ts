@@ -125,7 +125,6 @@ describe('UI5 SAP Application - Product Management', () => {
         const table = await $('#odataTable');
         await table.waitForDisplayed({ timeout: 20000 });
         
-        // Try multiple times to find the product
         let maxAttempts = 3;
         let productRow;
         
