@@ -83,7 +83,7 @@ describe('UI5 SAP Application - Product Management', () => {
     it('should create a new product', async () => {
         await browser.maximizeWindow();
         await browser.url('http://localhost:8080/index.html#/main');
-        await browser.pause(20000);
+        await browser.pause(20000);  // Give enough time for the app to load
 
         const pageTitle = await browser.getTitle();
         console.log('Page Title:', pageTitle);
@@ -93,13 +93,14 @@ describe('UI5 SAP Application - Product Management', () => {
         await addButton.click();
 
         const testProduct = {
-            id: '13',
-            name: 'ye',
-            price: '100',
+            id: '16', // Product ID for the new product (can be dynamically generated)
+            name: 'Milk',
+            price: '200',
             rating: '5',
-            releaseDate: '2025-01-16'
+            releaseDate: '2025-01-06'
         };
 
+        // Fill the form with the product data
         await $('input[name="ID"]').setValue(testProduct.id);
         await $('input[name="Name"]').setValue(testProduct.name);
         await $('input[name="Price"]').setValue(testProduct.price);
@@ -110,43 +111,56 @@ describe('UI5 SAP Application - Product Management', () => {
         await createButton.waitForClickable({ timeout: 20000 });
         await createButton.click();
 
-        // Add verification step
-        await browser.pause(5000); // Wait for UI to update
+        // Refresh the page to ensure the new product is added to the DOM
+        await browser.refresh();
+
+        // Wait for the product list to load again
+        const createdProductRow = await $(`//div[contains(text(), '${testProduct.name}')]`);
+        await createdProductRow.waitForDisplayed({ timeout: 20000 });
+
+        // Log success
         console.log('Product created successfully');
     });
 
     it('should edit an existing product and change its name to kasongo', async () => {
         await browser.maximizeWindow();
         await browser.url('http://localhost:8080/index.html#/main');
-        await browser.pause(20000);
-        // Wait for the list of products to be displayed (you can remove table check)
-        const productRow = await $(`//div[@data-id="13"]`); // Assuming the product row has a unique ID or identifier
+
+        const testProduct = {
+            id: '16',  // Ensure this is the same ID you created earlier
+            name: 'Milk'
+        };
+
+        // Dynamically find the product based on the name or other unique attribute
+        const productRow = await $(`//div[contains(text(), '${testProduct.name}')]`);
         await productRow.waitForDisplayed({ timeout: 20000 });
 
+        // Click the 'Edit' button for this product
         const editButton = await productRow.$('button=Edit');
         await editButton.waitForClickable({ timeout: 20000 });
         await editButton.click();
 
+        // Wait for the update dialog to be displayed
         const updateDialog = await $('#updateDialog');
         await updateDialog.waitForDisplayed({ timeout: 20000 });
 
         // Change the product name to 'kasongo'
         await $('input[name="Name"]').setValue('kasongo');
 
+        // Save the updated product
         const saveButton = await $('button=Save');
         await saveButton.waitForClickable({ timeout: 20000 });
         await saveButton.click();
 
-        // Add verification for the name update
-        await browser.pause(5000); // Wait for UI to update
+        // Refresh the page to reflect the changes
+        await browser.refresh();
 
-        const updatedNameElement = await productRow.$('.sapMText');
-        const updatedNameText = await updatedNameElement.getText();
-        
-        if (updatedNameText === 'kasongo') {
-            console.log('Product name updated successfully');
-        } else {
-            throw new Error('Product name was not updated successfully');
-        }
+        // Wait for the updated product name to appear
+        const updatedProductRow = await $(`//div[contains(text(), 'kasongo')]`);
+        await updatedProductRow.waitForDisplayed({ timeout: 20000 });
+
+        // Log success
+        console.log('Product name updated to kasongo');
     });
 });
+
