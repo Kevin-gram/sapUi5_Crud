@@ -91,7 +91,6 @@
                         itemPress="onShowData"
                         growing="true"
                         growingScrollToLoad="true" 
-                        growingThreshold="9"
                     >
                         <columns>
                             <Column width="150px">
