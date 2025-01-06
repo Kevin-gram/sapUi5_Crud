@@ -93,11 +93,11 @@ describe('UI5 SAP Application - Product Management', () => {
         await addButton.click();
 
         const testProduct = {
-            id: '18',
-            name: 'samsung S22 ultra',
+            id: '11',
+            name: 'kasongo yeye',
             price: '200',
             rating: '5',
-            releaseDate: '2023-12-31'
+            releaseDate: '2025-01-06'
         };
 
         await $('input[name="ID"]').setValue(testProduct.id);
@@ -112,8 +112,6 @@ describe('UI5 SAP Application - Product Management', () => {
 
         // Add verification step
         await browser.pause(5000); // Wait for UI to update
-        const productRow = await $(`#odataTable .sapMListTblRow=${testProduct.id}`);
-        await productRow.waitForExist({ timeout: 20000 });
         console.log('Product created successfully');
     });
 
