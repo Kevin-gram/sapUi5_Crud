@@ -30,9 +30,17 @@ sap.ui.define([
             });
         },
         onThemeToggle: function () {
-            const currentTheme = Configuration.getTheme();
+            const currentTheme = sap.ui.getCore().getConfiguration().getTheme();
             const newTheme = currentTheme === "sap_belize_dark" ? "sap_belize" : "sap_belize_dark";
-            Configuration.setTheme(newTheme);
+            this._changeTheme(newTheme);
+        },
+
+        _changeTheme: function (theme) {
+            const bootstrap = document.getElementById("sap-ui-bootstrap");
+            if (bootstrap) {
+                bootstrap.setAttribute("data-sap-ui-theme", theme);
+                sap.ui.getCore().applyTheme(theme);
+            }
         },
         onFilterSelect: function (oEvent) {
             const sKey = oEvent.getParameter("key");

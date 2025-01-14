@@ -50,7 +50,7 @@
                             icon="sap-icon://log"
                             press="onLogout"
                         />
-                          <VBox class="sapUiSmallMargin">
+                        <VBox class="sapUiSmallMargin">
                 <custom:ThemeToggleButton
                     text="Toggle Theme"
                     themeToggle="onThemeToggle"
