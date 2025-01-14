@@ -4,8 +4,9 @@ sap.ui.define([
     "sap/m/MessageToast",
     "sap/ui/model/odata/v2/ODataModel",
     "sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator"
-], function (BaseController, MessageBox, MessageToast, ODataModel, Filter, FilterOperator) {
+    "sap/ui/model/FilterOperator",
+    "sap/ui/core/Core" // Ensure Core is imported
+], function (BaseController, MessageBox, MessageToast, ODataModel, Filter, FilterOperator, Core) { // Add Core to the function parameters
     "use strict";
 
     return BaseController.extend("crud.controller.Main", {
@@ -30,17 +31,13 @@ sap.ui.define([
             });
         },
         onThemeToggle: function () {
-            const currentTheme = sap.ui.getCore().getConfiguration().getTheme();
+            const currentTheme = Core.getConfiguration().getTheme();
             const newTheme = currentTheme === "sap_belize_dark" ? "sap_belize" : "sap_belize_dark";
             this._changeTheme(newTheme);
         },
 
         _changeTheme: function (theme) {
-            const bootstrap = document.getElementById("sap-ui-bootstrap");
-            if (bootstrap) {
-                bootstrap.setAttribute("data-sap-ui-theme", theme);
-                sap.ui.getCore().applyTheme(theme);
-            }
+            Core.applyTheme(theme);
         },
         
         onFilterSelect: function (oEvent) {
