@@ -32,9 +32,9 @@ sap.ui.define([
         },
         onThemeToggle: function () {
             const currentTheme = Core.getConfiguration().getTheme();
-            console.log("Current theme:", currentTheme);
-            const newTheme = currentTheme === "sap_belize_dark" ? "sap_belize" : "sap_belize_dark";
-            console.log("Switching to theme:", newTheme);
+            // Check if current theme contains "dark" instead of exact match
+            const isDarkTheme = currentTheme.toLowerCase().includes("dark");
+            const newTheme = isDarkTheme ? "sap_belize" : "sap_belize_dark";
             this._changeTheme(newTheme);
         },
 
