@@ -53,8 +53,8 @@
                         <VBox class="sapUiSmallMargin">
               <VBox class="sapUiSmallMargin">
                 <Button
-                    text="Toggle Theme"
                     press="onThemeToggle"
+                    icon="sap-icon://palette"
                 />
                 </VBox>
             </VBox>
