@@ -29,7 +29,11 @@ sap.ui.define([
                 }
             });
         },
-
+        onThemeToggle: function () {
+            const currentTheme = Configuration.getTheme();
+            const newTheme = currentTheme === "sap_belize_dark" ? "sap_belize" : "sap_belize_dark";
+            Configuration.setTheme(newTheme);
+        },
         onFilterSelect: function (oEvent) {
             const sKey = oEvent.getParameter("key");
             const oTable = this.byId("odataTable");
