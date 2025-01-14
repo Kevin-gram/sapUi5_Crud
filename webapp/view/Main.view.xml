@@ -51,10 +51,12 @@
                             press="onLogout"
                         />
                         <VBox class="sapUiSmallMargin">
-                <custom:ThemeToggleButton
+              <VBox class="sapUiSmallMargin">
+                <Button
                     text="Toggle Theme"
-                    themeToggle="onThemeToggle"
+                    press="onThemeToggle"
                 />
+                </VBox>
             </VBox>
                     </Toolbar>
                 </headerContent>
