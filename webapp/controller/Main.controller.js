@@ -42,6 +42,7 @@ sap.ui.define([
                 sap.ui.getCore().applyTheme(theme);
             }
         },
+        
         onFilterSelect: function (oEvent) {
             const sKey = oEvent.getParameter("key");
             const oTable = this.byId("odataTable");
