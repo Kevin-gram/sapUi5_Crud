@@ -17,8 +17,3 @@ Access the deployed app [here](https://sapui5_crud.cfapps.us10-001.hana.ondemand
 
 
 
-
-## Technologies
-
-- SAPUI5 for UI.
-- OData for backend integration.
