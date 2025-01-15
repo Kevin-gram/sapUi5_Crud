@@ -1,0 +1,9 @@
+---
+applications:
+  - name: sapUi5_Crud
+    memory: 512M
+    buildpacks:
+      - nodejs_buildpack
+    path: ./dist
+    env:
+      UI5_REPO: "https://github.com/Kevin-gram/sapUi5_Crud"
