@@ -16,7 +16,7 @@ Access the deployed app [here](https://sapui5_crud.cfapps.us10-001.hana.ondemand
 
 
 
-3. Open [http://localhost:8080](http://localhost:8080) in a browser.
+
 4. To fetch the data, you need to run the proxy to skip the CORS policies. Run `node proxy.js`.
 
 ## Technologies
