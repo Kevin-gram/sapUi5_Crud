@@ -4,9 +4,8 @@ applications:
     memory: 512M
     buildpacks:
       - https://github.com/cloudfoundry/staticfile-buildpack
-    path: ./dist  # Path to your build directory (update if needed)
+    path: ./dist  # Path to your built files
     routes:
-      - route: sapUi5_Crud.deployment.cfapps.sap.hana.ondemand.com  # You can comment this out
-    random-route: true  # Cloud Foundry will automatically create a route for you
+      - route: sapUi5_Crud.cfapps.us10-001.hana.ondemand.com  # Updated with a valid domain
     env:
       UI5_REPO: "https://github.com/Kevin-gram/sapUi5_Crud"
