@@ -6,13 +6,9 @@ This project demonstrates CRUD (Create, Read, Update, Delete) operations in SAPU
 
 - Fetch and display data from an OData service.
 - Perform CRUD operations with a simple UI.
+- Responsive design using SAPUI5 controls.
 
 
-## Demo
-
-Access the deployed app [here](https://sapui5_crud.cfapps.us10-001.hana.ondemand.com/#/product/4).
-
-## Setup
 
 1. Clone the repository.
 2. Run `npm install` and `npm start`.
