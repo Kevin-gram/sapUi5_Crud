@@ -3,7 +3,9 @@ applications:
   - name: sapUi5_Crud
     memory: 512M
     buildpacks:
-      - nodejs_buildpack
-    path: ./dist
+      - https://github.com/cloudfoundry/staticfile-buildpack  # Use static file buildpack for UI5
+    path: ./dist  # Path to the built UI5 app (adjust if necessary)
+    routes:
+      - route: sapUi5_Crud.deployment.cfapps.sap.hana.ondemand.com  # Access URL after deployment
     env:
-      UI5_REPO: "https://github.com/Kevin-gram/sapUi5_Crud"
+      UI5_REPO: "https://github.com/Kevin-gram/sapUi5_Crud"  # Only if this is used in your app
