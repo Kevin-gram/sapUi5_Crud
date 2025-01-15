@@ -14,7 +14,7 @@ Access the deployed app [here](https://sapui5_crud.cfapps.us10-001.hana.ondemand
 
 ## Setup
 
-1. Clone the repository.
+
 2. Run `npm install` and `npm start`.
 3. Open [http://localhost:8080](http://localhost:8080) in a browser.
 4. To fetch the data, you need to run the proxy to skip the CORS policies. Run `node proxy.js`.
