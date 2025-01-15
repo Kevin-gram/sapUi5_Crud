@@ -6,7 +6,7 @@ This project demonstrates CRUD (Create, Read, Update, Delete) operations in SAPU
 
 - Fetch and display data from an OData service.
 - Perform CRUD operations with a simple UI.
-- Responsive design using SAPUI5 controls.
+
 
 ## Demo
 
