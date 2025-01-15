@@ -10,7 +10,7 @@ This project demonstrates CRUD (Create, Read, Update, Delete) operations in SAPU
 
 ## Demo
 
-Access the deployed app [here](https://kevinsap.netlify.app/).
+Access the deployed app [here](https://sapui5_crud.cfapps.us10-001.hana.ondemand.com/#/product/4).
 
 ## Setup
 
