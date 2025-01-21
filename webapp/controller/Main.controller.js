@@ -195,118 +195,118 @@ sap.ui.define([
                 String(d.getDate()).padStart(2, '0');
         },
 
-        onCreate: async function () {
-            // Get the input values
-            const ID = this.byId("newProductId").getValue();
-            const Name = this.byId("newProductName").getValue();
-            const Price = this.byId("newProductPrice").getValue();
-            const Rating = this.byId("newProductRating").getValue();
-            const ReleaseDate = this.byId("newProductReleaseDate").getValue();
-        
-            // Validate ID (must be a valid integer)
-            if (!ID || isNaN(ID) || parseInt(ID) <= 0) {
-                MessageBox.error("Please enter a valid Product ID.");
-                return;
-            }
-        
-            // Validate Name (must not be empty)
-            if (!Name || Name.trim() === "") {
-                MessageBox.error("Please enter a valid Product Name.");
-                return;
-            }
-        
-            // Validate Price (must be a valid number and greater than 0)
-            if (!Price || isNaN(Price) || parseFloat(Price) <= 0) {
-                MessageBox.error("Please enter a valid Product Price.");
-                return;
-            }
-        
-            // Validate Rating (must be an integer between 1 and 5)
-            if (!Rating || isNaN(Rating) || parseInt(Rating) < 1 || parseInt(Rating) > 5) {
-                MessageBox.error("Please enter a valid Rating (1 to 5).");
-                return;
-            }
-        
-            // Validate ReleaseDate (must be a valid date)
-            if (!ReleaseDate || !this.isValidDate(ReleaseDate)) {
-                MessageBox.error("Please enter a valid Release Date.");
-                return;
-            }
-        
-            // Fetch existing products to check for duplicates
-            try {
-                const response = await fetch("http://localhost:3000/odata/Products", {
-                    headers: {
-                        "Accept": "application/json"
-                    }
-                });
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                const data = await response.json();
-                const existingProducts = data.value;
-        
-                // Check for duplicate ID
-                if (existingProducts.some(product => product.ID === parseInt(ID))) {
-                    MessageBox.error("A product with the same ID already exists.");
-                    return;
-                }
-        
-                // Check for duplicate Name
-                if (existingProducts.some(product => product.Name === Name)) {
-                    MessageBox.error("A product with the same Name already exists.");
-                    return;
-                }
-            } catch (error) {
-                MessageBox.error("Error fetching existing products: " + error.message);
-                return;
-            }
-        
-            // Format the Release Date for OData
-            const formattedReleaseDate = this.formatDateForOData(ReleaseDate);
-        
-            // Create the Atom XML for the new product
-            const atomXml = `<?xml version="1.0" encoding="utf-8"?>
-            <entry xmlns="http://www.w3.org/2005/Atom" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
-                <category term="ODataDemo.Product" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
-                <title type="text">${Name}</title>
-                <updated>${new Date().toISOString()}</updated>
-                <author><name/></author>
-                <content type="application/xml">
-                    <m:properties>
-                        <d:ID m:type="Edm.Int32">${parseInt(ID)}</d:ID>
-                        <d:Name>${Name}</d:Name>
-                        <d:Description>New Product</d:Description>
-                        <d:ReleaseDate m:type="Edm.DateTime">${formattedReleaseDate}</d:ReleaseDate>
-                        <d:DiscontinuedDate m:null="true"/>
-                        <d:Rating m:type="Edm.Int16">${parseInt(Rating)}</d:Rating>
-                        <d:Price m:type="Edm.Double">${parseFloat(Price)}</d:Price>
-                    </m:properties>
-                </content>
-            </entry>`;
-        
-            // Make the POST request to create the product
-            fetch("http://localhost:3000/odata/Products", {
-                method: "POST",
+          onCreate: async function () {
+        // Get the input values
+        const ID = this.byId("newProductId").getValue();
+        const Name = this.byId("newProductName").getValue();
+        const Price = this.byId("newProductPrice").getValue();
+        const Rating = this.byId("newProductRating").getValue();
+        const ReleaseDate = this.byId("newProductReleaseDate").getValue();
+    
+        // Validate ID (must be a valid integer)
+        if (!ID || isNaN(ID) || parseInt(ID) <= 0) {
+            MessageBox.error("Please enter a valid Product ID.");
+            return;
+        }
+    
+        // Validate Name (must not be empty)
+        if (!Name || Name.trim() === "") {
+            MessageBox.error("Please enter a valid Product Name.");
+            return;
+        }
+    
+        // Validate Price (must be a valid number and greater than 0)
+        if (!Price || isNaN(Price) || parseFloat(Price) <= 0) {
+            MessageBox.error("Please enter a valid Product Price.");
+            return;
+        }
+    
+        // Validate Rating (must be an integer between 1 and 5)
+        if (!Rating || isNaN(Rating) || parseInt(Rating) < 1 || parseInt(Rating) > 5) {
+            MessageBox.error("Please enter a valid Rating (1 to 5).");
+            return;
+        }
+    
+        // Validate ReleaseDate (must be a valid date)
+        if (!ReleaseDate || !this.isValidDate(ReleaseDate)) {
+            MessageBox.error("Please enter a valid Release Date.");
+            return;
+        }
+    
+        // Fetch existing products to check for duplicates
+        try {
+            const response = await fetch("http://localhost:3000/odata/Products", {
                 headers: {
-                    "Content-Type": "application/atom+xml",
-                },
-                body: atomXml
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        return response.text().then(errorText => {
-                            throw new Error(`HTTP error! Status: ${response.status} - ${errorText}`);
-                        });
-                    }
-                    MessageBox.success("Product created successfully!");
-                    this.onCloseProductDialog();
-                    this.getView().getModel().refresh(true);
-                })
-                .catch(error => {
-                    MessageBox.error("Error creating product: " + error.message);
+                    "Accept": "application/json"
+                }
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
+            const existingProducts = data.value;
+    
+            // Check for duplicate ID
+            if (existingProducts.some(product => product.ID === parseInt(ID))) {
+                MessageBox.error("A product with the same ID already exists.");
+                return;
+            }
+    
+            // Check for duplicate Name
+            if (existingProducts.some(product => product.Name === Name)) {
+                MessageBox.error("A product with the same Name already exists.");
+                return;
+            }
+        } catch (error) {
+            MessageBox.error("Error fetching existing products: " + error.message);
+            return;
+        }
+    
+        // Format the Release Date for OData
+        const formattedReleaseDate = this.formatDateForOData(ReleaseDate);
+    
+        // Create the Atom XML for the new product
+        const atomXml = `<?xml version="1.0" encoding="utf-8"?>
+        <entry xmlns="http://www.w3.org/2005/Atom" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
+            <category term="ODataDemo.Product" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+            <title type="text">${Name}</title>
+            <updated>${new Date().toISOString()}</updated>
+            <author><name/></author>
+            <content type="application/xml">
+                <m:properties>
+                    <d:ID m:type="Edm.Int32">${parseInt(ID)}</d:ID>
+                    <d:Name>${Name}</d:Name>
+                    <d:Description>New Product</d:Description>
+                    <d:ReleaseDate m:type="Edm.DateTime">${formattedReleaseDate}</d:ReleaseDate>
+                    <d:DiscontinuedDate m:null="true"/>
+                    <d:Rating m:type="Edm.Int16">${parseInt(Rating)}</d:Rating>
+                    <d:Price m:type="Edm.Double">${parseFloat(Price)}</d:Price>
+                </m:properties>
+            </content>
+        </entry>`;
+    
+        // Make the POST request to create the product
+        fetch("http://localhost:3000/odata/Products", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/atom+xml",
+            },
+            body: atomXml
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.text().then(errorText => {
+                    throw new Error(`HTTP error! Status: ${response.status} - ${errorText}`);
                 });
-        },
+            }
+            MessageBox.success("Product created successfully!");
+            this.onCloseProductDialog();
+            this.getView().getModel().refresh(true);
+        })
+        .catch(error => {
+            MessageBox.error("Error creating product: " + error.message);
+        });
+    },
         
         // Helper function to validate if a date is in the correct format
         isValidDate(dateString) {
