@@ -11,7 +11,7 @@ sap.ui.define([
         },
 
         _loadChartData: function () {
-            let oModel = new ODataModel("http://localhost:3000/odata", {
+            let oModel = new ODataModel("http://localhost:4000/odata", {
                 defaultBindingMode: "TwoWay",
                 useBatch: false,
                 headers: {

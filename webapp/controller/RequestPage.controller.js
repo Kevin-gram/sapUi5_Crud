@@ -8,7 +8,7 @@ sap.ui.define([
 
     return Controller.extend("crud.controller.RequestPage", {
         onInit: function () {
-            const oModel = new ODataModel("http://localhost:3000/odata", {
+            const oModel = new ODataModel("http://localhost:4000/odata", {
                 defaultBindingMode: "TwoWay",
                 useBatch: true,
                 headers: {

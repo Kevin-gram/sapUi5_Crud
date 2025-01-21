@@ -13,6 +13,6 @@ app.use("/odata", createProxyMiddleware({
     }
 }))
 
-app.listen(3000,()=>{
+app.listen(4000,()=>{
     console.log('Proxy server running at http://localhost:3000');
 })

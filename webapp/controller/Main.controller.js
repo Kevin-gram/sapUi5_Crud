@@ -11,7 +11,7 @@ sap.ui.define([
 
     return BaseController.extend("crud.controller.Main", {
         onInit() {
-            let oModel = new ODataModel("http://localhost:3000/odata", {
+            let oModel = new ODataModel("http://localhost:4000/odata", {
                 defaultBindingMode: "TwoWay",
                 useBatch: false,
                 headers: {
@@ -235,7 +235,7 @@ sap.ui.define([
     
        
         try {
-            const response = await fetch("http://localhost:3000/odata/Products", {
+            const response = await fetch("http://localhost:4000/odata/Products", {
                 headers: {
                     "Accept": "application/json"
                 }
@@ -286,7 +286,7 @@ sap.ui.define([
         </entry>`;
     
        
-        fetch("http://localhost:3000/odata/Products", {
+        fetch("http://localhost:4000/odata/Products", {
             method: "POST",
             headers: {
                 "Content-Type": "application/atom+xml",
@@ -422,7 +422,7 @@ sap.ui.define([
                 </link>
             </entry>`;
 
-            fetch("http://localhost:3000/odata/Products", {
+            fetch("http://localhost:4000/odata/Products", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/atom+xml",
@@ -494,7 +494,7 @@ sap.ui.define([
                 </content>
             </entry>`;
         
-            fetch(`http://localhost:3000/odata/Products(${productId})`, {
+            fetch(`http://localhost:4000/odata/Products(${productId})`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/atom+xml",
