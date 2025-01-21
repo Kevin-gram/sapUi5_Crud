@@ -48,7 +48,7 @@
                 demandPopin="true"
                 showFullScreenButton="true">
                 <Table id="idResponsiveTable" selectionChange="handleSelectionChange" mode="SingleSelectMaster">
-                    <!-- No need to specify columns here -->
+                    <!-- No need to specify columns they are auto- generated-->
                 </Table>
             </smartTable:SmartTable>
 

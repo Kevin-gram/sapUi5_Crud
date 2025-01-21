@@ -128,6 +128,17 @@
         "ZipCode": "98052",
         "Country": "United States"
       }
+    },
+    {
+      "ID": "12",
+      "Name": "Kgl trading ltd",
+      "Address": {
+        "Street": "NE 228th",
+        "City": "Kibungo",
+        "State": "CA",
+        "ZipCode": "98052",
+        "Country": "United States"
+      }
     }
   ]
 }
