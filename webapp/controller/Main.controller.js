@@ -5,7 +5,8 @@ sap.ui.define([
     "sap/ui/model/odata/v2/ODataModel",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
-    "sap/ui/core/Core" // Ensure Core is imported
+    "sap/ui/core/Core", // Ensure Core is imported
+    "sap/ui/core/Fragment"
 ], function (BaseController, MessageBox, MessageToast, ODataModel, Filter, FilterOperator, Core) { // Add Core to the function parameters
     "use strict";
 
@@ -306,7 +307,7 @@ sap.ui.define([
         .catch(error => {
             MessageBox.error("Error creating product: " + error.message);
         });
-    },
+     },
         
       
         isValidDate(dateString) {
