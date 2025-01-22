@@ -13,12 +13,10 @@
             <Page title="Product List">
                 <headerContent>
                     <Toolbar>
-                        
                         <ToolbarSpacer />
-                       
                         <Button
-                        text="Add Product"
-                        id="addButton"
+                            text="Add Product"
+                            id="addButton"
                             icon="sap-icon://add"
                             press="onShowProductDialog"
                         />
@@ -26,7 +24,7 @@
                             text="Create Product with Details"
                             press="onShowProductWithDetailsDialog"
                         />
-                         <Button
+                        <Button
                             text="View Chart"
                             press="onViewChart"
                         />
@@ -51,13 +49,13 @@
                             press="onLogout"
                         />
                         <VBox class="sapUiSmallMargin">
-              <VBox class="sapUiSmallMargin">
-                <Button
-                    press="onThemeToggle"
-                    icon="sap-icon://palette"
-                />
-                </VBox>
-            </VBox>
+                            <VBox class="sapUiSmallMargin">
+                                <Button
+                                    press="onThemeToggle"
+                                    icon="sap-icon://palette"
+                                />
+                            </VBox>
+                        </VBox>
                     </Toolbar>
                 </headerContent>
                 <content>
@@ -98,8 +96,8 @@
                         items="{/Products}"
                         itemPress="onShowData"
                         growing="true"
-                        growingScrollToLoad="true" 
-                       growingThreshold="10"
+                        growingScrollToLoad="true"
+                        growingThreshold="10"
                     >
                         <columns>
                             <Column width="150px">
@@ -236,185 +234,4 @@
             </Page>
         </f:endColumnPages>
     </f:FlexibleColumnLayout>
-
-    <!-- Update Product Dialog -->
-    <Dialog
-        id="updateDialog"
-        title="Update Product"
-    >
-        <VBox class="sapUiSmallMargin">
-            <Label text="Product Name" />
-            <Input id="productNameText" />
-            <Label text="Price" />
-            <Input
-                id="productPriceText"
-                type="Number"
-            />
-            <Label text="Rating" />
-            <Input
-                id="productRatingText"
-                type="Number"
-            />
-            <Label text="Release Date" />
-            <DatePicker
-                id="productReleaseDateText"
-                valueFormat="yyyy-MM-dd"
-                displayFormat="yyyy-MM-dd"
-            />
-        </VBox>
-        <beginButton>
-            <Button
-                text="Save"
-                press="onEditPress"
-            />
-        </beginButton>
-        <endButton>
-            <Button
-                text="Cancel"
-                press="onCloseEditingDialog"
-            />
-        </endButton>
-    </Dialog>
-
-    <!-- Create Product Dialog -->
-    <Dialog
-        id="createProductDialog"
-        title="Create Product"
-        type="Message"
-    >
-        <VBox class="sapUiSmallMargin">
-            <Label text="Product ID" />
-            <Input
-                name="ID"
-                id="newProductId"
-                type="Number"
-            />
-            <Label text="Name" />
-            <Input name="Name" id="newProductName" />
-            <Label text="Price" />
-            <Input
-            name="Price"
-                id="newProductPrice"
-                type="Number"
-            />
-            <Label text="Rating" />
-            <Input
-            name="Rate"
-                id="newProductRating"
-                type="Number"
-            />
-            <Label text="Release Date" />
-            <DatePicker
-            name="Date"
-                id="newProductReleaseDate"
-                valueFormat="yyyy-MM-dd"
-                displayFormat="yyyy-MM-dd"
-            />
-        </VBox>
-        <beginButton>
-            <Button
-                text="Create"
-                press="onCreate"
-            />
-        </beginButton>
-        <endButton>
-            <Button
-                text="Cancel"
-                press="onCloseProductDialog"
-            />
-        </endButton>
-    </Dialog>
-
-    <!-- Create Product with Details Dialog -->
-    <Dialog
-        id="createProductWithDetailsDialog"
-        title="Create Product with Details"
-        type="Message"
-    >
-        <VBox class="sapUiSmallMargin">
-            <Label text="Product ID" />
-            <Input
-                id="newProductWithDetailsId"
-                type="Number"
-            />
-            <Label text="Name" />
-            <Input id="newProductWithDetailsName" />
-            <Label text="Price" />
-            <Input
-                id="newProductWithDetailsPrice"
-                type="Number"
-            />
-            <Label text="Rating" />
-            <Input
-                id="newProductWithDetailsRating"
-                type="Number"
-            />
-            <Label text="Release Date" />
-            <DatePicker
-                id="newProductWithDetailsReleaseDate"
-                valueFormat="yyyy-MM-dd"
-                displayFormat="yyyy-MM-dd"
-            />
-            <Label text="Category 1 ID" />
-            <Input
-                id="newProductWithDetailsCategory1Id"
-                type="Number"
-            />
-            <Label text="Category 1 Name" />
-            <Input id="newProductWithDetailsCategory1Name" />
-            <Label text="Category 2 ID" />
-            <Input
-                id="newProductWithDetailsCategory2Id"
-                type="Number"
-            />
-            <Label text="Category 2 Name" />
-            <Input id="newProductWithDetailsCategory2Name" />
-            <Label text="Supplier ID" />
-            <Input
-                id="newProductWithDetailsSupplierId"
-                type="Number"
-            />
-            <Label text="Supplier Name" />
-            <Input id="newProductWithDetailsSupplierName" />
-            <Label text="Supplier Street" />
-            <Input id="newProductWithDetailsSupplierStreet" />
-            <Label text="Supplier City" />
-            <Input id="newProductWithDetailsSupplierCity" />
-            <Label text="Supplier State" />
-            <Input id="newProductWithDetailsSupplierState" />
-            <Label text="Supplier ZipCode" />
-            <Input id="newProductWithDetailsSupplierZipCode" />
-            <Label text="Supplier Country" />
-            <Input id="newProductWithDetailsSupplierCountry" />
-            <Label text="Supplier Latitude" />
-            <Input
-                id="newProductWithDetailsSupplierLatitude"
-                type="Number"
-            />
-            <Label text="Supplier Longitude" />
-            <Input
-                id="newProductWithDetailsSupplierLongitude"
-                type="Number"
-            />
-            <Label text="Product Detail ID" />
-            <Input
-                id="newProductWithDetailsProductDetailId"
-                type="Number"
-            />
-            <Label text="Product Detail Description" />
-            <Input id="newProductWithDetailsProductDetailDescription" />
-        </VBox>
-        <beginButton>
-            <Button
-                text="Create"
-                press="onCreateProductWithDetails"
-            />
-        </beginButton>
-        <endButton>
-            <Button
-                text="Cancel"
-                press="onCloseProductWithDetailsDialog"
-            />
-        </endButton>
-    </Dialog>
 </mvc:View>
