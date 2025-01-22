@@ -1,4 +1,6 @@
+# SAPUI5 CRUD Project
 
+This project demonstrates CRUD (Create, Read, Update, Delete) operations in SAPUI5 by fetching and managing data from an online service.
 
 ## Features
 
