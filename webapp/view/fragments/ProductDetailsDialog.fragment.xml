@@ -1,0 +1,21 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+    <Dialog id="idProductDetailsDialog" title="Product Details" class="sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer">
+        <content>
+            <VBox>
+                <Label text="Product ID"/>
+                <Text text="{ID}"/>
+                <Label text="Product Name"/>
+                <Text text="{Name}"/>
+                <Label text="Product Price"/>
+                <Text text="{Price}"/>
+                <Label text="Product Rating"/>
+                <Text text="{Rating}"/>
+                <Label text="Release Date"/>
+                <Text text="{ReleaseDate}"/>
+            </VBox>
+        </content>
+        <endButton>
+            <Button text="Close" press="onCloseProductDetailsDialog"/>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>
