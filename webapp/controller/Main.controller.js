@@ -567,6 +567,78 @@ sap.ui.define([
            
             this.getRouter().navTo("loginPage");
         },
+        onShowProductDialog: function () {
+            if (!this.byId("idCreateProductDialog")) {
+                Fragment.load({
+                    id: this.getView().getId(),
+                    name: "crud.view.fragments.CreateProductDialog",
+                    controller: this
+                }).then(function (oDialog) {
+                    this.getView().addDependent(oDialog);
+                    oDialog.open();
+                }.bind(this));
+            } else {
+                this.byId("idCreateProductDialog").open();
+            }
+        },
+
+        onCloseProductDialog: function () {
+            this.byId("idCreateProductDialog").close();
+        },
+
+        onShowProductWithDetailsDialog: function () {
+            if (!this.byId("idCreateProductWithDetailsDialog")) {
+                Fragment.load({
+                    id: this.getView().getId(),
+                    name: "crud.view.fragments.CreateProductWithDetailsDialog",
+                    controller: this
+                }).then(function (oDialog) {
+                    this.getView().addDependent(oDialog);
+                    oDialog.open();
+                }.bind(this));
+            } else {
+                this.byId("idCreateProductWithDetailsDialog").open();
+            }
+        },
+
+        onCloseProductWithDetailsDialog: function () {
+            this.byId("idCreateProductWithDetailsDialog").close();
+        },
+
+        onShowEditingDialog: function (oEvent) {
+            if (!this.byId("idEditProductDialog")) {
+                Fragment.load({
+                    id: this.getView().getId(),
+                    name: "crud.view.fragments.EditProductDialog",
+                    controller: this
+                }).then(function (oDialog) {
+                    this.getView().addDependent(oDialog);
+                    this._openEditDialog(oEvent);
+                }.bind(this));
+            } else {
+                this._openEditDialog(oEvent);
+            }
+        },
+        _openEditDialog: function (oEvent) {
+            const button = oEvent.getSource();
+            const listItem = button.getParent();
+            const context = listItem.getBindingContext();
+            const productData = context.getObject();
+
+            this._selectedProductId = productData.ID;
+
+            const dialog = this.byId("idEditProductDialog");
+            this.byId("productNameText").setValue(productData.Name);
+            this.byId("productPriceText").setValue(productData.Price);
+            this.byId("productRatingText").setValue(productData.Rating);
+            this.byId("productReleaseDateText").setValue(productData.ReleaseDate);
+
+            dialog.open();
+        },
+
+        onCloseEditingDialog: function () {
+            this.byId("idEditProductDialog").close();
+        },
         
     });
 });
